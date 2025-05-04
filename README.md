@@ -29,6 +29,8 @@ O escotismo ensina a importância de liderar com propósito e servir com o cora�
 
 ## Prototipação
 https://www.figma.com/design/lyaR6bRbnhqyfQuGxuw6dg/movimento-escoteiro?node-id=0-1&p=f&t=uNxdMEdiBwxMQZv7-0
+### Trello
+https://trello.com/b/dhuxucQV/me-projeto-individual
 ## 🏕️ Agradecimentos
 A todos que fazem do escotismo uma verdadeira escola para a vida.
 Este projeto é uma pequena semente para retribuir tudo que o Movimento Escoteiro semeou.
