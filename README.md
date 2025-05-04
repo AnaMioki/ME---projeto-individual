@@ -26,6 +26,8 @@ Configurações de Perfil: Personalização dos dados do grupo e dos membros.
 
 ## 🌱 Motivação
 O escotismo ensina a importância de liderar com propósito e servir com o coração. Esta plataforma é uma forma de levar esses valores para a tecnologia — mostrando que, com organização e colaboração, podemos transformar realidades.
+![image](https://github.com/user-attachments/assets/fb639a86-9933-4f51-85a2-061594ced3d2)
+
 
 ## Prototipação
 https://www.figma.com/design/lyaR6bRbnhqyfQuGxuw6dg/movimento-escoteiro?node-id=0-1&p=f&t=uNxdMEdiBwxMQZv7-0
