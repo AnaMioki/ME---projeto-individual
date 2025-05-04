@@ -2,6 +2,7 @@
 ## Sempre Alerta para Servir!
 
 A Plataforma de Gestão Escoteira é uma solução digital pensada para facilitar o dia a dia do meu grupo escoteiro, trazendo organização, praticidade e uma gestão financeira eficiente — tudo isso com o espírito do escotismo: acolhedor, coletivo e voltado para o crescimento.
+## Prototipação
 https://www.figma.com/design/lyaR6bRbnhqyfQuGxuw6dg/movimento-escoteiro?node-id=0-1&p=f&t=uNxdMEdiBwxMQZv7-0
 ## ✨ Sobre o Projeto
 Esta plataforma nasceu do desejo de retribuir ao Movimento Escoteiro tudo o que ele proporcionou: liderança, trabalho em equipe, superação de desafios e, acima de tudo, propósito.
