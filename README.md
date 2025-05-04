@@ -1,5 +1,4 @@
 # 🌿 Plataforma de Gestão Escoteira
-![image]D:\OneDrive\SPTECH\pi\imagens_scoutEase\Group 4.png
 ## Sempre Alerta para Servir!
 
 A Plataforma de Gestão Escoteira é uma solução digital pensada para facilitar o dia a dia do meu grupo escoteiro, trazendo organização, praticidade e uma gestão financeira eficiente — tudo isso com o espírito do escotismo: acolhedor, coletivo e voltado para o crescimento.
