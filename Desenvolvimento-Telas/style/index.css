@@ -1,0 +1,470 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root {
+  --bege-claro: #f2d79d;
+  --verde-escoteiro: #166345;
+  --laranja-escoteiro: #d99b50;
+  --texto-escuro: #333;
+}
+
+* {
+  margin: 0 auto;
+  padding: 0%;
+  font-family: Poppins, sans-serif;
+}
+
+header {
+  background-color: #f1d598;
+  padding: 12px 0;
+}
+
+.container {
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  height: 50px;
+}
+
+.navegacao {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  padding: 0;
+  margin: 0;
+}
+
+.navegacao li a {
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+.acesso {
+  display: flex;
+  gap: 8px;
+}
+
+.cadastro {
+  background-color: #166c5f;
+  color: white;
+  padding: px 12px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 13px;
+}
+
+.entrar {
+  background-color: #d28d28;
+  color: white;
+  padding: 6px 12px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 13px;
+}
+
+
+/* inicio */
+.inicio {
+  background: url('../assets/backgroundFogueira.png') center/cover no-repeat;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+  position: relative;
+  color: white;
+}
+
+.inicio::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.inicio-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+}
+
+.inicio h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.citacao {
+  font-style: italic;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.btn-inicio {
+  background-color: var(--verde-escoteiro);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn-inicio:hover {
+  background-color: #195c45;
+}
+
+
+/* .sobre-criadora, .porque-surgiu, .sobre-plataforma {
+    background-color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.sobre-criadora h2, .porque-surgiu h2, .sobre-plataforma h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #1f1f1f;
+}
+
+.sobre-criadora p, .porque-surgiu p, .sobre-plataforma p {
+    font-size: 18px;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto 20px;
+} */
+
+/* SOBRE A CRIADORA */
+.criadora-section {
+  background-color: #f4e3c3;
+  padding: 70px 20px;
+}
+
+.criadora-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.criadora-container h2 {
+  color: #0b4b38;
+  font-family: Rubik, sans-serif;
+}
+
+.criadora-imagem img {
+  width: 400px;
+  height: 250px;
+  border-radius: 20px;
+  object-fit: cover;
+  /* border: 4px solid #896028; */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.criadora-conteudo {
+  flex: 1;
+  min-width: 260px;
+}
+
+.criadora-conteudo h2 {
+  font-size: 30px;
+  color: #0b4b38;
+  margin-bottom: 15px;
+  font-family: Rubik, sans-serif;
+  font-weight: bold;
+  /* font-weight: 10000; */
+}
+
+.criadora-conteudo p {
+  font-size: 16px;
+  color: #3a2b20;
+  line-height: 2;
+  margin-bottom: 10px;
+}
+
+
+/* POR QUE SURGIU A IDEIA */
+/* .motivo-section {
+    background-color: #E7C381;
+    padding: 60px 20px;
+  }
+  
+  .motivo-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .motivo-container h2 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #2c1d0b;
+    margin-bottom: 40px;
+  }
+  
+  .motivo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .motivo-card {
+    background-color: #fff;
+    border: 1px solid #e6d2ae;
+    border-radius: 12px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+  }
+  
+  .motivo-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .motivo-card img {
+    width: 50px;
+    margin-bottom: 15px;
+  }
+  
+  .motivo-card p {
+    font-size: 15px;
+    color: #3a2b20;
+  } */
+
+
+.secao-porque {
+  background-color: #E7C381;
+  padding: 60px 20px;
+}
+
+.secao-porque .titulo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 auto;
+  margin-top: -40px;
+  margin-bottom: 20px;
+}
+
+.conteudo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.bloco-esquerdo {
+  flex: 1 1 45%;
+}
+
+.bloco-esquerdo h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.destaque-verde {
+  color: #087B57;
+  font-weight: bold;
+}
+
+.caixinha-info {
+  background-color: #FAE9D0;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+  align-items: flex-start;
+}
+
+.caixinha-info img {
+  width: 32px;
+  height: 32px;
+}
+
+.caixinha-info h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.caixinha-info p {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+}
+
+.bloco-direito {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bloco-direito p {
+  font-size: 16px;
+  margin-bottom: 16px;
+  line-height: 1.9;
+}
+
+.texto-destaque {
+  font-weight: bold;
+}
+
+.sobre-plataforma {
+  background-color: #f5f5f5;
+  padding: 60px 20px;
+  font-family: 'Arial', sans-serif;
+  background-image: url('../assets/backgroundEscoteiros.png');
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  padding: 40px 90px 20px;
+  /* mais espaço no topo por causa da imagem */
+  color: white;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+
+/* .sobre-plataforma {
+    background-image: url('caminho/para/sua-imagem-de-fundo.png');
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    padding: 100px 20px 60px; /* mais espaço no topo por causa da imagem */
+/* color: white;
+    position: relative;
+    z-index: 1;
+  } */
+.sobre-plataforma .container {
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sobre-plataforma .container1 {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.sobre-plataforma h2 {
+  font-size: 2.2rem;
+  color: #f1e2e2;
+  margin-bottom: 10px;
+}
+
+.sobre-plataforma .subtitulo {
+  font-size: 1.1rem;
+  color: #f1e2e2;
+  margin-bottom: 40px;
+}
+
+.cards {
+  display: flex;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  flex-direction: column;
+  background-color: #005843;
+  border-radius: 8px;
+}
+
+.card {
+  color: white;
+  padding: 20px;
+  position: relative;
+  text-align: left;
+}
+
+.card .numero {
+  background-color: white;
+  color: #005843;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -15px;
+  left: -15px;
+}
+
+.notas-futuro {
+  display: flex;
+  flex-direction: row;
+  background-color: #fbd4a0;
+  color: #222;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 0px;
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+
+.notas-futuro img {
+ position: relative;
+ right: -150px;
+ top: -10px;
+}
+
+.imagem-direita img {
+  width: 350px;
+  height: auto;
+  border-radius: 10px;
+  position: relative;
+  /* Isso permite mover a imagem */
+  left: -65px;
+  top: 110px;
+  /* Mover para a esquerda (ajuste o valor conforme necessário) */
+  z-index: 10;
+}
+
+
+footer {
+  background-color: var(--verde-escoteiro);
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+
+.footer-links a {
+  text-decoration: none;
+  color: #fff;
+  margin: 0 15px;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+footer p {
+  font-size: 14px;
+}
