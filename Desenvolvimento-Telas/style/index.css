@@ -69,7 +69,7 @@ header {
 }
 
 
-/* inicio */
+
 .inicio {
   background: url('../assets/backgroundFogueira.png') center/cover no-repeat;
   height: 100vh;
@@ -122,26 +122,6 @@ header {
 }
 
 
-/* .sobre-criadora, .porque-surgiu, .sobre-plataforma {
-    background-color: #fff;
-    padding: 40px 20px;
-    text-align: center;
-}
-
-.sobre-criadora h2, .porque-surgiu h2, .sobre-plataforma h2 {
-    font-size: 30px;
-    margin-bottom: 20px;
-    color: #1f1f1f;
-}
-
-.sobre-criadora p, .porque-surgiu p, .sobre-plataforma p {
-    font-size: 18px;
-    color: #555;
-    max-width: 800px;
-    margin: 0 auto 20px;
-} */
-
-/* SOBRE A CRIADORA */
 .criadora-section {
   background-color: #f4e3c3;
   padding: 70px 20px;
@@ -190,58 +170,6 @@ header {
   line-height: 2;
   margin-bottom: 10px;
 }
-
-
-/* POR QUE SURGIU A IDEIA */
-/* .motivo-section {
-    background-color: #E7C381;
-    padding: 60px 20px;
-  }
-  
-  .motivo-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  
-  .motivo-container h2 {
-    font-size: 30px;
-    font-weight: bold;
-    color: #2c1d0b;
-    margin-bottom: 40px;
-  }
-  
-  .motivo-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-  }
-  
-  .motivo-card {
-    background-color: #fff;
-    border: 1px solid #e6d2ae;
-    border-radius: 12px;
-    padding: 20px;
-    width: 300px;
-    text-align: center;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease;
-  }
-  
-  .motivo-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .motivo-card img {
-    width: 50px;
-    margin-bottom: 15px;
-  }
-  
-  .motivo-card p {
-    font-size: 15px;
-    color: #3a2b20;
-  } */
 
 
 .secao-porque {
@@ -340,7 +268,6 @@ header {
   background-position: top center;
   background-repeat: no-repeat;
   padding: 40px 90px 20px;
-  /* mais espaço no topo por causa da imagem */
   color: white;
   position: relative;
   z-index: 1;
@@ -348,17 +275,6 @@ header {
   flex-direction: row;
 }
 
-
-/* .sobre-plataforma {
-    background-image: url('caminho/para/sua-imagem-de-fundo.png');
-    background-size: cover;
-    background-position: top center;
-    background-repeat: no-repeat;
-    padding: 100px 20px 60px; /* mais espaço no topo por causa da imagem */
-/* color: white;
-    position: relative;
-    z-index: 1;
-  } */
 .sobre-plataforma .container {
   margin: 0 auto;
   padding: 0;
@@ -439,10 +355,8 @@ header {
   height: auto;
   border-radius: 10px;
   position: relative;
-  /* Isso permite mover a imagem */
   left: -65px;
   top: 110px;
-  /* Mover para a esquerda (ajuste o valor conforme necessário) */
   z-index: 10;
 }
 
