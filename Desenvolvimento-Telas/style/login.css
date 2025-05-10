@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root {
+    --bege-claro: #f2d79d;
+    --verde-escoteiro: #166345;
+    --laranja-escoteiro: #d99b50;
+    --texto-escuro: #333;
+  }
+
+body {
+    margin: 0;
+    font-family: Poppins, sans-serif;
+    background-color: #1e1e1e;
+  }
+  
+  .container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .imagem-lateral {
+    flex: 1;
+    background-image: url('../assets/imagemLogin.png'); 
+    background-position: center;
+  }
+  
+  .login-box {
+    flex: 1;
+    background-color: #f4e5c2;
+    padding: 40px;
+    box-sizing: border-box;
+  }
+  
+  .titulo{
+    display: flex;
+    flex-direction: row;
+    gap: 200px;
+  }
+  h2 {
+    color: #1f4e35;
+    margin-bottom: 30px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+  }
+  
+  button {
+    padding: 12px;
+    background-color: #1f4e35;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #163d29;
+  }
+  
+  .cadastro {
+    margin-top: 20px;
+    color: #333;
+  }
+  
+  .cadastro a {
+    color: #1f4e35;
+    text-decoration: none;
+  }
+  

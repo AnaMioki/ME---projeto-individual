@@ -1,11 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Cadastro de Grupo</title>
+  <link rel="stylesheet" href="./style/cadastro.css">
 </head>
 <body>
-    
+  <div class="container">
+   
+    <div class="imagem-lateral"></div>
+    <div class="formulario">
+        <div class="titulo">
+            <h2>Vamos começar a organizar seu grupo?</h2> 
+            <a href="./index.html"><img src="./assets/logo.png" alt="" width="80px"></a>
+            
+        </div>
+      
+      <form>
+        <label for="grupo">Nome do grupo escoteiro</label>
+        <input type="text" id="grupo" placeholder="No momento, aceitamos apenas um cadastro por grupo.">
+
+        <label for="responsavel">Nome do responsável</label>
+        <input type="text" id="responsavel">
+
+        <label for="email">E-mail</label>
+        <input type="email" id="email">
+
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" placeholder="Mínimo de 8 caracteres com letras e números">
+
+        <label for="confirmar">Confirmar senha</label>
+        <input type="password" id="confirmar">
+
+        <button type="submit">Cadastrar</button>
+      </form>
+
+      <p class="login-link">Já tem uma conta? <a href="#">Entrar</a></p>
+    </div>
+  </div>
 </body>
 </html>

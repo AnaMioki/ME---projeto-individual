@@ -12,19 +12,19 @@
 <body>
   <header>
     <div class="container">
-      <img src="./assets/logo.png" alt="ScoutEase Logo" class="logo">
+      <img src="./assets/logo.png" alt="ScoutEase Logo" width="80px">
 
       <ul class="navegacao">
-        <li><a href="#">Início</a></li>
-        <li><a href="#">Sobre a Criadora</a></li>
-        <li><a href="#">Porque Surgiu</a></li>
-        <li><a href="#">Sobre a plataforma</a></li>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#criadora">Sobre a Criadora</a></li>
+        <li><a href="#porque">Porque Surgiu</a></li>
+        <li><a href="#plataforma">Sobre a plataforma</a></li>
       </ul>
 
       <div class="acesso">
 
-        <a href="#" class="cadastro">Cadastrar</a>
-        <a href="#" class="entrar">Login</a>
+        <a href="./cadastrar.html" class="cadastro">Cadastrar</a>
+        <a href="./login.html" class="entrar">Login</a>
       </div>
     </div>
   </header>
@@ -34,11 +34,11 @@
     <div class="inicio-content">
       <h1>Criado por quem cresceu com o lenço no pescoço.<br>Feito para quem vive o escotismo de verdade.</h1>
       <p class="citacao">"Deixe o mundo um pouco melhor do que quando encontrou." <br>– Baden Powell</p>
-      <a href="#sobre_plataforma" class="btn-inicio">Explorar a plataforma</a>
+      <a href="#plataforma" class="btn-inicio">Explorar a plataforma</a>
     </div>
   </section>
 
-  <section class="criadora-section">
+  <section id="criadora" class="criadora-section">
     <div class="criadora-container">
       <div class="criadora-imagem">
         <img src="./assets/anaMioki.png" alt="Foto da criadora do Scout Ease">
@@ -53,7 +53,7 @@
     </div>
   </section>
 
-  <section class="secao-porque">
+  <section id="porque" class="secao-porque">
     <div class="titulo">
       <h2>Por que surgiu a ideia?</h2>
       <p><span class="destaque-verde">A Scout Ease</span> nasceu de uma <strong class="destaque-verde">necessidade
@@ -102,7 +102,7 @@
     </div>
   </section>
 
-  <section class="sobre-plataforma">
+  <section id="plataforma" class="sobre-plataforma">
     <div class="container">
       <div class="container1">
         <h2>Sobre a Plataforma</h2>
@@ -151,18 +151,19 @@
 
 
   <footer>
-    <p>“Sempre Alerta para Servir!”</p>
-    <div class="imgsfotter">
-      <img src="./assets/logo.png" alt="" width="200px">
+    <div class="footer-content">
+      <img src="./assets/logo.png" alt="Logo" class="logo">
+      <h3 class="frase">"Sempre Alerta para Servir!"</h3>
       <div class="icons">
-        <img src="./assets/github.png" alt="">
-
-        <img src="./assets/linkedin.png" alt="">
-      
+        <a href="https://github.com/AnaMioki" target="_blank" rel="noopener noreferrer">
+          <img src="./assets/github.png" alt="GitHub">
+        </a>
+        <a href="https://www.linkedin.com/in/ana-mioki/" target="_blank" rel="noopener noreferrer">
+          <img src="./assets/linkedin.png" alt="LinkedIn">
+        </a>
       </div>
-     </div>
-
-    <p>&copy; 2025 ScoutEase - Ana Mioki. Todos os direitos reservados.</p>
+    </div>
+    <p>© 2025 Todos os direitos reservados</p>
   </footer>
 </body>
 

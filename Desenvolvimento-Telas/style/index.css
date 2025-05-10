@@ -14,6 +14,10 @@
   font-family: Poppins, sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 header {
   background-color: #f1d598;
   padding: 12px 0;
@@ -25,10 +29,6 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.logo {
-  height: 50px;
 }
 
 .navegacao {
@@ -45,6 +45,10 @@ header {
   font-size: 14px;
 }
 
+.navegacao li a:hover {
+  color: #166c5f;
+}
+
 .acesso {
   display: flex;
   gap: 8px;
@@ -53,19 +57,26 @@ header {
 .cadastro {
   background-color: #166c5f;
   color: white;
-  padding: px 12px;
+  padding:  12px;
   text-decoration: none;
   border-radius: 5px;
   font-size: 13px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .entrar {
   background-color: #d28d28;
   color: white;
-  padding: 6px 12px;
+  padding:  12px;
   text-decoration: none;
   border-radius: 5px;
   font-size: 13px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.acesso a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -111,14 +122,19 @@ header {
   background-color: var(--verde-escoteiro);
   color: white;
   padding: 12px 24px;
-  border-radius: 20px;
+  border-radius: 15px;
   text-decoration: none;
   font-weight: bold;
-  transition: background 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-align: center;
 }
 
 .btn-inicio:hover {
   background-color: #195c45;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
 }
 
 
@@ -242,6 +258,23 @@ header {
   font-size: 14px;
 }
 
+
+.caixinha-info {
+  display: flex;
+  gap: 16px;
+  background-color: #f5f5f5;
+  padding: 16px;
+  border-radius: 12px;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.caixinha-info:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  background-color: #f0efe0;
+}
+
 .bloco-direito {
   flex: 1 1 45%;
   display: flex;
@@ -253,6 +286,7 @@ header {
   font-size: 16px;
   margin-bottom: 16px;
   line-height: 1.9;
+  color: #0b3b2d;
 }
 
 .texto-destaque {
@@ -302,11 +336,11 @@ header {
 
 .cards {
   display: flex;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-  flex-direction: column;
+  flex-direction: column; 
+  gap: 20px;               
   background-color: #005843;
   border-radius: 8px;
+  padding: 20px;
 }
 
 .card {
@@ -330,6 +364,7 @@ header {
   top: -15px;
   left: -15px;
 }
+
 
 .notas-futuro {
   display: flex;
@@ -368,17 +403,23 @@ footer {
   text-align: center;
 }
 
-
-.footer-links a {
-  text-decoration: none;
-  color: #fff;
-  margin: 0 15px;
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  width: 100%;
 }
 
-.footer-links a:hover {
-  text-decoration: underline;
+.logo {
+  width: 200px;
+}
+
+.icons a {
+  margin-left: 15px;
 }
 
 footer p {
   font-size: 14px;
+  margin-top: 10px;
 }
