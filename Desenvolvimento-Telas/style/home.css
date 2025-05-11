@@ -79,6 +79,11 @@ body {
     background-color: #d6d69e;
 }
 
+.menu-opcoes a{
+    color: #103F2A;
+    text-decoration: none;
+}
+
 .botao-sair {
     display: flex;
     align-items: center;
@@ -304,7 +309,7 @@ canvas {
 }
 
 .graficos h3{
-    margin-bottom: 5px;
+    margin-bottom: 20px;
     font-size: 15px;
     color: #221006
 }
