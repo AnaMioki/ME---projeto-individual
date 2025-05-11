@@ -198,6 +198,80 @@ body {
     background-color: #8E44AD;
 }
 
+.metricas{
+    display: flex;
+    /* justify-content: space-around; */
+    /* padding-left: 100px; */
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 0px 0px 0 20px;
+}
 .card{
     background-color: #FFFBEA;
+    border-radius: 20px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
 }
+
+.tituloCard {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .tituloCard img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .tituloCard h3 {
+    font-size: 16px;
+    color: #221006;
+    margin: 0;
+    flex: 1;
+  }
+  
+  .numbers {
+    font-size: 25px;
+    font-weight: bold;
+    /* color: #103F2A; */
+    margin-top: -20px;
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: end; /* Centraliza verticalmente */
+    height: 100%; 
+  }
+
+  .metricas #escoteiros{
+    color: #0F6DB1;
+  }
+
+  .metricas #arrecadado{
+    color: #628D3D;
+  }
+
+  .metricas #atrasoMensalidade{
+    color: #E53E3E;
+  }
+
+  .campoGrafico{
+    padding-left: 40px;
+  }
+  .grafico{
+    background-color: white;
+    width: 500px;
+    border-radius: 10px;
+  }
+
+  .tituloGrafico{
+    gap:15px;
+    display: flex;
+    font-size: 15px;
+  }
+
+  .tituloGrafico h2{
+    font-size: 20px;
+  }

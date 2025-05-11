@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
     <link rel="stylesheet" href="./style/home.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Scout Ease</title>
 </head>
 
@@ -58,23 +59,23 @@
 
             </div>
             <div class="metricas">
-                <div class="card">
+                <div id="escoteiros" class="card">
                     <div class="tituloCard">
                         <img src="./assets/iconFlordeLis.png" alt="" width="20px">
                         <h3>Escoteiros Cadastrados</h3>
                     </div>
                     <div class="numbers">
-
+                        <p id="qtdEscoteiro">84</p>
                     </div>
 
                 </div>
-                <div class="card">
+                <div id="arrecadado" class="card">
                     <div class="tituloCard">
                         <img src="./assets/iconArrecadado.png" alt="" width="20px">
                         <h3>Valor Arrecadado no mês atual</h3>
                     </div>
                     <div class="numbers">
-
+                        <p id="valorArrecadado">R$ 1700,89</p>
                     </div>
                 </div>
                 <div class="card">
@@ -82,17 +83,54 @@
                         <img src="./assets/iconAtraso.png" alt="" width="20px">
                         <h3>Mensalidades Atrasadas</h3>
                     </div>
-                    <div class="numbers">
-
+                    <div id="atrasoMensalidade" class="numbers">
+                        <p id="valorMensalidadeAtrasada">R$ 84</p> 
+                        <p id="porcentagemMensalidaeAtrasada">%</p>
                     </div>
                 </div>
             </div>
+            <div class="campoGrafico">
+                <div class="tituloGrafico">
+                    <h2>Comparativo Mensal:</h2>
+                    <p>Valor Previsto x Valor Pago x Inadimplência</p>
+                    
+                </div>
+                <div class="grafico">
+                    <canvas id="myChart"></canvas>
+                </div>
+
+                <select name="" id="">Selecione o mês</select>
+            </div>
+            <div class="indices"></div>
         </section>
     </section>
 
 </body>
 
 </html>
+<script>
+    const ctx = document.getElementById('myChart');
+  
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+  
 
 <script>
     function alternarMenu() {
