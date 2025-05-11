@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root {
+    --bege-claro: #f2d79d;
+    --verde-escoteiro: #166345;
+    --laranja-escoteiro: #d99b50;
+    --texto-escuro: #333;
+}
+
+body {
+    margin: 0;
+    font-family: Poppins, sans-serif;
+    background-color: #F1DBAE;
+    padding: 0;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 90px;
+    background-color: #E0DFB1;
+    transition: width 0.3s;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar.expandido {
+    width: 250px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.logo-img {
+    width: 80px;
+}
+
+.sidebar.expandido .logo-text {
+    display: block;
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    padding: 15px;
+    color: #103F2A;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    gap: 10px;
+}
+
+.menu-opcoes {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-opcoes li {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    gap: 10px;
+    color: #103F2A;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.menu-opcoes li:hover {
+    background-color: #d6d69e;
+}
+
+.botao-sair {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    gap: 10px;
+    color: #103F2A;
+    margin-top: auto;
+}
+
+.botao-sair:hover {
+    background-color: #d6d69e;
+    cursor: pointer;
+}
+
+.label {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar.expandido .label {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* .sidebar.expandido .label {
+    display: inline;
+  } */
+
+.menu-opcoes li {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    color: #103F2A;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+}
+
+.icone {
+    width: 24px;
+    min-width: 24px;
+    text-align: center;
+}
+
+.label {
+    margin-left: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+.sidebar.expandido .label {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* pra garantir que o menu e a pagina fiquem ocupando o msm espeço e se sobrepondo */
+.home {
+    margin-left: 80px;
+    transition: margin-left 0.3s;
+    padding: 20px;
+}
+
+.sidebar.expandido~.home {
+    margin-left: 250px;
+}
+
+/* estilizando só a home agora  */
+
+
+.boasVindas {
+    display: flex;
+    justify-content: end;
+    font-size: 15px;
+    margin-top: -10px; 
+}
+
+.inicio {
+    display: flex;
+    justify-content: space-between;
+}
+
+.inicio h1 {
+    font-size: 30px;
+    padding-left: 30px;
+    color: #033D2F;
+    margin-top: -8px; 
+}
+
+.inicio button {
+    padding: 6px;
+    font-size: 13px;
+    font-family: Poppins, sans-serif;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inicio button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.288);
+}
+
+.botoesGestao{
+    gap: 20px;
+}
+
+.botaoEscoteiro{
+    background-color: #276749;
+}
+
+.botaoMensalidade{
+    background-color: #8E44AD;
+}
+
+.card{
+    background-color: #FFFBEA;
+}
