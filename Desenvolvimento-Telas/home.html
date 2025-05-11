@@ -84,24 +84,40 @@
                         <h3>Mensalidades Atrasadas</h3>
                     </div>
                     <div id="atrasoMensalidade" class="numbers">
-                        <p id="valorMensalidadeAtrasada">R$ 84</p> 
+                        <p id="valorMensalidadeAtrasada">R$ 84</p>
                         <p id="porcentagemMensalidaeAtrasada">%</p>
                     </div>
                 </div>
             </div>
             <div class="campoGrafico">
-                <div class="tituloGrafico">
-                    <h2>Comparativo Mensal:</h2>
-                    <p>Valor Previsto x Valor Pago x Inadimplência</p>
+                <div class="graficos">
+                    <div class="grafico1">
+                        <div class="tituloGrafico">
+                            <h3>Comparativo Mensal:</h3>
+                        </div>
+                        <div class="grafico">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- <select name="" id="">Selecione o mês</select> -->
+
+                    <div class="grafico2">
+                        <h3>Situação Atual das Mensalidades:</h3>
+                        <div class="graficoRosca">
+                            <canvas id="myChartRosca"></canvas>
+                        </div>
+                    </div>
                     
-                </div>
-                <div class="grafico">
-                    <canvas id="myChart"></canvas>
+                    <div class="alerta">
+                        <h3>Alertas:</h3>
+                        <p>2 escoteiros com mensalidades atrasadas há mais de 30 dias</p>
+                    </div>
+
                 </div>
 
-                <select name="" id="">Selecione o mês</select>
             </div>
-            <div class="indices"></div>
+
         </section>
     </section>
 
@@ -110,27 +126,111 @@
 </html>
 <script>
     const ctx = document.getElementById('myChart');
-  
+    const graficoRosca = document.getElementById('myChartRosca');
+
+    const previsto = [1000, 1200, 900, 1100, 1300, 1250];
+    const arrecadado = [800, 1000, 850, 1000, 1150, 1200];
+    const faltando = previsto.map((v, i) => v - arrecadado[i]);
+
     new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+        type: 'line',
+        data: {
+            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+            datasets: [
+                {
+                    label: 'Valor Previsto',
+                    data: previsto,
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    fill: true,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
+                },
+                {
+                    label: 'Valor Pago',
+                    data: arrecadado,
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
+                },
+                {
+                    label: 'Inadimplência',
+                    data: faltando,
+                    borderColor: '#ef4444',
+                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: {
+                            size: 14
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            return context.dataset.label + ': R$ ' + context.parsed.y.toFixed(2);
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Valor em R$'
+                    },
+                    ticks: {
+                        callback: function (value) {
+                            return 'R$ ' + value;
+                        }
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Meses'
+                    }
+                }
+            }
         }
-      }
     });
-  </script>
-  
+
+    const dataRosca = {
+        labels: [
+            'Atrasado',
+            'Em dia',
+        ],
+        datasets: [{
+            label: 'Mensalidades',
+            data: [300, 50],
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                '#10b981'
+            ],
+            hoverOffset: 4
+        }]
+    };
+    new Chart(graficoRosca, {
+        type: 'doughnut',
+        data: dataRosca,
+    })
+</script>
+
 
 <script>
     function alternarMenu() {
