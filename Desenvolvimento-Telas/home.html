@@ -29,7 +29,7 @@
                 </li>
                 <li>
                     <img src="./assets/iconEscoteiro.png" alt="" width="30px">
-                    <a href=""><span class="label">Mensalidades</span></a>
+                    <a href="./mensalidades.html"><span class="label">Mensalidades</span></a>
                 </li>
                 <li>
                     <img src="./assets/iconConfig.png" alt="" width="30px">
@@ -39,7 +39,7 @@
 
             <div class="botao-sair">
                 <img src="./assets/iconSair.png" alt="" width="30px">
-                <a href=""><span class="label">Sair</span></a>
+                <a href="./index.html"><span class="label">Sair</span></a>
             </div>
         </div>
 
@@ -52,9 +52,12 @@
             <div class="inicio">
                 <h1>Dashboards</h1>
                 <div class="botoesGestao">
-                    <button class="botaoEscoteiro">Adicionar Escoteiro</button>
-                    <button class="botaoMensalidade">Lançar Mensalidade</button>
-
+                    <a href="./mensalidades.html">
+                        <button class="botaoEscoteiro"><img src="./assets/iconAdd.png" alt="" width="20px" height="20px">Adicionar Escoteiro</button>
+                    </a>
+                    <a href="./mensalidades.html">
+                        <button class="botaoMensalidade"><img src="./assets/iconDindin.png" alt=""width="20px">Lançar Mensalidade</button>
+                    </a>
                 </div>
 
             </div>
@@ -212,7 +215,7 @@
 
     const dataRosca = {
         labels: [
-            'Atrasado',
+            'Em Atraso',
             'Em dia',
         ],
         datasets: [{
