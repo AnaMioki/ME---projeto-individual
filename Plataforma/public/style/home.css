@@ -1,0 +1,342 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+*{
+    font-family: Poppins, sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: Poppins, sans-serif;
+    background-color: #F1DBAE;
+    padding: 0;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 90px;
+    background-color: #E0DFB1;
+    transition: width 0.3s;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar.expandido {
+    width: 250px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.logo-img {
+    width: 80px;
+}
+
+.sidebar.expandido .logo-text {
+    display: block;
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    padding: 15px;
+    color: #103F2A;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    gap: 10px;
+}
+
+.menu-opcoes {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-opcoes li {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    gap: 10px;
+    color: #103F2A;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.menu-opcoes li:hover {
+    background-color: #d6d69e;
+}
+
+.menu-opcoes a{
+    color: #103F2A;
+    text-decoration: none;
+}
+
+.botao-sair {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    gap: 10px;
+    color: #103F2A;
+    margin-top: auto;
+}
+
+.botao-sair a{
+    color: #103F2A;
+    text-decoration: none;
+}
+
+.botao-sair:hover {
+    background-color: #d6d69e;
+    cursor: pointer;
+}
+
+.label {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar.expandido .label {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* .sidebar.expandido .label {
+    display: inline;
+  } */
+
+.menu-opcoes li {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    color: #103F2A;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+}
+
+.icone {
+    width: 24px;
+    min-width: 24px;
+    text-align: center;
+}
+
+.label {
+    margin-left: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+.sidebar.expandido .label {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* pra garantir que o menu e a pagina fiquem ocupando o msm espeço e se sobrepondo */
+.home {
+    margin-left: 80px;
+    transition: margin-left 0.3s;
+    padding: 20px;
+}
+
+/* .sidebar.expandido~.home {
+    margin-left: 250px;
+} */
+
+/* estilizando só a home agora  */
+
+
+.boasVindas {
+    display: flex;
+    justify-content: end;
+    font-size: 15px;
+    margin-top: -10px; 
+}
+
+.inicio {
+    display: flex;
+    justify-content: space-between;
+}
+
+.inicio h1 {
+    font-size: 30px;
+    padding-left: 30px;
+    color: #033D2F;
+    margin-top: -8px; 
+}
+
+.inicio button {
+    padding: 6px;
+    font-size: 15px;
+    font-family: Poppins, sans-serif;
+    border-radius: 5px;
+    border: none;
+     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inicio button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.288);
+}
+
+.botoesGestao{
+      gap: 20px;
+    display: flex;
+}
+
+.botaoEscoteiro{
+    background-color: #276749;
+     display: flex;
+    gap: 5px;
+}
+
+.botaoMensalidade{
+    background-color: #8E44AD;
+     display: flex;
+    gap: 5px;
+}
+
+.botoesGestao a{
+    text-decoration: none;
+}
+.metricas{
+    display: flex;
+    /* justify-content: space-around; */
+    /* padding-left: 100px; */
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 0px 0px 0 20px;
+}
+.card{
+    background-color: #FFFBEA;
+    border-radius: 20px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.tituloCard {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .tituloCard img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .tituloCard h3 {
+    font-size: 16px;
+    color: #221006;
+    margin: 0;
+    flex: 1;
+  }
+  
+  .numbers {
+    font-size: 25px;
+    font-weight: bold;
+    /* color: #103F2A; */
+    margin-top: -20px;
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: end; /* Centraliza verticalmente */
+    height: 100%; 
+  }
+
+  .metricas #escoteiros{
+    color: #0F6DB1;
+  }
+
+  .metricas #arrecadado{
+    color: #628D3D;
+  }
+
+  .metricas #atrasoMensalidade{
+    color: #E53E3E;
+  }
+
+  .campoGrafico{
+    padding-left: 20px;
+    /* background-color: #d28d28; */
+  }
+  .grafico{
+    background-color: white;
+    width: 500px;
+    border-radius: 10px;
+  }
+  
+  .graficos{
+    display: flex;
+  }
+  .graficoRosca{
+    width: 210px;
+    background-color: white;
+    border-radius: 10px;
+  }
+
+  .graficos {
+    display: flex;
+    justify-content: start;
+    gap: 20px; 
+    flex-wrap: wrap;
+}
+
+.grafico,
+.graficoRosca {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+.grafico2{
+    height: 210px;
+    gap: 30px;
+    padding-left: 20px;
+}
+
+.graficos h3{
+    margin-bottom: 20px;
+    font-size: 15px;
+    color: #221006
+}
+
+.alerta{
+    /* background-color: #d28d28; */
+    padding-left: 30px;
+    width: 300px;
+}
+
+.alerta p{
+    background-color: #d28d28;
+    border-radius: 10px;
+    text-align: start;
+    padding: 10px;
+     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+

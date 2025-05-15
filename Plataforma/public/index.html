@@ -1,82 +1,171 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>AquaTech | Página Inicial</title>
-
-    <script src="./js/sessao.js"></script>
-
-    <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="./assets/logo.png" type="image/x-icon" width="200px">
+  <link rel="stylesheet" href="./style/index.css">
+  <title>Scout Ease</title>
 </head>
 
 <body>
-    <div class="header">
-      <div class="container">
-        <h1 class="titulo">AquaTech</h1>
-        <ul class="navbar">
-          <li class="agora">
-            <a href="#">Inicial</a>
-          </li>
-          <li>
-            <a href="simulador.html">Simulador</a>
-          </li>
-          <li>|</li>
-          <li>
-            <a href="login.html">Login</a>
-          </li>
-          <li>
-            <a href="cadastro.html">Cadastro</a>
-          </li>
-        </ul>
+  <header>
+    <div class="container">
+      <img src="./assets/logo.png" alt="ScoutEase Logo" width="80px">
+
+      <ul class="navegacao">
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#criadora">Sobre a Criadora</a></li>
+        <li><a href="#porque">Porque Surgiu</a></li>
+        <li><a href="#plataforma">Sobre a plataforma</a></li>
+      </ul>
+
+      <div class="acesso">
+
+        <a href="./cadastrar.html" class="cadastro">Cadastrar</a>
+        <a href="./login.html" class="entrar">Login</a>
       </div>
     </div>
-  
-    <div class="banner">
-      <div class="container">
-        <p>Preservando <span>hoje</span> para existirem <span>amanhã</span>.</p>
+  </header>
+
+
+  <section id="inicio" class="inicio">
+    <div class="inicio-content">
+      <h1>Criado por quem cresceu com o lenço no pescoço.<br>Feito para quem vive o escotismo de verdade.</h1>
+      <p class="citacao">"Deixe o mundo um pouco melhor do que quando encontrou." <br>– Baden Powell</p>
+      <a href="#plataforma" class="btn-inicio">Explorar a plataforma</a>
+    </div>
+  </section>
+
+  <section id="criadora" class="criadora-section">
+    <div class="criadora-container">
+      <div class="criadora-imagem">
+        <img src="./assets/anaMioki.png" alt="Foto da criadora do Scout Ease">
+      </div>
+      <div class="criadora-conteudo">
+        <h2>Sobre a Criadora do Scout Ease</h2>
+        <h3>Meu nome é Ana Mioki,</h3>
+        <p>Cresci acampando, liderando patrulhas, aprendendo com cada tempestade. <br> O escotismo não foi só parte da
+          minha vida — ele moldou quem eu sou. <br>
+          Essa plataforma é meu jeito de retribuir um pouco que vivi.</p>
       </div>
     </div>
-  
-    <div class="social">
-      <div class="container">
-        <div class="boxes">
-          <div class="box">
-            <img src="assets/imgs/planet-earth_color.png">
-            <h4>Missão</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
+  </section>
+
+  <section id="porque" class="secao-porque">
+    <div class="titulo">
+      <h2>Por que surgiu a ideia?</h2>
+      <p><span class="destaque-verde">A Scout Ease</span> nasceu de uma <strong class="destaque-verde">necessidade
+          real.</strong></p>
+
+    </div>
+    <div class="conteudo">
+      <div class="bloco-esquerdo">
+
+        <div class="caixinha-info">
+          <img src="./assets/iconArquivo.png" alt="Ícone de gestão">
+          <div>
+            <h3>Gestão descentralizada</h3>
+            <p>Grupos escoteiros usando planilhas diferentes, dificultando o controle de dados.</p>
           </div>
-          <div class="box">
-            <img src="assets/imgs/lightbulb_color.png">
-            <h4>Visão</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
+        </div>
+
+        <div class="caixinha-info">
+          <img src="./assets/iconRelogio.png" alt="Ícone de voluntários">
+          <div>
+            <h3>Voluntários sobrecarregados</h3>
+            <p>Tempo e energia gastos com tarefas que poderiam ser automatizadas.</p>
           </div>
-          <div class="box">
-            <img src="assets/imgs/growth_color.png">
-            <h4>Valores</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
+        </div>
+
+        <div class="caixinha-info">
+          <img src="./assets/iconBussula.png" alt="Ícone de escotismo">
+          <div>
+            <h3>Feito por quem vive o escotismo</h3>
+            <p>A solução nasceu da vivência real com as dificuldades enfrentadas nos bastidores.</p>
           </div>
         </div>
       </div>
-    </div>
-  
-    <div class="footer">
-      <div class="container">
-        <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
-        <span class="version">v1.0.0</span>
+
+      <div class="bloco-direito">
+        <p>
+          Como escoteira e voluntária, percebi o quanto <strong class="texto-destaque">as gestões eram feitas na
+            raça</strong> — com planilhas, anotações soltas e processos repetitivos que <strong
+            class="texto-destaque">roubavam tempo e energia.</strong>
+        </p>
+        <p>
+          Decidi transformar essa vivência em algo útil. <strong class="texto-destaque">Este MVP é o primeiro passo para
+            facilitar o dia a dia</strong> de quem se dedica a fazer o movimento escoteiro acontecer.
+        </p>
       </div>
     </div>
-  </body>
+  </section>
+
+  <section id="plataforma" class="sobre-plataforma">
+    <div class="container">
+      <div class="container1">
+        <h2>Sobre a Plataforma</h2>
+        <p class="subtitulo">Funcionalidades Principais (MVP - Produto Mínimo Viável)</p>
+
+        <div class="cards">
+          <div class="card">
+            <span class="numero">1</span>
+            <h3>Registre Pagamentos com Simplicidade</h3>
+            <p>Marque cada mensalidade como paga em poucos cliques — um a um, com transparência e controle.</p>
+          </div>
+
+          <div class="card">
+            <span class="numero">2</span>
+            <h3>Acompanhe Vencimentos e Atrasos</h3>
+            <p>Visualize rapidamente quem está em dia e quem está com pendências — facilite cobranças e mantenha a
+              organização em dia.</p>
+          </div>
+
+          <div class="card" style="margin: 0;">
+            <span class="numero">3</span>
+            <h3>Cadastre e Organize seus Escoteiros</h3>
+            <p>Armazene dados essenciais em um único lugar.</p>
+          </div>
+
+          <div class="card" style="margin: 0;">
+            <span class="numero">4</span>
+            <h3>Dashboards em Tempo Real</h3>
+            <p>Gráficos e resumos mostram taxa de adimplência, total arrecadado e quem tem mensalidades atrasadas.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="imagem-direita">
+      <img src="./assets/badenPowell.png" alt="Escoteiro fundador">
+    </div>
+
+  </section>
+  <div class="notas-futuro">
+    <img src="./assets/iconConstrucao.png" alt="" width="80px">
+    <p>- Será possível que mais de um usuário utilize o mesmo ambiente (ferramenta colaborativa) em versões futuras.<br>
+      - Alertas e relatórios avançados virão nas próximas versões.<br>
+      - A centralização de documentos estará disponível na versão futura da plataforma.</p>
+  </div>
+
+
+  <footer>
+    <div class="footer-content">
+      <img src="./assets/logo.png" alt="Logo" class="logo">
+      <h3 class="frase">"Sempre Alerta para Servir!"</h3>
+      <div class="icons">
+        <a href="https://github.com/AnaMioki" target="_blank" rel="noopener noreferrer">
+          <img src="./assets/github.png" alt="GitHub">
+        </a>
+        <a href="https://www.linkedin.com/in/ana-mioki/" target="_blank" rel="noopener noreferrer">
+          <img src="./assets/linkedin.png" alt="LinkedIn">
+        </a>
+      </div>
+    </div>
+    <p>© 2025 Todos os direitos reservados</p>
+  </footer>
+</body>
 
 </html>

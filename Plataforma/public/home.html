@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <link rel="stylesheet" href="./style/home.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Scout Ease</title>
+</head>
+
+<body>
+    <section class="pagina">
+        <div class="sidebar" id="sidebar">
+            <div class="logo">
+                <img src="./assets/logo.png" alt="Logo Scout Ease" class="logo-img">
+                <!-- <span class="logo-text">SCOUT EASE</span> -->
+            </div>
+
+            <button class="toggle-btn" onclick="alternarMenu()">
+                <img src="./assets/iconMenu.png" alt="" width="30px">
+                <span class="label">Menu</span>
+            </button>
+
+            <ul class="menu-opcoes">
+                <li>
+                    <img src="./assets/iconHome.png" alt="" width="30px">
+                    <a href="./home.html"><span class="label">Inicio | Dashboards</span></a>
+                </li>
+                <li>
+                    <img src="./assets/iconEscoteiro.png" alt="" width="30px">
+                    <a href="./mensalidades.html"><span class="label">Mensalidades</span></a>
+                </li>
+                <li>
+                    <img src="./assets/iconConfig.png" alt="" width="30px">
+                    <a href=""><span class="label">Configurações</span></a>
+                </li>
+            </ul>
+
+            <div class="botao-sair">
+                <img src="./assets/iconSair.png" alt="" width="30px">
+                <a href="./index.html"><span class="label">Sair</span></a>
+            </div>
+        </div>
+
+        <!-- pagina de fato -->
+        <section class="home">
+            <div class="boasVindas">
+                <p>Boas-Vindas, fulano </p>
+                <img src="./assets/iconUser.png" alt="">
+            </div>
+            <div class="inicio">
+                <h1>Dashboards</h1>
+                <div class="botoesGestao">
+                    <a href="./mensalidades.html">
+                        <button class="botaoEscoteiro"><img src="./assets/iconAdd.png" alt="" width="20px" height="20px">Adicionar Escoteiro</button>
+                    </a>
+                    <a href="./mensalidades.html">
+                        <button class="botaoMensalidade"><img src="./assets/iconDindin.png" alt=""width="20px">Lançar Mensalidade</button>
+                    </a>
+                </div>
+
+            </div>
+            <div class="metricas">
+                <div id="escoteiros" class="card">
+                    <div class="tituloCard">
+                        <img src="./assets/iconFlordeLis.png" alt="" width="20px">
+                        <h3>Escoteiros Cadastrados</h3>
+                    </div>
+                    <div class="numbers">
+                        <p id="qtdEscoteiro">84</p>
+                    </div>
+
+                </div>
+                <div id="arrecadado" class="card">
+                    <div class="tituloCard">
+                        <img src="./assets/iconArrecadado.png" alt="" width="20px">
+                        <h3>Valor Arrecadado no mês atual</h3>
+                    </div>
+                    <div class="numbers">
+                        <p id="valorArrecadado">R$ 1700,89</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="tituloCard">
+                        <img src="./assets/iconAtraso.png" alt="" width="20px">
+                        <h3>Mensalidades Atrasadas</h3>
+                    </div>
+                    <div id="atrasoMensalidade" class="numbers">
+                        <p id="valorMensalidadeAtrasada">R$ 84</p>
+                        <p id="porcentagemMensalidaeAtrasada">%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="campoGrafico">
+                <div class="graficos">
+                    <div class="grafico1">
+                        <div class="tituloGrafico">
+                            <h3>Comparativo Mensal:</h3>
+                        </div>
+                        <div class="grafico">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- <select name="" id="">Selecione o mês</select> -->
+
+                    <div class="grafico2">
+                        <h3>Situação Atual das Mensalidades:</h3>
+                        <div class="graficoRosca">
+                            <canvas id="myChartRosca"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="alerta">
+                        <h3>Alertas:</h3>
+                        <p>2 escoteiros com mensalidades atrasadas há mais de 30 dias</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+    </section>
+
+</body>
+
+</html>
+<script>
+    const ctx = document.getElementById('myChart');
+    const graficoRosca = document.getElementById('myChartRosca');
+
+    const previsto = [1000, 1200, 900, 1100, 1300, 1250];
+    const arrecadado = [800, 1000, 850, 1000, 1150, 1200];
+    const faltando = previsto.map((v, i) => v - arrecadado[i]);
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+            datasets: [
+                {
+                    label: 'Valor Previsto',
+                    data: previsto,
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    fill: true,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
+                },
+                {
+                    label: 'Valor Pago',
+                    data: arrecadado,
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
+                },
+                {
+                    label: 'Inadimplência',
+                    data: faltando,
+                    borderColor: '#ef4444',
+                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: {
+                            size: 14
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            return context.dataset.label + ': R$ ' + context.parsed.y.toFixed(2);
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Valor em R$'
+                    },
+                    ticks: {
+                        callback: function (value) {
+                            return 'R$ ' + value;
+                        }
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Meses'
+                    }
+                }
+            }
+        }
+    });
+
+    const dataRosca = {
+        labels: [
+            'Em Atraso',
+            'Em dia',
+        ],
+        datasets: [{
+            label: 'Mensalidades',
+            data: [300, 50],
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                '#10b981'
+            ],
+            hoverOffset: 4
+        }]
+    };
+    new Chart(graficoRosca, {
+        type: 'doughnut',
+        data: dataRosca,
+    })
+</script>
+
+
+<script>
+    function alternarMenu() {
+        const barraLateral = document.getElementById("sidebar");
+        barraLateral.classList.toggle("expandido");
+    }
+</script>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/mensalidades.css">
+    <link rel="stylesheet" href="./style/menuLateral.css">
+    <script src="mensalidade.js"></script>
+    <title>Scout Ease</title>
+</head>
+
+<body>
+    <section class="pagina">
+        <div class="sidebar" id="sidebar">
+            <div class="logo">
+                <img src="./assets/logo.png" alt="Logo Scout Ease" class="logo-img">
+                <!-- <span class="logo-text">SCOUT EASE</span> -->
+            </div>
+
+            <button class="toggle-btn" onclick="alternarMenu()">
+                <img src="./assets/iconMenu.png" alt="" width="30px">
+                <span class="label">Menu</span>
+            </button>
+
+            <ul class="menu-opcoes">
+                <li>
+                    <img src="./assets/iconHome.png" alt="" width="30px">
+                    <a href="./home.html"><span class="label">Inicio | Dashboards</span></a>
+                </li>
+                <li>
+                    <img src="./assets/iconEscoteiro.png" alt="" width="30px">
+                    <a href=""><span class="label">Mensalidades</span></a>
+                </li>
+                <li>
+                    <img src="./assets/iconConfig.png" alt="" width="30px">
+                    <a href="./index.html"><span class="label">Configurações</span></a>
+                </li>
+            </ul>
+
+            <div class="botao-sair">
+                <img src="./assets/iconSair.png" alt="" width="30px">
+                <a href="./index.html"><span class="label">Sair</span></a>
+            </div>
+        </div>
+
+    </section>
+    <section class="EscoteirosMensalidades">
+        <div class="boasVindas">
+            <p>Boas-Vindas, fulano </p>
+            <img src="./assets/iconUser.png" alt="">
+        </div>
+        <h1>Escoteiros e Mensalidades</h1>
+        <div class="funcionalidades">
+            <div class="botoesGestao">
+                <a href="./adicionarEscoteiro.html">
+                    <button class="botaoEscoteiro"><img src="./assets/iconAdd.png" alt="" width="20px"
+                        height="20px">Adicionar Escoteiro</button>
+                </a>
+                
+                <button class="botaoMensalidade"><img src="./assets/iconDindin.png" alt="" width="20px">Lançar
+                    Mensalidade</button>
+            </div>
+
+            <div class="pesquisa">
+                <label>Buscar Escoteiro</label>
+                <div class="inputBusca">
+                    <input type="text" id="input_escoteiro" placeholder="Digite por nome ou registro">
+                    <img src="./assets/iconBuscar.png" alt="" width="20px" id="btn-buscar">
+
+                </div>
+            </div>
+
+            <div class="filtroDiv">
+                <span>Filtrar</span>
+                <img src="./assets/iconFiltrar.png" alt="" width="20px" id="filtrar-btn" class="filtrar-btn">
+                <select id="filtro" class="filtro" style="display: none;">
+                    <option value="opcao1">Opção 1</option>
+                    <option value="opcao2">Opção 2</option>
+                    <option value="opcao3">Opção 3</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="listaEscoteiros">
+            <span>Painel Escoteiro | Controle de Mensalidades e Dados Pessoais</span>
+            <div class="escoteiro">
+                <div class="info">
+                    <div class="dados">
+                        <div class="identificacao">
+                            <span>${escoteiro.registro}</span>
+                            <span>${escoteiro.nome}</span>
+                            <img src="./assets/iconEditar.png" alt="editar" class="editar-btn"
+                                onclick="editarEscoteiro('${escoteiro.registro}')">
+
+                        </div>
+                        <div class="mensalidadeInfo">
+                            <span>${escoteiro.ramo}</span>
+                            <div class="vencimento">
+                                <span>${escoteiro.status}</span>
+                                <span>${escoteiro.dtMensalidade}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="botoes">
+                        <button class="btn-darBaixa">Dar Baixa</button>
+                        <button class="btn-verMensalidades" onclick="mostrarDetalhes('${escoteiro.registro}')">Ver
+                            Mensalidades</button>
+                        <img src="./assets/iconExcluir.png" alt="" class="excluir-btn" width="20px" onclick="excluirEscoteiro('${escoteiro.registro}')">
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div id="mensagem" style="display: none;">
+            Adicione um escoteiro
+        </div>
+    </section>
+</body>
+
+</html>
+
+
+
+<script>
+    function alternarMenu() {
+        const barraLateral = document.getElementById("sidebar");
+        barraLateral.classList.toggle("expandido");
+    }
+
+
+    document.getElementById('filtrar-btn').addEventListener('click', function () {
+        var filtro = document.getElementById('filtro');
+        // Alterna entre mostrar e esconder o select
+        if (filtro.style.display === 'none' || filtro.style.display === '') {
+            filtro.style.display = 'block';
+        } else {
+            filtro.style.display = 'none';
+        }
+    });
+
+
+    document.getElementById('btn-buscar').addEventListener('click', function () {
+        var input = document.getElementById('input_escoteiro').value;
+        if (input.trim() !== '') {
+            // Aqui você pode realizar a ação de busca, como enviar uma solicitação para um banco de dados ou apenas mostrar uma mensagem
+            alert('Buscando por: ' + input); // Exemplo de ação
+        } else {
+            alert('Por favor, digite um nome ou registro para buscar.');
+        }
+    });
+</script>
