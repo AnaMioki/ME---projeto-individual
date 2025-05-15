@@ -84,4 +84,34 @@
 
     console.log("Todos os dados validados. Pronto para enviar ao backend.");
   }
+
+  const dadosCadastro = {
+    grupo: nomeGrupoEscoteiroVar,
+    responsavel: nomeVar,
+    email: emailVar,
+    senha: senhaVar,
+  };
+
+  fetch("/usuario/cadastrar", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dadosCadastro)
+  })
+
+  .then(function (resposta){
+    console.log("resposta: ", resposta);
+
+    if(resposta.ok){
+      alert("Cadastro realizado com sucesso!")
+      // redirecionar para o login
+    }else{
+      alert("Erro no cadastro: " + data.message);
+    }
+  })
+  .catch(error => {
+    console.error('Erro:', error);
+    alert('Erro ao conectar com o servidor.');
+  });
 </script>
