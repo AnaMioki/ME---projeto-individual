@@ -1,0 +1,103 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins, sans-serif;
+}
+
+/* Background */
+body {
+    background: url('../assets/backgroundEscoteiro.png') no-repeat center center fixed; 
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.escoteiro {
+    margin-left: 80px;
+    transition: margin-left 0.3s;
+    padding: 20px;
+}
+/* Card */
+.card {
+    background-color: #F6E5BF;
+    border-radius: 10px;
+    width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.icon {
+    width: 100px;
+    margin-right: 10px;
+}
+
+.title {
+    font-size: 30px;
+    font-family: Poppins, sans-serif;
+    color: #103F2A;
+    margin-top: -20px;
+}
+
+/* Form Fields */
+.field {
+    margin-bottom: 15px;
+}
+
+label {
+    margin-bottom: 5px;
+    font-size: 15px;
+    color: #103F2A;
+}
+
+.input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Buttons */
+.buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+}
+
+.btn {
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-cancel {
+    background-color: #F8D7A5;
+    color: #4A5736;
+}
+
+.btn-cancel:hover {
+    background-color: #EAC890;
+}
+
+.btn-submit {
+    background-color: #166c5f;
+    color: white;
+}
+
+.btn-submit:hover {
+    background-color: #6d8854;
+}

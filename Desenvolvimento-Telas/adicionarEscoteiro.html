@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/menuLateral.css">
+    <link rel="stylesheet" href="./style/adicionarEscoteiro.css">
+    <title>Scout Ease</title>
+</head>
+
+<body>
+    <section class="pagina">
+        <div class="sidebar" id="sidebar">
+            <div class="logo">
+                <img src="./assets/logo.png" alt="Logo Scout Ease" class="logo-img">
+                
+            </div>
+
+            <button class="toggle-btn" onclick="alternarMenu()">
+                <img src="./assets/iconMenu.png" alt="" width="30px">
+                <span class="label">Menu</span>
+            </button>
+
+            <ul class="menu-opcoes">
+                <li>
+                    <img src="./assets/iconHome.png" alt="" width="30px">
+                    <a href="./home.html"><span class="label">Inicio | Dashboards</span></a>
+                </li>
+                <li>
+                    <img src="./assets/iconEscoteiro.png" alt="" width="30px">
+                    <a href=""><span class="label">Mensalidades</span></a>
+                </li>
+                <li>
+                    <img src="./assets/iconConfig.png" alt="" width="30px">
+                    <a href="./index.html"><span class="label">Configurações</span></a>
+                </li>
+            </ul>
+
+            <div class="botao-sair">
+                <img src="./assets/iconSair.png" alt="" width="30px">
+                <a href="./index.html"><span class="label">Sair</span></a>
+            </div>
+        </div>
+        <div class="escoteiro">
+            <div class="card">
+                <header class="header">
+                    <a href="./mensalidades.html"> <img src="./assets/iconSeta.png" alt="" width="20px"></a>
+                    <img src="./assets/iconEscoteiropersona.png" alt="Ícone Escoteiro" width="200px" class="icon">
+                    
+                    <h1 class="title">Adicionar Escoteiro</h1>
+                </header>
+                <form class="form">
+                    <div class="field">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" class="input" required
+                            placeholder="Digite o nome do escoteiro">
+                    </div>
+                    <div class="field">
+                        <label for="registro">Registro Escoteiro</label>
+                        <input type="text" id="registro" name="registro" class="input" required
+                            placeholder="Digite somente os números">
+                    </div>
+                    <div class="field">
+                        <label for="nascimento">Data de Nascimento</label>
+                        <input type="date" id="nascimento" name="nascimento" class="input" required>
+                    </div>
+                    <div class="field">
+                        <label for="responsavel">Responsável</label>
+                        <input type="text" id="responsavel" name="responsavel" class="input" required
+                            placeholder="Inclua o nome do responsável">
+                    </div>
+                    <div class="field">
+                        <label for="celular">Celular</label>
+                        <input type="tel" id="celular" name="celular" class="input" required
+                            placeholder="Digite somente os números">
+                    </div>
+                    <div class="field">
+                        <label for="mensalidade">Vencimento da Mensalidade</label>
+                        <input type="date" id="mensalidade" name="mensalidade" class="input" required>
+                    </div>
+                    <div class="buttons">
+                        <button type="button" class="btn btn-cancel">Cancelar</button>
+                        <button type="submit" class="btn btn-submit">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </section>
+</body>
+
+</html>
+<script>
+    function alternarMenu() {
+        const barraLateral = document.getElementById("sidebar");
+        barraLateral.classList.toggle("expandido");
+    }
+
+</script>

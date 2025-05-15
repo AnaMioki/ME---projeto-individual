@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/menuLateral.css">
+    <link rel="stylesheet" href="./style/escoteiro.css">
+    <title>Scout Ease</title>
+</head>
+
+<body>
+    <section class="pagina">
+        <div class="sidebar" id="sidebar">
+            <div class="logo">
+                <img src="./assets/logo.png" alt="Logo Scout Ease" class="logo-img">
+                <!-- <span class="logo-text">SCOUT EASE</span> -->
+            </div>
+
+            <button class="toggle-btn" onclick="alternarMenu()">
+                <img src="./assets/iconMenu.png" alt="" width="30px">
+                <span class="label">Menu</span>
+            </button>
+
+            <ul class="menu-opcoes">
+                <li>
+                    <img src="./assets/iconHome.png" alt="" width="30px">
+                    <a href="./home.html"><span class="label">Inicio | Dashboards</span></a>
+                </li>
+                <li>
+                    <img src="./assets/iconEscoteiro.png" alt="" width="30px">
+                    <a href=""><span class="label">Mensalidades</span></a>
+                </li>
+                <li>
+                    <img src="./assets/iconConfig.png" alt="" width="30px">
+                    <a href="./index.html"><span class="label">Configurações</span></a>
+                </li>
+            </ul>
+
+            <div class="botao-sair">
+                <img src="./assets/iconSair.png" alt="" width="30px">
+                <a href="./index.html"><span class="label">Sair</span></a>
+            </div>
+        </div>
+        <div class="escoteiro">
+            <div class="card">
+                <header class="header">
+                    <div class="topo">
+                        <a href="./mensalidades.html"> <img src="./assets/iconSeta.png" alt="" width="20px"></a>
+                        <img src="./assets/iconExcluir.png" alt="">
+                    </div>
+                    
+                    <img src="./assets/iconEscoteiropersona.png" alt="Ícone Escoteiro" width="200px" class="icon">
+                    
+                    <h1 class="title">${escoteiro.nome}</h1>
+                    <img src="./assets/iconEditar.png" alt="">
+                    <div class="contentUser">
+                        <span id="ramo"></span>
+                        <span id="registro"></span>
+                        <span id="celular"></span>
+                    </div>
+                </header>
+                <div class="status">
+                    <p></p>
+                    <div class="dtVencimento">
+                        <p>Data Vencimento</p>
+                        <p>10/05/2025</p>
+                    </div>
+                    <div class="botao">
+                        <button>Dar Baixa</button>
+                    </div>
+                    <div class="mesesAnteriores">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</body>
+
+</html>
+<script>
+    function alternarMenu() {
+        const barraLateral = document.getElementById("sidebar");
+        barraLateral.classList.toggle("expandido");
+    }
+
+</script>
