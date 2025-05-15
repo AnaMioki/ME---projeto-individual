@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <title>Cadastro de Grupo</title>
   <link rel="stylesheet" href="./style/cadastro.css">
 </head>
+
 <body>
   <div class="container">
-   
+
     <div class="imagem-lateral"></div>
     <div class="formulario">
-        <div class="titulo">
-            <h2>Vamos começar a organizar seu grupo?</h2> 
-            <a href="./index.html"><img src="./assets/logo.png" alt="" width="80px"></a>
-            
-        </div>
-      
+      <div class="titulo">
+        <h2>Vamos começar a organizar seu grupo?</h2>
+        <a href="./index.html"><img src="./assets/logo.png" alt="" width="80px"></a>
+
+      </div>
+
       <form>
         <label for="grupo">Nome do grupo escoteiro</label>
         <input type="text" id="grupo" placeholder="No momento, aceitamos apenas um cadastro por grupo.">
@@ -32,11 +34,54 @@
         <label for="confirmar">Confirmar senha</label>
         <input type="password" id="confirmar">
 
-        <button type="submit">Cadastrar</button>
+        <button type="button" onclick="cadastrar()">Cadastrar</button>
       </form>
 
       <p class="login-link">Já tem uma conta? <a href="./login.html">Entrar</a></p>
     </div>
   </div>
 </body>
+
 </html>
+<script>
+  function cadastrar() {
+    var nomeGrupoEscoteiroVar = grupo.value;
+    var nomeVar = responsavel.value
+    var emailVar = email.value;
+    var senhaVar = senha.value;
+    var confirmarVar = confirmar.value;
+
+    if (
+      nomeGrupoEscoteiroVar == "" ||
+      nomeVar == "" ||
+      emailVar == "" ||
+      senhaVar == "" ||
+      confirmarVar == ""
+    ) {
+      alert("Preencha todos os campos.");
+      return false;
+    }
+
+    if (senhaVar.length < 8) {
+      alert("A senha deve conter no mínimo 8 caracteres");
+      return false;
+    }
+
+    if (!/[A-Z]/.test(senhaVar)) {
+      alert("A senha deve conter alguma letra maiúscula");
+      return false;
+    }
+
+    if (!/[0-9]/.test(senhaVar)) {
+      alert("A senha deve conter algum número");
+      return false;
+    }
+
+    if (senhaVar != confirmarVar) {
+      alert("As senhas não coincidem.");
+      return false;
+    }
+
+    console.log("Todos os dados validados. Pronto para enviar ao backend.");
+  }
+</script>

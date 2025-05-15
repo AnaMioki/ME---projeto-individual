@@ -1,6 +1,7 @@
 CREATE DATABASE ScoutEase;
 
 USE ScoutEase;
+select * from usuario;
 
 CREATE TABLE usuario
 (idUsuario INT PRIMARY KEY AUTO_INCREMENT,
