@@ -10,15 +10,20 @@ router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res);
 })
 
-// router.post("/autenticar", function (req, res) {
-//     usuarioController.autenticar(req, res);
-// });
-
-
-router.post('/cadastrar', (req, res) => {
-  console.log('Dados recebidos:', req.body);
-//   res.status(201).send({ message: 'Cadastro realizado com sucesso!' });
+router.post("/entrar", function (req, res) {
+    usuarioController.entrar(req, res);
+    console.log('Recebeu login:', req.body);
 });
+
+router.get("/entrar", (req, res) => {
+    res.status(200).send("Rota GET /usuario/entrar funcionando!");
+});
+
+
+// router.post('/cadastrar', (req, res) => {
+//   console.log('Dados recebidos:', req.body);
+// //   res.status(201).send({ message: 'Cadastro realizado com sucesso!' });
+// });
 
 
 
