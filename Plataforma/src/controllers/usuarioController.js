@@ -16,31 +16,34 @@ function entrar(req, res) {
                     console.log(`\nResultados encontrados: ${resultadoEntrar.length}`);
                     console.log(`Resultados: ${JSON.stringify(resultadoEntrar)}`); // transforma JSON em String
 
+
                     if (resultadoEntrar.length == 1) {
                         console.log(resultadoEntrar);
+                        res.json(resultadoEntrar[0]);
 
-                                // aquarioModel.buscarAquariosPorEmpresa(resultadoEntrar[0].empresaId)
-                                //     .then((resultadoAquarios) => {
-                                //         if (resultadoAquarios.length > 0) {
-                                //             res.json({
-                                //                 id: resultadoEntrar[0].id,
-                                //                 email: resultadoEntrar[0].email,
-                                //                 nome: resultadoEntrar[0].nome,
-                                //                 senha: resultadoEntrar[0].senha,
-                                //                 aquarios: resultadoAquarios
-                                //             });
-                                //         } else {
-                                //             res.status(204).json({ aquarios: [] });
-                                //         }
-                                //     })
-                            /*} else*/ if (resultadoEntrar.length == 0) {
-                            res.status(403).send("Email e/ou senha inválido(s)");
-                        } else {
-                            res.status(403).send("Mais de um usuário com o mesmo login e senha!");
-                        }
+                        // aquarioModel.buscarAquariosPorEmpresa(resultadoEntrar[0].empresaId)
+                        //     .then((resultadoAquarios) => {
+                        //         if (resultadoAquarios.length > 0) {
+                        //             res.json({
+                        //                 id: resultadoEntrar[0].id,
+                        //                 email: resultadoEntrar[0].email,
+                        //                 nome: resultadoEntrar[0].nome,
+                        //                 senha: resultadoEntrar[0].senha,
+                        //                 aquarios: resultadoAquarios
+                        //             });
+                        //         } else {
+                        //             res.status(204).json({ aquarios: [] });
+                        //         }
+                        //     })
+                    } else if (resultadoEntrar.length == 0) {
+                        res.status(403).send("Email e/ou senha inválido(s)");
+                    } else {
+                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
                     }
-                }
-            ).catch(
+                })
+
+
+            .catch(
                 function (erro) {
                     console.log(erro);
                     console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
@@ -48,7 +51,6 @@ function entrar(req, res) {
                 }
             );
     }
-
 }
 
 
