@@ -35,6 +35,7 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/usuario", usuarioRouter);
 app.use("/escoteiro", escoteiroRouter);
+// app.use("/mensalidades/:fkUsuario", escoteiroRouter);
 // app.use("/avisos", avisosRouter);
 // app.use("/medidas", medidasRouter);
 // app.use("/aquarios", aquariosRouter);

@@ -7,24 +7,13 @@ router.post("/cadastrar/:fkUsuario", function (req, res) {
     escoteiroController.cadastrar(req, res);
 });
 
-// router.get("/listar/:idUsuario", function (req, res) {
-//     avisoController.listarPorUsuario(req, res);
-// });
+router.get("/mensalidades/:fkUsuario", function (req, res) {
+    escoteiroController.renderizarEscoteiro(req, res);
+});
 
-// router.get("/pesquisar/:descricao", function (req, res) {
-//     avisoController.pesquisarDescricao(req, res);
-// });
+router.post("/darBaixa", function (req, res) {
+    escoteiroController.darBaixa(req, res);
+});
 
-// router.post("/publicar/:idUsuario", function (req, res) {
-//     avisoController.publicar(req, res);
-// });
-
-// router.put("/editar/:idAviso", function (req, res) {
-//     avisoController.editar(req, res);
-// });
-
-// router.delete("/deletar/:idAviso", function (req, res) {
-//     avisoController.deletar(req, res);
-// });
 
 module.exports = router;

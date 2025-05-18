@@ -53,6 +53,53 @@ function cadastrar(req, res) {
     });
 }
 
+
+function renderizarEscoteiro(req, res) {
+    const fkUsuario = req.params.fkUsuario;
+
+    console.log("fkUsuario recebido:", fkUsuario)
+
+    if (!fkUsuario) {
+        return res.status(400).send("Parâmetro fkUsuario ausente!");
+    }
+
+    escoteiroModel.renderizarEscoteiro(fkUsuario)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                console.log(resultado)
+                res.status(200).send("Nenhum escoteiro encontrado. :(")
+            }
+        })
+
+        .catch(erro => {
+            console.error("Erro ao buscar escoteiros: ", erro);
+            res.status(500).json(erro.sqlMessage || erro.message);
+        });
+}
+// var nome = res.body.nome;
+// var registroEscoteiro = res.body.registro;
+// var secaoEscoteira = res.body.secao;
+// var statusMensalidade = res.body.statusMensalidade
+// var vencimentoMensalidade = res.body.vencimentoMensalidade;
+
+
+function darBaixa(req, res) {
+    var registroEscoteiro = req.body.registroEscoteiro;
+
+    escoteiroModel.darBaixa(registroEscoteiro)
+        .then(() => {
+            res.status(200).send("Mensalidade atualizada com sucesso.");
+        })
+        .catch(erro => {
+            console.error("Erro ao dar baixa: ", erro);
+            res.status(500).json(erro.sqlMessage || erro.message);
+        });
+
+}
+
+
 // function calcularIdade(data) {
 //     const hoje = new Date();
 //     const nascimento = new Date(data);
@@ -74,5 +121,7 @@ function cadastrar(req, res) {
 
 
 module.exports = {
-    cadastrar
+    cadastrar,
+    renderizarEscoteiro,
+    darBaixa
 }
