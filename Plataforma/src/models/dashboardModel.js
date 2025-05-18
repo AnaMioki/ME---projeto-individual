@@ -38,10 +38,11 @@ function obterValorAtrasado() {
 
 function obterDadosGraficoLinha() {
     console.log("ACESSEI O MENSALIDADE MODEL - função obterDadosGraficoLinha()");
-    obterValorPrevisto(),
-    obterValorPago(),
-    obterValorInadimplente()
-    
+   return Promise.all([
+        obterValorPrevisto(),
+        obterValorPago(),
+        obterValorInadimplente()
+    ]);
 };
 
 function  obterValorPrevisto(){
@@ -94,11 +95,12 @@ function  obterValorInadimplente(){
 }
 
 function obterDadosGraficoRosca() {
-    obterQuantidadeMensalidadesEmAtraso(),
-    obterQuantidadeMensalidadesEmDia
-    
     console.log("ACESSEI O MENSALIDADE MODEL - função obterDadosGraficoRosca()");
-   
+    
+    return Promise.all([
+        obterQuantidadeMensalidadesEmDia(),
+        obterQuantidadeMensalidadesEmAtraso()
+    ]);
 };
 
 function obterQuantidadeMensalidadesEmDia() {
@@ -124,5 +126,10 @@ module.exports = {
     obterValorArrecadado,
     obterValorAtrasado,
     obterDadosGraficoLinha,
-    obterDadosGraficoRosca
+    obterDadosGraficoRosca,
+    obterValorPrevisto,
+    obterValorPago,
+    obterValorInadimplente,
+    obterQuantidadeMensalidadesEmDia,
+    obterQuantidadeMensalidadesEmAtraso
 }
