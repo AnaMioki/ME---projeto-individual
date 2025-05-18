@@ -15,5 +15,8 @@ router.post("/darBaixa", function (req, res) {
     escoteiroController.darBaixa(req, res);
 });
 
+router.delete("/deletar/:registroEscoteiro", function (req, res) {
+    escoteiroController.deletarEscoteiro(req, res);
+});
 
 module.exports = router;

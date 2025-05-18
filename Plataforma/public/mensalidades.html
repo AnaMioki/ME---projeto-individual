@@ -28,7 +28,7 @@
                 </li>
                 <li>
                     <img src="./assets/iconEscoteiro.png" alt="" width="30" />
-                    <a href="#"><span class="label">Mensalidades</span></a>
+                    <a href="./mensalidades.html"><span class="label">Mensalidades</span></a>
                 </li>
                 <li>
                     <img src="./assets/iconConfig.png" alt="" width="30" />
@@ -105,7 +105,7 @@
                     <div class="botoes">
                         <button class="btn-darBaixa" style="display:none" onclick="darBaixa()">Dar Baixa</button>
                         <button class="btn-verMensalidades">Ver Mensalidades</button>
-                        <img src="./assets/iconExcluir.png" alt="" class="excluir-btn" width="20" />
+                        <img src="./assets/iconExcluir.png" alt="" class="excluir-btn" width="20" onclick="deletarEscoteiro()" />
                     </div>
                 </div>
             </div>
@@ -180,116 +180,149 @@
                     dados.forEach((escoteiro, i) => {
                         console.log(`Escoteiro ${i}:`, escoteiro.statusMensalidade);
                     })
-                        if (!dados || dados.length === 0) {
-                            document.getElementById("mensagem").style.display = "block";
-                            document.getElementById("listaEscoteiros").style.display = "none";
-                        } else {
-                            document.getElementById("mensagem").style.display = "none";
-                            document.getElementById("listaEscoteiros").style.display = "block";
-                            renderizarEscoteiros(dados);
-                        }
-                    })
+                    if (!dados || dados.length === 0) {
+                        document.getElementById("mensagem").style.display = "block";
+                        document.getElementById("listaEscoteiros").style.display = "none";
+                    } else {
+                        document.getElementById("mensagem").style.display = "none";
+                        document.getElementById("listaEscoteiros").style.display = "block";
+                        renderizarEscoteiros(dados);
+                    }
+                })
 
-                        // .then(data => {
-                        //     const tabela = document.getElementById("listaEscoteiros");
-                        //     tabela.innerHTML = ""; // limpa a tabela
+                // .then(data => {
+                //     const tabela = document.getElementById("listaEscoteiros");
+                //     tabela.innerHTML = ""; // limpa a tabela
 
-                        //     data.forEach(escoteiro => {
-                        //         tabela.innerHTML += `
-                        //         <tr>
-                        //         <td>${escoteiro["Registro Escoteiro"]}</td>
-                        //         <td>${escoteiro.nome}</td>
-                        //         <td>${escoteiro.secaoRamo}</td>
-                        //         <td>${escoteiro.vencimentoMensalidade}</td>
-                        //         </tr>
-                        //         `;
-                        //     });
-                        // })
+                //     data.forEach(escoteiro => {
+                //         tabela.innerHTML += `
+                //         <tr>
+                //         <td>${escoteiro["Registro Escoteiro"]}</td>
+                //         <td>${escoteiro.nome}</td>
+                //         <td>${escoteiro.secaoRamo}</td>
+                //         <td>${escoteiro.vencimentoMensalidade}</td>
+                //         </tr>
+                //         `;
+                //     });
+                // })
 
-                        .catch(erro => {
-                            console.error("Erro:", erro);
-                            alert("Não foi possível carregar os escoteiros.");
-                        });
-                }
+                .catch(erro => {
+                    console.error("Erro:", erro);
+                    alert("Não foi possível carregar os escoteiros.");
+                });
+        }
 
 
         function renderizarEscoteiros(escoteiros) {
-                        const lista = document.getElementById("listaEscoteiros");
-                        const molde = document.getElementById("moldeEscoteiro");
+            const lista = document.getElementById("listaEscoteiros");
+            const molde = document.getElementById("moldeEscoteiro");
 
-                        lista.innerHTML = '<span>Painel Escoteiro | Controle de Mensalidades e Dados Pessoais</span>'; // limpa mantendo o título
+            lista.innerHTML = '<span>Painel Escoteiro | Controle de Mensalidades e Dados Pessoais</span>'; // limpa mantendo o título
 
-                        escoteiros.forEach(escoteiro => {
-                            const clone = molde.cloneNode(true);
-                            clone.style.display = "block";
-                            clone.removeAttribute("id"); // Remove o id do clone para evitar duplicidade
+            escoteiros.forEach(escoteiro => {
+                const clone = molde.cloneNode(true);
+                clone.style.display = "block";
+                clone.removeAttribute("id"); // Remove o id do clone para evitar duplicidade
 
-                            clone.querySelector(".registro").textContent = escoteiro.registroEscoteiro;
-                            clone.querySelector(".nome").textContent = escoteiro.nome;
-                            clone.querySelector(".secao").textContent = escoteiro.secaoRamo || "Não informado";
-                            clone.querySelector(".status").textContent = escoteiro.statusMensalidade || "em atraso";
-                            clone.querySelector(".vencimento").textContent = escoteiro.vencimentoMensalidade || "";
+                clone.querySelector(".registro").textContent = escoteiro.registroEscoteiro;
+                clone.querySelector(".nome").textContent = escoteiro.nome;
+                clone.querySelector(".secao").textContent = escoteiro.secaoRamo || "Não informado";
+                clone.querySelector(".status").textContent = escoteiro.statusMensalidade || "em atraso";
+                clone.querySelector(".vencimento").textContent = escoteiro.vencimentoMensalidade || "";
 
-                            const btnDarBaixa = clone.querySelector(".btn-darBaixa");
-                            if (escoteiro.statusMensalidade === "em atraso") {
-                                btnDarBaixa.style.display = "inline-block";
-                                btnDarBaixa.onclick = () => darBaixa(escoteiro.registroEscoteiro);
-                            } else {
-                                btnDarBaixa.style.display = "none";
-                            }
+                const btnDarBaixa = clone.querySelector(".btn-darBaixa");
+                if (escoteiro.statusMensalidade === "em atraso") {
+                    btnDarBaixa.style.display = "inline-block";
+                    btnDarBaixa.onclick = () => darBaixa(escoteiro.registroEscoteiro);
+                } else {
+                    btnDarBaixa.style.display = "none";
+                }
 
-                            clone.querySelector(".btn-verMensalidades").onclick = () =>
-                                mostrarDetalhes(escoteiro.registroEscoteiro);
+                clone.querySelector(".btn-verMensalidades").onclick = () =>
+                    mostrarDetalhes(escoteiro.registroEscoteiro);
 
-                            // Botão excluir
-                            clone.querySelector(".excluir-btn").onclick = () =>
-                                excluirEscoteiro(escoteiro.registroEscoteiro);
+                // Botão excluir
+                clone.querySelector(".excluir-btn").onclick = () =>
+                    deletarEscoteiro(escoteiro.registroEscoteiro);
 
-                            lista.appendChild(clone);
-                        });
-                    }
+                lista.appendChild(clone);
+            });
+        }
 
         function darBaixa(registroEscoteiro) {
-                        fetch("/escoteiro/darBaixa", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({
-                                registroEscoteiro: registroEscoteiro
-                            })
-                        })
-                            .then(res => {
-                                if (res.ok) {
-                                    alert(`Mensalidade do escoteiro ${registroEscoteiro} atualizada para 'Em dia'.`);
+            console.log("acionaram o dar baixa")
+            fetch("/escoteiro/darBaixa", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    registroEscoteiro: registroEscoteiro
+                })
+            })
+                .then(res => {
+                    console.log("entrei no fetch")
+                    // console.log(body)
+                    if (res.ok) {
+                        return res.json().then(data => {
+                            //  console.log("Resposta da API:", data);
+                            alert(`Mensalidade do escoteiro ${registroEscoteiro} atualizada para 'Em dia'.`);
 
-                                    window.location.reload();
-                                } else {
-                                    throw new Error("Erro ao dar baixa na mensalidade.");
-                                }
-                            })
-                            .catch(error => {
-                                console.error("Erro na requisição de dar baixa: ", error);
-                            });
+                            window.location.reload();
+                        })
+                    } else {
+                        return res.json().then(data => {
+                            throw new Error(data.erro || "Erro ao dar baixa na mensalidade.");
+                        });
                     }
+                })
+                .catch(error => {
+                    console.error("Erro na requisição de dar baixa: ", error);
+                });
+        }
 
 
         function mostrarDetalhes(registro) {
-                        alert(`Mostrar detalhes das mensalidades do escoteiro ${registro}`);
-                    }
+            alert(`Mostrar detalhes das mensalidades do escoteiro ${registro}`);
+        }
 
-        function excluirEscoteiro(registro) {
-                        alert(`Excluir escoteiro ${registro}`);
+        function deletarEscoteiro(registroEscoteiro) {
+            if (!confirm(`Deseja realmente deletar o escoteiro ${registroEscoteiro}?`)) {
+                return;
+            }
+
+            fetch(`/escoteiro/deletar/${registroEscoteiro}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ registroEscoteiro })
+            })
+                .then(res => {
+                    if (res.ok) {
+                        alert("Escoteiro deletado com sucesso.");
+                        window.location.reload();
+                    } else {
+                        return res.json().then(data => {
+                            throw new Error(data.erro || "Erro ao deletar escoteiro.");
+                        });
                     }
+                })
+                .catch(err => {
+                    console.error("Erro na requisição de deletar:", err);
+                    alert("Erro ao deletar escoteiro.");
+                });
+        }
+
 
         document.getElementById('btn-buscar').addEventListener('click', function () {
-                        var input = document.getElementById('input_escoteiro').value.trim();
-                        if (input !== '') {
-                            alert('Buscando por: ' + input);
-                        } else {
-                            alert('Por favor, digite um nome ou registro para buscar.');
-                        }
-                    });
+            var input = document.getElementById('input_escoteiro').value.trim();
+            if (input !== '') {
+                alert('Buscando por: ' + input);
+            } else {
+                alert('Por favor, digite um nome ou registro para buscar.');
+            }
+        });
     </script>
 </body>
 

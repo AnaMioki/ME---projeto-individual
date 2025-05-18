@@ -29,7 +29,7 @@
                 </li>
                 <li>
                     <img src="./assets/iconEscoteiro.png" alt="" width="30px">
-                    <a href=""><span class="label">Mensalidades</span></a>
+                    <a href="./mensalidades.html"><span class="label">Mensalidades</span></a>
                 </li>
                 <li>
                     <img src="./assets/iconConfig.png" alt="" width="30px">
@@ -66,21 +66,21 @@
                         <input type="date" id="nascimento" name="nascimento" class="input" required>
                     </div>
                     <div class="field">
-                        <label for="responsavel">Responsável</label>
+                        <label for="responsavel">Responsável (caso for menor de idade)</label>
                         <input type="text" id="responsavel" name="responsavel" class="input"
                             placeholder="Inclua o nome do responsável">
                     </div>
                     <div class="field">
-                        <label for="celular">Celular</label>
+                        <label for="celular">Celular (do maior de idade ou do responsável)</label>
                         <input type="tel" id="celular" name="celular" class="input" required
                             placeholder="Digite somente os números">
                     </div>
                     <div class="field">
-                        <label for="mensalidade">Vencimento da Mensalidade</label>
+                        <label for="mensalidade">Vencimento da Mensalidade *coloque o mês e ano atuais</label>
                         <input type="date" id="mensalidade" name="mensalidade" class="input" required>
                     </div>
                     <div class="buttons">
-                        <button type="button" class="btn btn-cancel">Cancelar</button>
+                        <a href="./mensalidades.html"><button type="button" class="btn btn-cancel">Cancelar</button></a>
                         <button type="button" class="btn btn-submit" onclick="cadastrarEscoteiro()">Enviar</button>
                     </div>
                 </form>
@@ -158,7 +158,7 @@
                 if (resposta.ok) {
                     alert('Escoteiro cadastrado com sucesso!');
                     // document.getElementById("form").reset();
-                    window.location = "./mensalidade.html";
+                    window.location = "./mensalidades.html";
 
                 } else {
                     alert('Erro ao cadastrar escoteiro. Código: ' + resposta.status);
