@@ -2,11 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style/mensalidades.css">
-    <link rel="stylesheet" href="./style/menuLateral.css">
-    <script src="mensalidade.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./style/mensalidades.css" />
+    <link rel="stylesheet" href="./style/menuLateral.css" />
     <title>Scout Ease</title>
 </head>
 
@@ -14,66 +13,67 @@
     <section class="pagina">
         <div class="sidebar" id="sidebar">
             <div class="logo">
-                <img src="./assets/logo.png" alt="Logo Scout Ease" class="logo-img">
-                <!-- <span class="logo-text">SCOUT EASE</span> -->
+                <img src="./assets/logo.png" alt="Logo Scout Ease" class="logo-img" />
             </div>
 
             <button class="toggle-btn" onclick="alternarMenu()">
-                <img src="./assets/iconMenu.png" alt="" width="30px">
+                <img src="./assets/iconMenu.png" alt="" width="30" />
                 <span class="label">Menu</span>
             </button>
 
             <ul class="menu-opcoes">
                 <li>
-                    <img src="./assets/iconHome.png" alt="" width="30px">
+                    <img src="./assets/iconHome.png" alt="" width="30" />
                     <a href="./home.html"><span class="label">Inicio | Dashboards</span></a>
                 </li>
                 <li>
-                    <img src="./assets/iconEscoteiro.png" alt="" width="30px">
-                    <a href=""><span class="label">Mensalidades</span></a>
+                    <img src="./assets/iconEscoteiro.png" alt="" width="30" />
+                    <a href="#"><span class="label">Mensalidades</span></a>
                 </li>
                 <li>
-                    <img src="./assets/iconConfig.png" alt="" width="30px">
+                    <img src="./assets/iconConfig.png" alt="" width="30" />
                     <a href="./index.html"><span class="label">Configurações</span></a>
                 </li>
             </ul>
 
             <div class="botao-sair">
-                <img src="./assets/iconSair.png" alt="" width="30px">
+                <img src="./assets/iconSair.png" alt="" width="30" />
                 <a href="./index.html"><span class="label">Sair</span></a>
             </div>
         </div>
-
     </section>
+
     <section class="EscoteirosMensalidades">
         <div class="boasVindas">
-            <p>Boas-Vindas, fulano </p>
-            <img src="./assets/iconUser.png" alt="">
+            <p>Boas-Vindas, fulano</p>
+            <img src="./assets/iconUser.png" alt="" />
         </div>
         <h1>Escoteiros e Mensalidades</h1>
+
         <div class="funcionalidades">
             <div class="botoesGestao">
                 <a href="./adicionarEscoteiro.html">
-                    <button class="botaoEscoteiro"><img src="./assets/iconAdd.png" alt="" width="20px"
-                            height="20px">Adicionar Escoteiro</button>
+                    <button class="botaoEscoteiro">
+                        <img src="./assets/iconAdd.png" alt="" width="20" height="20" />Adicionar Escoteiro
+                    </button>
                 </a>
 
-                <button class="botaoMensalidade"><img src="./assets/iconDindin.png" alt="" width="20px">Lançar
-                    Mensalidade</button>
+                <button class="botaoMensalidade">
+                    <img src="./assets/iconDindin.png" alt="" width="20" />Lançar Mensalidade
+                </button>
             </div>
 
             <div class="pesquisa">
                 <label>Buscar Escoteiro</label>
                 <div class="inputBusca">
-                    <input type="text" id="input_escoteiro" placeholder="Digite por nome ou registro">
-                    <img src="./assets/iconBuscar.png" alt="" width="20px" id="btn-buscar">
-
+                    <input type="text" id="input_escoteiro" placeholder="Digite por nome ou registro" />
+                    <img src="./assets/iconBuscar.png" alt="" width="20" id="btn-buscar" />
                 </div>
             </div>
 
             <div class="filtroDiv">
                 <span>Filtrar</span>
-                <img src="./assets/iconFiltrar.png" alt="" width="20px" id="filtrar-btn" class="filtrar-btn">
+                <img src="./assets/iconFiltrar.png" alt="" width="20" id="filtrar-btn" class="filtrar-btn" />
                 <select id="filtro" class="filtro" style="display: none;">
                     <option value="opcao1">Opção 1</option>
                     <option value="opcao2">Opção 2</option>
@@ -84,6 +84,7 @@
 
         <div class="listaEscoteiros" id="listaEscoteiros">
             <span>Painel Escoteiro | Controle de Mensalidades e Dados Pessoais</span>
+
             <div class="escoteiro" id="moldeEscoteiro" style="display: none;">
                 <div class="info">
                     <div class="dados">
@@ -91,8 +92,7 @@
                             <span class="registro"></span>
                             <span class="nome"></span>
                             <img src="./assets/iconEditar.png" alt="editar" class="editar-btn"
-                                onclick="editarEscoteiro()">
-
+                                onclick="editarEscoteiro()" />
                         </div>
                         <div class="mensalidadeInfo">
                             <span class="secao"></span>
@@ -101,132 +101,154 @@
                                 <span class="vencimento"></span>
                             </div>
                         </div>
-
                     </div>
                     <div class="botoes">
                         <button class="btn-darBaixa" style="display:none">Dar Baixa</button>
-                        <button class="btn-verMensalidades" onclick="mostrarDetalhes('${escoteiro.registro}')">Ver
-                            Mensalidades</button>
-                        <img src="./assets/iconExcluir.png" alt="" class="excluir-btn" width="20px"
-                            onclick="excluirEscoteiro('${escoteiro.registro}')">
+                        <button class="btn-verMensalidades">Ver Mensalidades</button>
+                        <img src="./assets/iconExcluir.png" alt="" class="excluir-btn" width="20" />
                     </div>
                 </div>
             </div>
         </div>
-        </div>
 
-        <div id="mensagem" style="display: none;">
-            Adicione um escoteiro
-        </div>
+        <div id="mensagem" style="display: none;">Adicione um escoteiro</div>
     </section>
+
+    <script>
+        function alternarMenu() {
+            const barraLateral = document.getElementById("sidebar");
+            barraLateral.classList.toggle("expandido");
+        }
+
+        document.getElementById('filtrar-btn').addEventListener('click', function () {
+            var filtro = document.getElementById('filtro');
+            filtro.style.display = filtro.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // const escoteirosTeste = [
+        //     {
+        //         registroEscoteiro: "001",
+        //         nome: "Ana",
+        //         secaoRamo: "Lobinho",
+        //         nomeResponsavel: "Carlos",
+        //         celular: "99999-9999",
+        //         statusMensalidade: "atrasado",
+        //         vencimentoMensalidade: "10/05/2025"
+        //     },
+        //     {
+        //         registroEscoteiro: "002",
+        //         nome: "Bruno",
+        //         secaoRamo: "Escoteiro",
+        //         nomeResponsavel: "Maria",
+        //         celular: "98888-8888",
+        //         statusMensalidade: "em dia",
+        //         vencimentoMensalidade: "15/05/2025"
+        //     },
+        // ];
+
+        window.onload = () => {
+            const fkUsuario = sessionStorage.getItem("ID_USUARIO");
+            // renderizarEscoteiros(escoteirosTeste);
+
+
+            if (!fkUsuario) {
+                alert("Usuário não logado.");
+                return;
+            }
+
+            var dadosEscoteiro = {
+                nome: nomeVar,
+                registro: registroVar,
+                nascimento: nascimentoVar,
+                secao: secaoEscoteira,
+                responsavel: responsavelVar,
+                celular: celularVar,
+                vencimentoMensalidade: vencimentoVar
+            };
+
+            fetch(`/escoteiro/mensalidades/${fkUsuario}`)
+                .then(res => {
+                    if (!res.ok) throw new Error("Erro ao buscar escoteiros.");
+                    return res.json(dadosEscoteiro);
+                })
+                .then(dados => {
+                    console.log('entrei no FETCH')
+                    console.log(dadosEscoteiro)
+                    if (!dados || dados.length === 0) {
+                        document.getElementById("mensagem").style.display = "block";
+                        document.getElementById("listaEscoteiros").style.display = "none";
+                    } else {
+                        document.getElementById("mensagem").style.display = "none";
+                        document.getElementById("listaEscoteiros").style.display = "block";
+                        renderizarEscoteiros(dados);
+                    }
+                })
+                .catch(erro => {
+                    console.error("Erro:", erro);
+                    alert("Não foi possível carregar os escoteiros.");
+                });
+        }
+
+
+        function renderizarEscoteiros(escoteiros) {
+            const lista = document.getElementById("listaEscoteiros");
+            const molde = document.getElementById("moldeEscoteiro");
+
+            lista.innerHTML = '<span>Painel Escoteiro | Controle de Mensalidades e Dados Pessoais</span>'; // limpa mantendo o título
+
+            escoteiros.forEach(escoteiro => {
+                const clone = molde.cloneNode(true);
+                clone.style.display = "block";
+                clone.removeAttribute("id"); // Remove o id do clone para evitar duplicidade
+
+                clone.querySelector(".registro").textContent = escoteiro.registroEscoteiro;
+                clone.querySelector(".nome").textContent = escoteiro.nome;
+                clone.querySelector(".secao").textContent = escoteiro.secaoRamo || "Não informado";
+                clone.querySelector(".status").textContent = escoteiro.statusMensalidade || "Desconhecido";
+                clone.querySelector(".vencimento").textContent = escoteiro.vencimentoMensalidade || "";
+
+                // Botão Dar Baixa aparece só se status for 'atrasado'
+                const btnDarBaixa = clone.querySelector(".btn-darBaixa");
+                if (escoteiro.statusMensalidade === "atrasado") {
+                    btnDarBaixa.style.display = "inline-block";
+                    btnDarBaixa.onclick = () => darBaixa(escoteiro.registroEscoteiro);
+                } else {
+                    btnDarBaixa.style.display = "none";
+                }
+
+                // Botão ver mensalidades
+                clone.querySelector(".btn-verMensalidades").onclick = () =>
+                    mostrarDetalhes(escoteiro.registroEscoteiro);
+
+                // Botão excluir
+                clone.querySelector(".excluir-btn").onclick = () =>
+                    excluirEscoteiro(escoteiro.registroEscoteiro);
+
+                lista.appendChild(clone);
+            });
+        }
+
+        function darBaixa(registro) {
+            alert(`Dar baixa na mensalidade do escoteiro ${registro}`);
+        }
+
+        function mostrarDetalhes(registro) {
+            alert(`Mostrar detalhes das mensalidades do escoteiro ${registro}`);
+        }
+
+        function excluirEscoteiro(registro) {
+            alert(`Excluir escoteiro ${registro}`);
+        }
+
+        document.getElementById('btn-buscar').addEventListener('click', function () {
+            var input = document.getElementById('input_escoteiro').value.trim();
+            if (input !== '') {
+                alert('Buscando por: ' + input);
+            } else {
+                alert('Por favor, digite um nome ou registro para buscar.');
+            }
+        });
+    </script>
 </body>
 
 </html>
-
-
-
-<script>
-    function alternarMenu() {
-        const barraLateral = document.getElementById("sidebar");
-        barraLateral.classList.toggle("expandido");
-    }
-
-
-    document.getElementById('filtrar-btn').addEventListener('click', function () {
-        var filtro = document.getElementById('filtro');
-        // Alterna entre mostrar e esconder o select
-        if (filtro.style.display === 'none' || filtro.style.display === '') {
-            filtro.style.display = 'block';
-        } else {
-            filtro.style.display = 'none';
-        }
-    });
-
-    const escoteirosTeste = [
-        { registroEscoteiro: "001", nome: "Ana", secaoRamo: "Lobinho", nomeResponsavel: "Carlos", celular: "99999-9999", statusMensalidade: "atrasado" },
-        { registroEscoteiro: "002", nome: "Bruno", secaoRamo: "Escoteiro", nomeResponsavel: "Maria", celular: "98888-8888", statusMensalidade: "em dia" },
-    ];
-    // const fkUsuario = sessionStorage.ID_USUARIO;
-    window.onload = () => {
-        
-
-        if (!fkUsuario) {
-            alert("Usuário não logado.");
-            return;
-        }
-
-        renderizarEscoteiros(escoteirosTeste);
-    }
-
-    // fetch(`/escoteiro/mensalidades/${fkUsuario}`)
-    //     .then(res => {
-    //         if (!res.ok) throw new Error("Erro ao buscar escoteiros.");
-    //         return res.json();
-    //     })
-    //     .then(dados => {
-    //         if (dados.length === 0) {
-    //             document.getElementById("mensagem").style.display = "block";
-    //             document.getElementById("listaEscoteiros").style.display = "none";
-    //         } else {
-    //             renderizarEscoteiros(dados);
-    //         }
-    //     })
-    //     .catch(erro => {
-    //         console.error("Erro:", erro);
-    //         alert("Não foi possível carregar os escoteiros.");
-    //     });
-
-
-    function renderizarEscoteiros(escoteiros) {
-        const lista = document.getElementById("listaEscoteiros");
-        const molde = document.getElementById("moldeEscoteiro");
-
-        lista.innerHTML = "";
-        // lista.forEach(e => e.remove()); // limpa os antigos
-
-        escoteirosTeste.forEach(escoteiro => {
-            const clone = molde.cloneNode(true);
-            // clone.id = ""; // remove o id para evitar duplicidade
-            clone.style.display = "block";
-
-            clone.querySelector(".registro").textContent = escoteiro.registroEscoteiro;
-            clone.querySelector(".nome").textContent = escoteiro.nome;
-            clone.querySelector(".secao").textContent = escoteiro.secaoRamo || "Não informado";
-            clone.querySelector(".status").textContent = escoteiro.statusMensalidade || "Desconhecido";
-            clone.querySelector(".vencimento").textContent = escoteiro.vencimentoMensalidade || "";
-
-            // Botão Dar Baixa só aparece se status for 'atrasado'
-            const btnDarBaixa = clone.querySelector(".btn-darBaixa");
-            if (escoteiro.statusMensalidade === "atrasado") {
-                btnDarBaixa.style.display = "inline-block";
-                btnDarBaixa.onclick = () => darBaixa(escoteiro.registroEscoteiro);
-            } else {
-                btnDarBaixa.style.display = "none";
-            }
-
-            // Outros botões (excluir, ver mensalidades) podem ter evento aqui também
-            // clone.querySelector(".excluir-btn").onclick = () => excluirEscoteiro(escoteiro.registroEscoteiro);
-            // clone.querySelector(".btn-verMensalidades").onclick = () => mostrarDetalhes(escoteiro.registroEscoteiro);
-
-            lista.appendChild(clone);
-        });
-    }
-
-    function darBaixa(registro) {
-        alert(`Dar baixa na mensalidade do escoteiro ${registro}`);
-        // Aqui você pode fazer uma chamada API para atualizar o status no banco
-    }
-
-
-    document.getElementById('btn-buscar').addEventListener('click', function () {
-        var input = document.getElementById('input_escoteiro').value;
-        if (input.trim() !== '') {
-            // Aqui você pode realizar a ação de busca, como enviar uma solicitação para um banco de dados ou apenas mostrar uma mensagem
-            alert('Buscando por: ' + input); // Exemplo de ação
-        } else {
-            alert('Por favor, digite um nome ou registro para buscar.');
-        }
-    });
-
-
-</script>
