@@ -32,6 +32,7 @@ function cadastrar(req, res) {
         return res.status(400).send("Preencha todos os campos obrigatórios!");
     }
 
+    
     escoteiroModel.cadastrar(registroEscoteiro,
         nome,
         dataNascimento,

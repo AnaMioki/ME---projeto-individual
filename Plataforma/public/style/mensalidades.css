@@ -191,6 +191,7 @@ input:focus {
 
 .identificacao{
     display: flex;
+    gap: 15px;
 }
 .dados {
     display: flex;
