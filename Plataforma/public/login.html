@@ -70,6 +70,7 @@
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.idUsuario;
 
+                    console.log("ID_USUARIO salvo no sessionStorage:", sessionStorage.ID_USUARIO);
                     setTimeout(function () {
                         window.location = "./home.html";
                     }, 1000); // apenas para exibir o loading

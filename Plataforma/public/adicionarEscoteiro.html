@@ -14,7 +14,7 @@
         <div class="sidebar" id="sidebar">
             <div class="logo">
                 <img src="./assets/logo.png" alt="Logo Scout Ease" class="logo-img">
-                
+
             </div>
 
             <button class="toggle-btn" onclick="alternarMenu()">
@@ -47,7 +47,7 @@
                 <header class="header">
                     <a href="./mensalidades.html"> <img src="./assets/iconSeta.png" alt="" width="20px"></a>
                     <img src="./assets/iconEscoteiropersona.png" alt="Ícone Escoteiro" width="200px" class="icon">
-                    
+
                     <h1 class="title">Adicionar Escoteiro</h1>
                 </header>
                 <form class="form">
@@ -67,7 +67,7 @@
                     </div>
                     <div class="field">
                         <label for="responsavel">Responsável</label>
-                        <input type="text" id="responsavel" name="responsavel" class="input" required
+                        <input type="text" id="responsavel" name="responsavel" class="input"
                             placeholder="Inclua o nome do responsável">
                     </div>
                     <div class="field">
@@ -81,7 +81,7 @@
                     </div>
                     <div class="buttons">
                         <button type="button" class="btn btn-cancel">Cancelar</button>
-                        <button type="submit" class="btn btn-submit">Enviar</button>
+                        <button type="button" class="btn btn-submit" onclick="cadastrarEscoteiro()">Enviar</button>
                     </div>
                 </form>
             </div>
@@ -95,6 +95,90 @@
     function alternarMenu() {
         const barraLateral = document.getElementById("sidebar");
         barraLateral.classList.toggle("expandido");
+    }
+
+    function cadastrarEscoteiro() {
+        var nomeVar = nome.value;
+        var registroVar = registro.value;
+        var nascimentoVar = nascimento.value;
+        var responsavelVar = responsavel.value;
+        var celularVar = celular.value;
+        var vencimentoVar = mensalidade.value;
+
+        // var idUsuario = sessionStorage.ID_USUARIO;
+        var fkUsuario = sessionStorage.ID_USUARIO;
+        console.log("fkUsuario (ID do usuário logado):", fkUsuario);
+
+        if (!fkUsuario) {
+            alert("Usuário não autenticado. Faça login novamente.");
+            return;
+        }
+
+        var idade = calcularIdade(nascimentoVar);
+        var secaoEscoteira = "";
+
+        if (idade < 6) {
+            alert("Idade mínima para escoteiro é 6 anos.");
+            return;
+        } else if (idade < 11) {
+            secaoEscoteira = "Lobinho";
+        } else if (idade < 15) {
+            secaoEscoteira = "Escoteiro";
+        } else if (idade < 18) {
+            secaoEscoteira = "Sênior";
+        } else if (idade < 21) {
+            secaoEscoteira = "Pioneiro";
+        } else {
+            secaoEscoteira = "Adulto Voluntário";
+        }
+
+        var dadosEscoteiro = {
+            nome: nomeVar,
+            registro: registroVar,
+            nascimento: nascimentoVar,
+            secao: secaoEscoteira,
+            responsavel: responsavelVar,
+            celular: celularVar,
+            vencimentoMensalidade: vencimentoVar
+        };
+
+
+        console.log("fkUsuario:", fkUsuario);
+        console.log('alo')
+        fetch(`escoteiro/cadastrar/${fkUsuario}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dadosEscoteiro)
+        })
+            .then(resposta => {
+                console.log('entrei no FETCH')
+                console.log(dadosEscoteiro)
+                if (resposta.ok) {
+                    alert('Escoteiro cadastrado com sucesso!');
+                    // document.getElementById("form").reset();
+                    window.location = "./mensalidade.html";
+
+                } else {
+                    alert('Erro ao cadastrar escoteiro. Código: ' + resposta.status);
+                }
+            })
+            .catch(erro => {
+                console.error('Erro na requisição:', erro);
+                alert('Erro na comunicação com o servidor.');
+            });
+    }
+
+    function calcularIdade(data) {
+        const hoje = new Date();
+        const nascimento = new Date(data);
+        let idade = hoje.getFullYear() - nascimento.getFullYear();
+        const m = hoje.getMonth() - nascimento.getMonth();
+        if (m < 0 || (m === 0 && hoje.getDate() < nascimento.getDate())) {
+            idade--;
+        }
+        return idade;
     }
 
 </script>
