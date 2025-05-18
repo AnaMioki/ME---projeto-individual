@@ -161,6 +161,27 @@ async function deletarEscoteiro(req, res) {
     }
 }
 
+async function buscarEscoteiro(req, res) {
+    const termo = req.query.termo;
+
+    if (!termo) {
+        return res.status(400).json({ erro: "O termo de busca é obrigatório." });
+    }
+
+    try {
+        const resultado = await escoteiroModel.buscarEscoteiro(termo);
+
+        if (resultado.length === 0) {
+            return res.status(404).json({ mensagem: "Nenhum escoteiro encontrado." });
+        }
+
+        res.status(200).json(resultado);
+    } catch (erro) {
+        console.error("Erro ao buscar escoteiro:", erro.sqlMessage || erro);
+        res.status(500).json({ erro: "Erro ao buscar escoteiro." });
+    }
+}
+
 
 
 // function calcularIdade(data) {
@@ -187,5 +208,6 @@ module.exports = {
     cadastrar,
     renderizarEscoteiro,
     darBaixa,
-    deletarEscoteiro
+    deletarEscoteiro, 
+    buscarEscoteiro
 }

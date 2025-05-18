@@ -53,10 +53,12 @@
                 <h1>Dashboards</h1>
                 <div class="botoesGestao">
                     <a href="./mensalidades.html">
-                        <button class="botaoEscoteiro"><img src="./assets/iconAdd.png" alt="" width="20px" height="20px">Adicionar Escoteiro</button>
+                        <button class="botaoEscoteiro"><img src="./assets/iconAdd.png" alt="" width="20px"
+                                height="20px">Adicionar Escoteiro</button>
                     </a>
                     <a href="./mensalidades.html">
-                        <button class="botaoMensalidade"><img src="./assets/iconDindin.png" alt=""width="20px">Lançar Mensalidade</button>
+                        <button class="botaoMensalidade"><img src="./assets/iconDindin.png" alt="" width="20px">Lançar
+                            Mensalidade</button>
                     </a>
                 </div>
 
@@ -68,7 +70,7 @@
                         <h3>Escoteiros Cadastrados</h3>
                     </div>
                     <div class="numbers">
-                        <p id="qtdEscoteiro">84</p>
+                        <p id="qtdEscoteiro"></p>
                     </div>
 
                 </div>
@@ -78,7 +80,7 @@
                         <h3>Valor Arrecadado no mês atual</h3>
                     </div>
                     <div class="numbers">
-                        <p id="valorArrecadado">R$ 1700,89</p>
+                        <p id="valorArrecadado"></p>
                     </div>
                 </div>
                 <div class="card">
@@ -87,8 +89,8 @@
                         <h3>Mensalidades Atrasadas</h3>
                     </div>
                     <div id="atrasoMensalidade" class="numbers">
-                        <p id="valorMensalidadeAtrasada">R$ 84</p>
-                        <p id="porcentagemMensalidaeAtrasada">%</p>
+                        <p id="valorMensalidadeAtrasada"></p>
+                        <p id="porcentagemMensalidaeAtrasada"></p>
                     </div>
                 </div>
             </div>
@@ -111,10 +113,10 @@
                             <canvas id="myChartRosca"></canvas>
                         </div>
                     </div>
-                    
+
                     <div class="alerta">
                         <h3>Alertas:</h3>
-                        <p>2 escoteiros com mensalidades atrasadas há mais de 30 dias</p>
+                        <p id="alerta"></p>
                     </div>
 
                 </div>
@@ -131,9 +133,9 @@
     const ctx = document.getElementById('myChart');
     const graficoRosca = document.getElementById('myChartRosca');
 
-    const previsto = [1000, 1200, 900, 1100, 1300, 1250];
-    const arrecadado = [800, 1000, 850, 1000, 1150, 1200];
-    const faltando = previsto.map((v, i) => v - arrecadado[i]);
+    // const previsto = [1000, 1200, 900, 1100, 1300, 1250];
+    // const arrecadado = [800, 1000, 850, 1000, 1150, 1200];
+    // const faltando = previsto.map((v, i) => v - arrecadado[i]);
 
     new Chart(ctx, {
         type: 'line',
@@ -240,4 +242,52 @@
         const barraLateral = document.getElementById("sidebar");
         barraLateral.classList.toggle("expandido");
     }
+
+    window.onload = () => {
+        const fkUsuario = sessionStorage.getItem("ID_USUARIO");
+        // renderizarEscoteiros(escoteirosTeste);
+        const nomeUsuario = sessionStorage.getItem("NOME_USUARIO"); //FUNCIONA?
+        document.querySelector('.boasVindas p').textContent = `Boas-vindas, ${nomeUsuario}`;
+
+        obterQuantidadeEscoteiros();
+        obterValorArrecadado();
+        obterValorAtrasado();
+        obterDadosGraficoLinha();
+        obterDadosGraficoRosca();
+    }
+
+    function obterQuantidadeEscoteiros() {
+        fetch("/dashboard/escoteiros")
+            .then(function (resposta) {
+                console.log("resposta quantidade:", resposta);
+                if (resposta.ok) {
+                    resposta.json().then(function (respostaJson) {
+                        document.getElementById("qtdEscoteiros").innerHTML = `${respostaJson.total} escoteiros`;
+                    });
+                } else {
+                    console.error("Erro ao obter quantidade de escoteiros.");
+                }
+            })
+            .catch(function (erro) {
+                console.error("Erro na requisição de escoteiros:", erro);
+            });
+    }
+
+    function obterValorArrecadado() {
+  fetch("/dashboard/financeiro/arrecadado")
+    .then(function (resposta) {
+      if (resposta.ok) {
+        resposta.json().then(function (respostaJson) {
+          document.getElementById("valorArrecadado").innerHTML = `R$ ${respostaJson.total.toFixed(2)}`;
+        });
+      } else {
+        console.error("Erro ao obter valor arrecadado.");
+      }
+    })
+    .catch(function (erro) {
+      console.error("Erro na requisição de valor arrecadado:", erro);
+    });
+}
+
+
 </script>

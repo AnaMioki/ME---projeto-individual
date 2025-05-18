@@ -72,9 +72,20 @@ function deletarEscoteiro(registroEscoteiro) {
     return database.executar(instrucaoSql);
 }
 
+async function buscarEscoteiro(termo) {
+    const instrucaoSql = `
+        SELECT registroEscoteiro, nome
+        FROM escoteiro
+        WHERE registroEscoteiro LIKE '%${termo}%' OR nome LIKE '%${termo}%'
+        ORDER BY nome;
+    `;
+    return await database.executar(instrucaoSql);
+}
+
 module.exports = {
     cadastrar,
     renderizarEscoteiro,
     darBaixa,
-    deletarEscoteiro
+    deletarEscoteiro,
+    buscarEscoteiro
 }

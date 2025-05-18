@@ -105,7 +105,8 @@
                     <div class="botoes">
                         <button class="btn-darBaixa" style="display:none" onclick="darBaixa()">Dar Baixa</button>
                         <button class="btn-verMensalidades">Ver Mensalidades</button>
-                        <img src="./assets/iconExcluir.png" alt="" class="excluir-btn" width="20" onclick="deletarEscoteiro()" />
+                        <img src="./assets/iconExcluir.png" alt="" class="excluir-btn" width="20"
+                            onclick="deletarEscoteiro()" />
                     </div>
                 </div>
             </div>
@@ -222,7 +223,7 @@
             escoteiros.forEach(escoteiro => {
                 const clone = molde.cloneNode(true);
                 clone.style.display = "block";
-                clone.removeAttribute("id"); // Remove o id do clone para evitar duplicidade
+                clone.removeAttribute("id"); 
 
                 clone.querySelector(".registro").textContent = escoteiro.registroEscoteiro;
                 clone.querySelector(".nome").textContent = escoteiro.nome;
@@ -285,6 +286,89 @@
         function mostrarDetalhes(registro) {
             alert(`Mostrar detalhes das mensalidades do escoteiro ${registro}`);
         }
+
+
+        async function buscarEscoteiro() {
+            const input = document.getElementById("input_escoteiro"); // Supondo que esse seja o id do input
+            const busca = input.value.trim();
+
+            if (busca.length === 0) {
+                alert("Digite algo para buscar");
+                document.getElementById("listaEscoteiros").innerHTML = ""; // limpa a lista
+                return;
+            }
+
+            console.log("acionaram a busca");
+
+            try {
+                const response = await fetch(`/escoteiro/buscar?termo=${encodeURIComponent(busca)}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+
+                if (!response.ok) throw new Error("Erro na busca");
+
+                const escoteiros = await response.json();
+
+                
+                let html = "<ul>";
+                for (const escoteiro of escoteiros) {
+                    html += `<li onclick="mostrarDetalhes('${escoteiro.registroEscoteiro}')">${escoteiro.registroEscoteiro} - ${escoteiro.nome}</li>`;
+                }
+                html += "</ul>";
+
+                document.getElementById("listaEscoteiros").innerHTML = html;
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById("listaEscoteiros").innerHTML = "<p>Erro ao buscar escoteiros.</p>";
+            }
+        }
+
+        // function buscarEscoteiro(registroEscoteiro) {
+        //     var pesquisa = input_escoteiro.value.trim();
+
+        //     if (!busca) {
+        //         alert("Digite algo para buscar");
+        //         return;
+        //     }
+
+        //     console.log("acionaram a busca")
+
+        //     fetch(`escoteiro/buscar/${registroEscoteiro}`), {
+        //         method: "GET",
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //          if(busca.length === 0) {
+        //         // Se estiver vazio, você pode decidir mostrar todos ou nada
+        //         document.getElementById("listaEscoteiros").innerHTML = "";
+        //         return;
+        //     }
+
+        //     try {
+        //         const response = await fetch(`/escoteiro/buscar?termo=${encodeURIComponent(busca)}`);
+        //         if (!response.ok) throw new Error("Erro na busca");
+
+        //         const escoteiros = await response.json();
+
+        //         // Agora monta a lista com os resultados
+        //         let html = "<ul>";
+        //         for (const escoteiro of escoteiros) {
+        //             html += `<li>${escoteiro.registroEscoteiro} - ${escoteiro.nome}</li>`;
+        //         }
+        //         html += "</ul>";
+
+        //         document.getElementById("listaEscoteiros").innerHTML = html;
+
+        //     } catch (error) {
+        //         console.error(error);
+        //         document.getElementById("listaEscoteiros").innerHTML = "<p>Erro ao buscar escoteiros.</p>";
+        //     }
+        // }
+        //     }
+        // }
 
         function deletarEscoteiro(registroEscoteiro) {
             if (!confirm(`Deseja realmente deletar o escoteiro ${registroEscoteiro}?`)) {

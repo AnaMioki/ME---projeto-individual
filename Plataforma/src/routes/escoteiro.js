@@ -19,4 +19,8 @@ router.delete("/deletar/:registroEscoteiro", function (req, res) {
     escoteiroController.deletarEscoteiro(req, res);
 });
 
+router.get("/buscar", function (req, res) {
+    escoteiroController.buscarEscoteiro(req, res);
+});
+ 
 module.exports = router;
