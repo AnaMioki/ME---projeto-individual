@@ -70,7 +70,7 @@
                         <h3>Escoteiros Cadastrados</h3>
                     </div>
                     <div class="numbers">
-                        <p id="qtdEscoteiro"></p>
+                        <p id="qtdEscoteiros"></p>
                     </div>
 
                 </div>
@@ -137,103 +137,103 @@
     // const arrecadado = [800, 1000, 850, 1000, 1150, 1200];
     // const faltando = previsto.map((v, i) => v - arrecadado[i]);
 
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
-            datasets: [
-                {
-                    label: 'Valor Previsto',
-                    data: previsto,
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                    fill: true,
-                    pointRadius: 5,
-                    pointHoverRadius: 7
-                },
-                {
-                    label: 'Valor Pago',
-                    data: arrecadado,
-                    borderColor: '#10b981',
-                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 5,
-                    pointHoverRadius: 7
-                },
-                {
-                    label: 'Inadimplência',
-                    data: faltando,
-                    borderColor: '#ef4444',
-                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 5,
-                    pointHoverRadius: 7
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                    labels: {
-                        font: {
-                            size: 14
-                        }
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function (context) {
-                            return context.dataset.label + ': R$ ' + context.parsed.y.toFixed(2);
-                        }
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Valor em R$'
-                    },
-                    ticks: {
-                        callback: function (value) {
-                            return 'R$ ' + value;
-                        }
-                    }
-                },
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Meses'
-                    }
-                }
-            }
-        }
-    });
+    // new Chart(ctx, {
+    //     type: 'line',
+    //     data: {
+    //         labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+    //         datasets: [
+    //             {
+    //                 label: 'Valor Previsto',
+    //                 data: previsto,
+    //                 borderColor: '#3b82f6',
+    //                 backgroundColor: 'rgba(59, 130, 246, 0.1)',
+    //                 fill: true,
+    //                 pointRadius: 5,
+    //                 pointHoverRadius: 7
+    //             },
+    //             {
+    //                 label: 'Valor Pago',
+    //                 data: arrecadado,
+    //                 borderColor: '#10b981',
+    //                 backgroundColor: 'rgba(16, 185, 129, 0.1)',
+    //                 fill: true,
+    //                 tension: 0.4,
+    //                 pointRadius: 5,
+    //                 pointHoverRadius: 7
+    //             },
+    //             {
+    //                 label: 'Inadimplência',
+    //                 data: faltando,
+    //                 borderColor: '#ef4444',
+    //                 backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    //                 fill: true,
+    //                 tension: 0.4,
+    //                 pointRadius: 5,
+    //                 pointHoverRadius: 7
+    //             }
+    //         ]
+    //     },
+    //     options: {
+    //         responsive: true,
+    //         plugins: {
+    //             legend: {
+    //                 position: 'top',
+    //                 labels: {
+    //                     font: {
+    //                         size: 14
+    //                     }
+    //                 }
+    //             },
+    //             tooltip: {
+    //                 callbacks: {
+    //                     label: function (context) {
+    //                         return context.dataset.label + ': R$ ' + context.parsed.y.toFixed(2);
+    //                     }
+    //                 }
+    //             }
+    //         },
+    //         scales: {
+    //             y: {
+    //                 beginAtZero: true,
+    //                 title: {
+    //                     display: true,
+    //                     text: 'Valor em R$'
+    //                 },
+    //                 ticks: {
+    //                     callback: function (value) {
+    //                         return 'R$ ' + value;
+    //                     }
+    //                 }
+    //             },
+    //             x: {
+    //                 title: {
+    //                     display: true,
+    //                     text: 'Meses'
+    //                 }
+    //             }
+    //         }
+    //     }
+    // });
 
-    const dataRosca = {
-        labels: [
-            'Em Atraso',
-            'Em dia',
-        ],
-        datasets: [{
-            label: 'Mensalidades',
-            data: [300, 50],
-            backgroundColor: [
-                'rgb(255, 99, 132)',
-                '#10b981'
-            ],
-            hoverOffset: 4
-        }]
-    };
-    new Chart(graficoRosca, {
-        type: 'doughnut',
-        data: dataRosca,
-    })
+    // const dataRosca = {
+    //     labels: [
+    //         'Em Atraso',
+    //         'Em dia',
+    //     ],
+    //     datasets: [{
+    //         label: 'Mensalidades',
+    //         data: [300, 50],
+    //         backgroundColor: [
+    //             'rgb(255, 99, 132)',
+    //             '#10b981'
+    //         ],
+    //         hoverOffset: 4
+    //     }]
+    // };
+    // new Chart(graficoRosca, {
+    //     type: 'doughnut',
+    //     data: dataRosca,
+    // })
 </script>
 
 
@@ -243,26 +243,40 @@
         barraLateral.classList.toggle("expandido");
     }
 
+    const fkUsuario = sessionStorage.getItem("ID_USUARIO");
+        if (!fkUsuario) {
+            console.error("Usuário não logado!");
+            // redirecionar ou mostrar erro
+        }
+
     window.onload = () => {
-        const fkUsuario = sessionStorage.getItem("ID_USUARIO");
+        // const fkUsuario = sessionStorage.getItem("ID_USUARIO");
         // renderizarEscoteiros(escoteirosTeste);
+
+        
+
         const nomeUsuario = sessionStorage.getItem("NOME_USUARIO"); //FUNCIONA?
         document.querySelector('.boasVindas p').textContent = `Boas-vindas, ${nomeUsuario}`;
 
-        obterQuantidadeEscoteiros();
-        obterValorArrecadado();
+        obterQuantidadeEscoteiros(fkUsuario);
+        obterValorArrecadado(fkUsuario);
         obterValorAtrasado();
         obterDadosGraficoLinha();
         obterDadosGraficoRosca();
+
+
     }
 
+
     function obterQuantidadeEscoteiros() {
-        fetch("/dashboard/escoteiros")
+        console.log('entrei na funcao de qntd escot')
+        fetch(`/dashboard/escoteiros/${fkUsuario}`)
             .then(function (resposta) {
                 console.log("resposta quantidade:", resposta);
                 if (resposta.ok) {
                     resposta.json().then(function (respostaJson) {
-                        document.getElementById("qtdEscoteiros").innerHTML = `${respostaJson.total} escoteiros`;
+                        console.log(respostaJson)
+                        document.getElementById("qtdEscoteiros").innerHTML = `${respostaJson[0].quantidade}`;
                     });
                 } else {
                     console.error("Erro ao obter quantidade de escoteiros.");
@@ -274,11 +288,12 @@
     }
 
     function obterValorArrecadado() {
-        fetch("/dashboard/financeiro/arrecadado")
+        fetch(`/dashboard/financeiro/arrecadado/${fkUsuario}`)
             .then(function (resposta) {
                 if (resposta.ok) {
                     resposta.json().then(function (respostaJson) {
-                        document.getElementById("valorArrecadado").innerHTML = `R$ ${respostaJson.total.toFixed(2)}`;
+                         console.log(respostaJson)
+                        document.getElementById("valorArrecadado").innerHTML = `R$ ${respostaJson[0].valorArrecadado}`;
                     });
                 } else {
                     console.error("Erro ao obter valor arrecadado.");
@@ -290,11 +305,13 @@
     }
 
     function obterValorAtrasado() {
-        fetch("/dashboard/financeiro/atrasado")
+        fetch(`/dashboard/financeiro/atrasado/${fkUsuario}`)
             .then(function (resposta) {
                 if (resposta.ok) {
                     resposta.json().then(function (respostaJson) {
-                        document.getElementById("valorAtrasado").innerHTML = `R$ ${respostaJson.total.toFixed(2)}`;
+                        console.log(respostaJson)
+                        document.getElementById("valorMensalidadeAtrasada").innerHTML = `R$ ${respostaJson[0].valorAtrasado}`;
+                        // document.getElementById("porcentagemMensalidadeAtrasada").innerHTML = `R$ ${respostaJson[0].valorAtrasado}`;
                     });
                 } else {
                     console.error("Erro ao obter valor em atraso.");
@@ -305,75 +322,148 @@
             });
     }
 
+    let graficoLinha;
+
     function obterDadosGraficoLinha() {
-        fetch("/dashboard/financeiro/grafico-linha")
-            .then(function (resposta) {
-                if (resposta.ok) {
-                    resposta.json().then(function (respostaJson) {
-                        let meses = [];
-                        let previsto = [];
-                        let arrecadado = [];
-                        let faltando = [];
+        fetch(`/dashboard/financeiro/grafico-linha/${fkUsuario}`)
+            .then(res => res.json())
+            .then(data => {
+                const labels = data.previsto.map(item => item.mesAno).reverse();
+                const previsto = data.previsto.map(item => item.totalMensal).reverse();
+                const pago = data.pago.map(item => item.valorPago).reverse();
+                const faltando = data.faltando.map(item => item.valorNaoPago).reverse();
 
-                        for (let i = 0; i < respostaJson.length; i++) {
-                            meses.push(respostaJson[i].mes);
-                            previsto.push(respostaJson[i].previsto);
-                            arrecadado.push(respostaJson[i].arrecadado);
-                            faltando.push(respostaJson[i].faltando);
-                        }
+                const ctx = document.getElementById("myChart").getContext("2d");
 
-                        const ctx = document.getElementById("graficoLinha").getContext("2d");
-                        new Chart(ctx, {
-                            type: "line",
-                            data: {
-                                labels: meses,
-                                datasets: [
-                                    {
-                                        label: "Previsto",
-                                        data: previsto,
-                                        borderColor: "#999",
-                                        backgroundColor: "transparent"
-                                    },
-                                    {
-                                        label: "Arrecadado",
-                                        data: arrecadado,
-                                        borderColor: "#4caf50",
-                                        backgroundColor: "transparent"
-                                    },
-                                    {
-                                        label: "Faltando",
-                                        data: faltando,
-                                        borderColor: "#f44336",
-                                        backgroundColor: "transparent"
-                                    }
-                                ]
+                if (graficoLinha) graficoLinha.destroy();
+
+                graficoLinha = new Chart(ctx, {
+                    type: "line",
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: "Previsto",
+                                data: previsto,
+                                borderColor: "#2196f3",
+                                fill: false
                             },
-                            options: {
-                                responsive: true,
-                                plugins: {
-                                    legend: { position: "top" },
-                                    title: { display: true, text: "Resumo mensal" }
+                            {
+                                label: "Pago",
+                                data: pago,
+                                borderColor: "#4caf50",
+                                fill: false
+                            },
+                            {
+                                label: "Faltando",
+                                data: faltando,
+                                borderColor: "#f44336",
+                                fill: false
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: "Evolução Financeira Mensal"
+                            },
+                            legend: {
+                                position: "top"
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: "R$ (reais)"
                                 }
                             }
-                        });
-                    });
-                } else {
-                    console.error("Erro ao obter dados do gráfico de linha.");
-                }
+                        }
+                    }
+                });
             })
-            .catch(function (erro) {
-                console.error("Erro na requisição do gráfico de linha:", erro);
+            .catch(erro => {
+                console.error("Erro ao buscar dados do gráfico de linha:", erro);
             });
     }
 
+
+    // function obterDadosGraficoLinha() {
+    //     fetch("/dashboard/financeiro/grafico-linha")
+    //         .then(function (resposta) {
+    //             if (resposta.ok) {
+    //                 resposta.json().then(function (respostaJson) {
+    //                     let meses = [];
+    //                     let previsto = [];
+    //                     let arrecadado = [];
+    //                     let faltando = [];
+
+    //                     for (let i = 0; i < respostaJson.length; i++) {
+    //                         meses.push(respostaJson[i].mes);
+    //                         previsto.push(respostaJson[i].previsto);
+    //                         arrecadado.push(respostaJson[i].arrecadado);
+    //                         faltando.push(respostaJson[i].faltando);
+    //                     }
+
+    //                     const ctx = document.getElementById("graficoLinha").getContext("2d");
+    //                     new Chart(ctx, {
+    //                         type: "line",
+    //                         data: {
+    //                             labels: meses,
+    //                             datasets: [
+    //                                 {
+    //                                     label: "Previsto",
+    //                                     data: previsto,
+    //                                     borderColor: "#999",
+    //                                     backgroundColor: "transparent"
+    //                                 },
+    //                                 {
+    //                                     label: "Arrecadado",
+    //                                     data: arrecadado,
+    //                                     borderColor: "#4caf50",
+    //                                     backgroundColor: "transparent"
+    //                                 },
+    //                                 {
+    //                                     label: "Faltando",
+    //                                     data: faltando,
+    //                                     borderColor: "#f44336",
+    //                                     backgroundColor: "transparent"
+    //                                 }
+    //                             ]
+    //                         },
+    //                         options: {
+    //                             responsive: true,
+    //                             plugins: {
+    //                                 legend: { position: "top" },
+    //                                 title: { display: true, text: "Resumo mensal" }
+    //                             }
+    //                         }
+    //                     });
+    //                 });
+    //             } else {
+    //                 console.error("Erro ao obter dados do gráfico de linha.");
+    //             }
+    //         })
+    //         .catch(function (erro) {
+    //             console.error("Erro na requisição do gráfico de linha:", erro);
+    //         });
+    // }
+
     function obterDadosGraficoRosca() {
-        fetch("/dashboard/financeiro/grafico-rosca")
+        fetch(`/dashboard/financeiro/grafico-rosca/${fkUsuario}`)
             .then(function (resposta) {
                 if (resposta.ok) {
                     resposta.json().then(function (respostaJson) {
                         const ctx = document.getElementById("graficoRosca").getContext("2d");
 
-                        new Chart(ctx, {
+                        if (graficoRosca) {
+                            graficoRosca.destroy();
+                        }
+
+                        graficoRosca = Chart(ctx, {
                             type: "doughnut",
                             data: {
                                 labels: ["Em dia", "Em atraso"],

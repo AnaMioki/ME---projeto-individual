@@ -1,60 +1,67 @@
 var database = require("../database/config");
 
-function obterQuantidadeEscoteiros() {
+function obterQuantidadeEscoteiros(fkUsuario) {
     console.log("ACESSEI O ESCOTEIRO MODEL - função obterQuantidadeEscoteiros()");
     var instrucaoSql = `
         SELECT COUNT(*) AS quantidade 
-        FROM escoteiro;
+        FROM escoteiro 
+        WHERE fkUsuario = ${fkUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function obterValorArrecadado() {
+function obterValorArrecadado(fkUsuario) {
     console.log("ACESSEI O MENSALIDADE MODEL - função obterValorArrecadado()");
     var instrucaoSql = `
-        SELECT IFNULL(SUM(valor), 0) AS valorArrecadado 
-        FROM mensalidade 
-        WHERE statusMensalidade = 'em dia'
-        AND YEAR(dataPagamento) = YEAR(CURDATE())
-        AND MONTH(dataPagamento) = MONTH(CURDATE());;
+        SELECT IFNULL(SUM(m.valor), 0) AS valorArrecadado 
+        FROM mensalidade m
+        JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
+        WHERE m.statusMensalidade = 'em dia'
+        AND YEAR(m.dataPagamento) = YEAR(CURDATE())
+        AND MONTH(m.dataPagamento) = MONTH(CURDATE())
+        AND e.fkUsuario = ${fkUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 };
 
-function obterValorAtrasado() {
+function obterValorAtrasado(fkUsuario) {
     console.log("ACESSEI O MENSALIDADE MODEL - função obterValorAtrasado()");
     var instrucaoSql = `
-        SELECT IFNULL(SUM(valor), 0) AS valorAtrasado 
-        FROM mensalidade 
-        WHERE statusMensalidade = 'em atraso'
-        AND YEAR(dataPagamento) = YEAR(CURDATE())
-        AND MONTH(dataPagamento) = MONTH(CURDATE());;
+        SELECT IFNULL(SUM(m.valor), 0) AS valorAtrasado 
+        FROM mensalidade m
+        JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
+        WHERE m.statusMensalidade = 'em atraso'
+        AND YEAR(m.dataPagamento) = YEAR(CURDATE())
+        AND MONTH(m.dataPagamento) = MONTH(CURDATE())
+        AND e.fkUsuario = ${fkUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 };
 
-function obterDadosGraficoLinha() {
+function obterDadosGraficoLinha(fkUsuario) {
     console.log("ACESSEI O MENSALIDADE MODEL - função obterDadosGraficoLinha()");
    return Promise.all([
-        obterValorPrevisto(),
-        obterValorPago(),
-        obterValorInadimplente()
+        obterValorPrevisto(fkUsuario),
+        obterValorPago(fkUsuario),
+        obterValorInadimplente(fkUsuario)
     ]);
 };
 
-function  obterValorPrevisto(){
+function  obterValorPrevisto(fkUsuario){
     console.log("ACESSEI O MENSALIDADE MODEL - função obterValorPrevisto()");
     var instrucaoSql = `
-        SELECT 
-            DATE_FORMAT(dataPagamento, '%Y-%m') AS mesAno,
-            COUNT(DISTINCT fkEscoteiro) AS qtdEscoteiros,
-            MAX(valor) AS valorMensalidade,
-            SUM(valor) AS totalMensal
-        FROM mensalidade
-        WHERE dataPagamento IS NOT NULL
+         SELECT 
+            DATE_FORMAT(m.dataPagamento, '%Y-%m') AS mesAno,
+            COUNT(DISTINCT m.fkEscoteiro) AS qtdEscoteiros,
+            MAX(m.valor) AS valorMensalidade,
+            SUM(m.valor) AS totalMensal
+        FROM mensalidade m
+        JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
+        WHERE m.dataPagamento IS NOT NULL
+        AND e.fkUsuario = ${fkUsuario}
         GROUP BY mesAno
         ORDER BY mesAno DESC
         LIMIT 6;
@@ -62,14 +69,16 @@ function  obterValorPrevisto(){
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-function  obterValorPago(){
+function  obterValorPago(fkUsuario){
     var instrucaoSql = `
        SELECT 
-        DATE_FORMAT(dataPagamento, '%Y-%m') AS mesAno,
-        SUM(valor) AS valorPago
-        FROM mensalidade
-        WHERE statusMensalidade = 'em dia'
-        AND dataPagamento IS NOT NULL
+            DATE_FORMAT(m.dataPagamento, '%Y-%m') AS mesAno,
+            SUM(m.valor) AS valorPago
+        FROM mensalidade m
+        JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
+        WHERE m.statusMensalidade = 'em dia'
+        AND m.dataPagamento IS NOT NULL
+        AND e.fkUsuario = ${fkUsuario}
         GROUP BY mesAno
         ORDER BY mesAno DESC
         LIMIT 6;
@@ -78,14 +87,16 @@ function  obterValorPago(){
     return database.executar(instrucaoSql);
 }
 
-function  obterValorInadimplente(){
+function  obterValorInadimplente(fkUsuario){
     var instrucaoSql = `
        SELECT 
-        DATE_FORMAT(dataPagamento, '%Y-%m') AS mesAno,
-        SUM(valor) AS valorNaoPago
-        FROM mensalidade
-        WHERE statusMensalidade = 'em atraso'
-        AND dataPagamento IS NOT NULL
+            DATE_FORMAT(m.dataPagamento, '%Y-%m') AS mesAno,
+            SUM(m.valor) AS valorNaoPago
+        FROM mensalidade m
+        JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
+        WHERE m.statusMensalidade = 'em atraso'
+        AND m.dataPagamento IS NOT NULL
+        AND e.fkUsuario = ${fkUsuario}
         GROUP BY mesAno
         ORDER BY mesAno DESC
         LIMIT 6;
@@ -94,28 +105,36 @@ function  obterValorInadimplente(){
     return database.executar(instrucaoSql);
 }
 
-function obterDadosGraficoRosca() {
+function obterDadosGraficoRosca(fkUsuario) {
     console.log("ACESSEI O MENSALIDADE MODEL - função obterDadosGraficoRosca()");
     
     return Promise.all([
-        obterQuantidadeMensalidadesEmDia(),
-        obterQuantidadeMensalidadesEmAtraso()
+        obterQuantidadeMensalidadesEmDia(fkUsuario),
+        obterQuantidadeMensalidadesEmAtraso(fkUsuario)
     ]);
 };
 
-function obterQuantidadeMensalidadesEmDia() {
+function obterQuantidadeMensalidadesEmDia(fkUsuario) {
     console.log("ACESSEI O MENSALIDADE MODEL - função obterQuantidadeMensalidadesEmDia()");
     var instrucaoSql = `
-        SELECT COUNT(*) AS quantidade FROM mensalidade WHERE statusMensalidade = 'em dia';
+        SELECT COUNT(*) AS quantidade 
+        FROM mensalidade m
+        JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
+        WHERE m.statusMensalidade = 'em dia'
+        AND e.fkUsuario = ${fkUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function obterQuantidadeMensalidadesEmAtraso() {
+function obterQuantidadeMensalidadesEmAtraso(fkUsuario) {
     console.log("ACESSEI O MENSALIDADE MODEL - função obterQuantidadeMensalidadesEmAtraso()");
     var instrucaoSql = `
-        SELECT COUNT(*) AS quantidade FROM mensalidade WHERE statusMensalidade = 'em atraso';
+        SELECT COUNT(*) AS quantidade 
+        FROM mensalidade m
+        JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
+        WHERE m.statusMensalidade = 'em atraso'
+        AND e.fkUsuario = ${fkUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
