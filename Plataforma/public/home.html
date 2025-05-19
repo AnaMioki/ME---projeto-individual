@@ -9,7 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Scout Ease</title>
 </head>
-
+<!-- ajustar grafico de rosca, tirar notificação, diminuit tamanho dos inputs
+ deixar mais intutit=vo no cadastro mrs, botar uma fucking seta pra voltar -->
 <body>
     <section class="pagina">
         <div class="sidebar" id="sidebar">
@@ -115,7 +116,7 @@
                     </div>
 
                     <div class="alerta">
-                        <h3>Alertas:</h3>
+                        <h3>Notificações:</h3>
                         <p id="alerta"></p>
                     </div>
 
@@ -244,16 +245,16 @@
     }
 
     const fkUsuario = sessionStorage.getItem("ID_USUARIO");
-        if (!fkUsuario) {
-            console.error("Usuário não logado!");
-            // redirecionar ou mostrar erro
-        }
+    if (!fkUsuario) {
+        console.error("Usuário não logado!");
+        // redirecionar ou mostrar erro
+    }
 
     window.onload = () => {
         // const fkUsuario = sessionStorage.getItem("ID_USUARIO");
         // renderizarEscoteiros(escoteirosTeste);
 
-        
+
 
         const nomeUsuario = sessionStorage.getItem("NOME_USUARIO"); //FUNCIONA?
         document.querySelector('.boasVindas p').textContent = `Boas-vindas, ${nomeUsuario}`;
@@ -292,7 +293,7 @@
             .then(function (resposta) {
                 if (resposta.ok) {
                     resposta.json().then(function (respostaJson) {
-                         console.log(respostaJson)
+                        console.log(respostaJson)
                         document.getElementById("valorArrecadado").innerHTML = `R$ ${respostaJson[0].valorArrecadado}`;
                     });
                 } else {
@@ -343,22 +344,33 @@
                         labels: labels,
                         datasets: [
                             {
-                                label: "Previsto",
+                                label: "Valor Previsto",
                                 data: previsto,
-                                borderColor: "#2196f3",
-                                fill: false
+                                borderColor: '#3b82f6',
+                                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                                fill: true,
+                                pointRadius: 5,
+                                pointHoverRadius: 7
                             },
                             {
-                                label: "Pago",
+                                label: "Valor Pago",
                                 data: pago,
-                                borderColor: "#4caf50",
-                                fill: false
+                                borderColor: '#10b981',
+                                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                                fill: true,
+                                tension: 0.4,
+                                pointRadius: 5,
+                                pointHoverRadius: 7
                             },
                             {
-                                label: "Faltando",
+                                label: "Inadimplência",
                                 data: faltando,
-                                borderColor: "#f44336",
-                                fill: false
+                                borderColor: '#ef4444',
+                                backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                                fill: true,
+                                tension: 0.4,
+                                pointRadius: 5,
+                                pointHoverRadius: 7
                             }
                         ]
                     },
@@ -457,19 +469,19 @@
             .then(function (resposta) {
                 if (resposta.ok) {
                     resposta.json().then(function (respostaJson) {
-                        const ctx = document.getElementById("graficoRosca").getContext("2d");
+                        let graficoRosca = document.getElementById("myChartRosca").getContext("2d");
 
-                        if (graficoRosca) {
-                            graficoRosca.destroy();
-                        }
+                        // if (myChartRosca) {
+                        //     myChartRosca.destroy();
+                        // }
 
-                        graficoRosca = Chart(ctx, {
+                        graficoRosca = new Chart(graficoRosca, {
                             type: "doughnut",
                             data: {
                                 labels: ["Em dia", "Em atraso"],
                                 datasets: [{
                                     data: [respostaJson.emDia, respostaJson.emAtraso],
-                                    backgroundColor: ["#4caf50", "#f44336"]
+                                    backgroundColor: ['#10b981', 'rgb(255, 99, 132)']
                                 }]
                             },
                             options: {

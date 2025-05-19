@@ -3,6 +3,8 @@ CREATE DATABASE ScoutEase;
 USE ScoutEase;
 SHOW TABLES;
 select * from usuario;
+select * from escoteiro;
+select * from mensalidade;
 
 
 CREATE TABLE usuario
@@ -29,14 +31,76 @@ ON DELETE CASCADE
 
 CREATE TABLE mensalidade
 (idMensalidade INT PRIMARY KEY AUTO_INCREMENT,
-valor DECIMAL(10,2) NOT NULL,
+valor DECIMAL(10,2),
 dataPagamento DATE,
-statusMensalidade VARCHAR(8),
-CONSTRAINT chkStatus CHECK( statusMensalidade IN ('pago', 'atrasado')),
-fkEscoteiro CHAR(9),
+statusMensalidade VARCHAR(9) DEFAULT 'em atraso',
+CONSTRAINT chkStatus CHECK( statusMensalidade IN ('em dia', 'em atraso')),
+fkEscoteiro CHAR(9) NOT NULL,
 CONSTRAINT fkMensalidadeEscoteiro FOREIGN KEY (fkEscoteiro)
 REFERENCES escoteiro(registroEscoteiro)
 ON DELETE CASCADE
 );
 
+ALTER TABLE mensalidade
+MODIFY valor DECIMAL(10,2) DEFAULT 25.0;
+
+UPDATE mensalidade
+SET valor = 25.0;
+
+
+ALTER TABLE mensalidade DROP CHECK chkStatus;
+
+ALTER TABLE mensalidade
+ADD CONSTRAINT chkStatus
+CHECK (statusMensalidade IN ('em dia', 'em atraso'));
+
+SELECT * FROM mensalidade;
+
+DROP TABLE mensalidade;
+
+SELECT
+        e.registroEscoteiro,
+        e.nome,
+        e.secaoRamo,
+        DATE_FORMAT(e.vencimentoMensalidade, '%Y-%m-%d') AS vencimentoMensalidade,
+        m.statusMensalidade
+        FROM escoteiro e
+        LEFT JOIN mensalidade m ON e.registroEscoteiro = m.fkEscoteiro
+        WHERE m.idMensalidade = (
+            SELECT MAX(idMensalidade) FROM mensalidade WHERE fkEscoteiro = e.registroEscoteiro
+        )
+        ORDER BY 
+        CASE WHEN m.statusMensalidade = 'em atraso' THEN 0 ELSE 1 END,
+        e.nome;
+        
+        SELECT * FROM mensalidade WHERE fkEscoteiro = 22378645;
+
+   SELECT 
+            DATE_FORMAT(dataPagamento, '%Y-%m') AS mesAno,
+            COUNT(DISTINCT fkEscoteiro) AS qtdEscoteiros,
+            MAX(valor) AS valorMensalidade,
+            SUM(valor) AS totalMensal
+        FROM mensalidade
+        WHERE dataPagamento IS NOT NULL
+        GROUP BY mesAno
+        ORDER BY mesAno DESC
+        LIMIT 6;
+        
+SELECT COUNT(*) AS quantidade
+        FROM escoteiro;
+
+SELECT
+        e.registroEscoteiro,
+        e.nome,
+        e.secaoRamo,
+        DATE_FORMAT(e.vencimentoMensalidade, '%Y-%m-%d') AS vencimentoMensalidade,
+        m.statusMensalidade
+        FROM escoteiro e
+        LEFT JOIN mensalidade m ON e.registroEscoteiro = m.fkEscoteiro
+        WHERE m.idMensalidade = (
+            SELECT MAX(idMensalidade) FROM mensalidade WHERE fkEscoteiro = e.registroEscoteiro
+        ) AND fkUsuario = 2
+        ORDER BY 
+        CASE WHEN m.statusMensalidade = 'em atraso' THEN 0 ELSE 1 END,
+        e.nome;
 

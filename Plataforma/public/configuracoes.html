@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grupo Escoteiro</title>
+  <link rel="stylesheet" href="./style/configuracoes.css" />
+  <link rel="stylesheet" href="./style/menuLateral.css">
+</head>
+
+<body>
+  <section class="pagina">
+    <div class="sidebar" id="sidebar">
+      <div class="logo">
+        <img src="./assets/logo.png" alt="Logo Scout Ease" class="logo-img">
+
+      </div>
+
+      <button class="toggle-btn" onclick="alternarMenu()">
+        <img src="./assets/iconMenu.png" alt="" width="30px">
+        <span class="label">Menu</span>
+      </button>
+
+      <ul class="menu-opcoes">
+        <li>
+          <img src="./assets/iconHome.png" alt="" width="30px">
+          <a href="./home.html"><span class="label">Inicio | Dashboards</span></a>
+        </li>
+        <li>
+          <img src="./assets/iconEscoteiro.png" alt="" width="30px">
+          <a href="./mensalidades.html"><span class="label">Mensalidades</span></a>
+        </li>
+        <li>
+          <img src="./assets/iconConfig.png" alt="" width="30px">
+          <a href="./index.html"><span class="label">Configurações</span></a>
+        </li>
+      </ul>
+
+      <div class="botao-sair">
+        <img src="./assets/iconSair.png" alt="" width="30px">
+        <a href="./index.html"><span class="label">Sair</span></a>
+      </div>
+    </div>
+    <div class="boasVindas">
+      <p>Boas-Vindas, fulano </p>
+      <img src="./assets/iconUser.png" alt="">
+    </div>
+
+    <main class="container">
+      <section class="card">
+        <div class="perfil">
+          <img src="g" alt="Logo do Grupo Escoteiro" class="logo" width="200px" />
+          <div class="info-usuario">
+            <h1>Grupo Escoteiro Santo Amaro</h1>
+            <p class="username">@user</p>
+            <p class="email">email@email.com</p>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <div class="info-item">
+            <h2>Valor da Mensalidade <span class="edit">&#9998;</span></h2>
+            <p class="valor">R$ valor</p>
+          </div>
+
+          <div class="info-item">
+            <h2>Alerta de Vencimento <span class="edit">&#9998;</span></h2>
+            <p class="vencimento">10 dias antes</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </section>
+</body>
+
+</html>

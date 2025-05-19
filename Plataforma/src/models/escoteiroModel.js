@@ -37,7 +37,7 @@ function renderizarEscoteiro(fkUsuario) {
         LEFT JOIN mensalidade m ON e.registroEscoteiro = m.fkEscoteiro
         WHERE m.idMensalidade = (
             SELECT MAX(idMensalidade) FROM mensalidade WHERE fkEscoteiro = e.registroEscoteiro
-        )
+        ) AND fkUsuario = ${fkUsuario}
         ORDER BY 
         CASE WHEN m.statusMensalidade = 'em atraso' THEN 0 ELSE 1 END,
         e.nome;
