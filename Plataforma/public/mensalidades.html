@@ -285,6 +285,25 @@
 
         function mostrarDetalhes(registro) {
             alert(`Mostrar detalhes das mensalidades do escoteiro ${registro}`);
+
+            fetch (`/escoteiro/${registroEscoteiro}`)
+            .then(function (resposta){
+                console.log('entrei no fetch mostrarDetalhes')
+                .then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then(function (respostaJson) {
+                        console.log(respostaJson)
+                        window.location = "./escoteiro.html";
+                    });
+                } else {
+                    console.error("Erro ao obter valor arrecadado.");
+                }
+            })
+            .catch(function (erro) {
+                console.error("Erro na requisição de valor arrecadado:", erro);
+            });
+        };
+
         }
 
 
