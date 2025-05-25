@@ -243,10 +243,12 @@
                     btnDarBaixa.style.display = "none";
                 }
 
-                clone.querySelector(".btn-verMensalidades").onclick = () =>
+                clone.querySelector(".btn-verMensalidades").onclick = () =>{
                     mostrarDetalhes(escoteiro.registroEscoteiro);
+                    sessionStorage.setItem("DADOS_ESCOTEIRO", JSON.stringify(escoteiro));
 
-                // Botão excluir
+                };
+                
                 clone.querySelector(".excluir-btn").onclick = () =>
                     deletarEscoteiro(escoteiro.registroEscoteiro);
 
@@ -298,7 +300,6 @@
                         resposta.json().then(function (respostaJson) {
                             console.log(respostaJson)
 
-                            sessionStorage.setItem("DETALHES_ESCOTEIRO", JSON.stringify(respostaJson));
                             window.location = "./escoteiro.html";
                         });
                     } else {

@@ -55,14 +55,14 @@
                     </div>
                     <div class="info">
                         <div class="name">
-                               <h1 class="title" id="nome">${escoteiro.nome}</h1>
+                               <h1 class="title" id="nome"></h1>
                     <img src="./assets/iconEditar.png" width="24px">
                         </div>
                      
                     <div class="contentUser">
-                        <span id="ramo">${ramo}</span>
-                        <span id="registro">${22222}</span>
-                        <span id="celular">${11972781117}</span>
+                        <span id="ramo"></span>
+                        <span id="registro"></span>
+                        <span id="celular"></span>
                     </div>
                     </div>
                      <img id="botaoExcluir" src="./assets/iconExcluir.png" alt="">
@@ -70,37 +70,37 @@
                 <div class="status">
                     <div class="statusMensalidade">
                         <p>Status Mensalidade Atual</p>
-                        <span>${10 dias} Em atraso</span>
+                        <span id="statusMensalidade"></span>
                     </div>
                     <div class="dtVencimento">
                         <p>Data de vencimento</p>
-                        <span>10/05/2025</span>
+                        <span id="dtVencimento"></span>
                     </div>
                     <!-- <div class="dtPagamento">
                         <p>Data do pagamento</p>
                         <span>xx/xx/xxxx</span>
                     </div> -->
                     <div class="botao">
-                        <button>Registrar pagamento em: ${10/04}</button>
+                        <button id="btnPagamento"></button>
                     </div>
 
                 </div>
 
                 <hr>
-                <div class="mesesAnteriores">
+                <div class="mesesAnteriores" id="listaMesesAnteriores">
                     <p id="TitulomesesAnteriores">Meses Anteriores</p>
                     <div class="moldeMes">
                         <div class="mesAno">
                             <p>Mês/Ano</p>
-                            <span>ssss</span>
+                            <span id="mesAno">ssss</span>
                         </div>
                         <div class="statusmes">
                             <p>Status</p>
-                            <span>Em atraso</span>
+                            <span id="statusMes">Em atraso</span>
                         </div>
                         <div class="dtPagamento">
                             <p>Data do pagamento</p>
-                            <span>xx/xx/xxxx</span>
+                            <span id="dtPagamento"</span>
                         </div>
                     </div>
                     <div class="moldeNenhum">
@@ -121,7 +121,8 @@
     }
 
     window.onload = () => {
-        const dados = JSON.parse(sessionStorage.getItem("DETALHES_ESCOTEIRO"));
+        const dados = JSON.parse(sessionStorage.getItem("DADOS_ESCOTEIRO"));
+        console.log("dados recebidos:", dados)
 
         if (!dados) {
             alert("Erro ao carregar os dados do escoteiro.");
@@ -129,19 +130,16 @@
             return;
         }
 
-        // Preencher dados básicos
         document.getElementById("nome").textContent = dados.nome;
-        document.getElementById("ramo").textContent = dados.ramo;
-        document.getElementById("registro").textContent = dados.registro;
-        document.getElementById("celular").textContent = dados.celular;
+        document.getElementById("ramo").textContent = dados.ramoEscoteiro;
+        document.getElementById("registro").textContent = dados.registroEscoteiro;
+        // document.getElementById("celular").textContent = dados.celular;
 
-        // Status atual
-        document.getElementById("statusAtual").textContent = dados.statusAtual || "Sem info";
-        document.getElementById("dataVencimento").textContent = dados.dataVencimento || "Não informada";
+        document.getElementById("statusMensalidade").textContent = dados.statusMensalidade || "Sem info";
+        document.getElementById("dtVencimento").textContent = dados.vencimentoMensalidade || "Não informada";
 
-        // Botão de pagamento
         if (dados.dataRegistrarPagamento) {
-            document.getElementById("btnPagamento").textContent =
+            document.getElementById("btnPagamento").textContent = 
                 `Registrar pagamento em: ${dados.dataRegistrarPagamento}`;
         }
 
