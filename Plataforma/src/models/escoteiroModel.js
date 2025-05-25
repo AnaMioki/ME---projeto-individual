@@ -25,10 +25,10 @@ function renderizarEscoteiro(fkUsuario) {
         console.error('fkusuario não foi fornecido!');
         return;
     }
-// eu pego o id de mensalidade mais recente para que eu saiba o status e data de vencimento
-// adicionei os campos de nomeResponsavel e celular
 
-//tirei
+// eu pego o id de mensalidade mais recente para que eu saiba o status e data de vencimento
+// talvez eu mude para que traga a informação em atraso  
+// o status deve pegar o mais antigo que esteja em atraso ou pendente ou senao o mais recente
     var instrucaoSql = `
       SELECT
         e.registroEscoteiro,
@@ -50,7 +50,7 @@ function renderizarEscoteiro(fkUsuario) {
     return database.executar(instrucaoSql);
 
 }
-
+// preciso alterar para que eu dê baixa na mensalidade mais antiga (pagina de mensalidade)
 function darBaixa(registroEscoteiro) {
     console.log("começando o comando")
     console.log(registroEscoteiro)

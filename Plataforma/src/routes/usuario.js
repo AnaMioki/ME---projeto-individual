@@ -15,9 +15,9 @@ router.post("/entrar", function (req, res) {
     console.log('Recebeu login:', req.body);
 });
 
-router.get("/entrar", (req, res) => {
-    res.status(200).send("Rota GET /usuario/entrar funcionando!");
-});
+// router.get("/entrar", (req, res) => {
+//     res.status(200).send("Rota GET /usuario/entrar funcionando!");
+// });
 
 
 // router.post('/cadastrar', (req, res) => {

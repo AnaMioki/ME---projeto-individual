@@ -134,104 +134,58 @@
         }
 
 
-        // document.getElementById("nome").textContent = dadosSessao.nome;
-        // document.getElementById("ramo").textContent = dadosSessao.secaoRamo;
-        // document.getElementById("registro").textContent = dadosSessao.registroEscoteiro;
-        // // document.getElementById("celular").textContent = dados.celular;
+        function carregarDadosEscoteiro(registroEscoteiro) {
+            fetch(`/escoteiro/${registroEscoteiro}`)
+                .then(res => {
+                    if (!res.ok) throw new Error("Erro ao buscar dados atualizados");
+                    return res.json();
+                })
+                .then(dados => {
+                    // renderizarEscoteiro(dados);
+                    document.getElementById("nome").textContent = dados.nome;
+                    document.getElementById("ramo").textContent = dados.secaoRamo;
+                    document.getElementById("registro").textContent = dados.registroEscoteiro;
+                    document.getElementById("celular").textContent = dados.celular || "Sem celular informado";
 
-        // document.getElementById("statusMensalidade").textContent = dados.statusMensalidade || "Sem info";
-        // document.getElementById("dtVencimento").textContent = dados.vencimentoMensalidade || "Não informada";
+                    // verifica se tem nomeResponsavel, se sim adiciona
+                    if (dados.nomeResponsavel) {
+                        document.getElementById("nomeResponsavel").textContent = dados.celular || "Sem celular informado";
+                    } else {
+                        document.getElementById("nomeResponsavel").style.display = "none";
+                    }
+                    document.getElementById("statusMensalidade").textContent = dados.statusMensalidade || "Sem info";
+                    document.getElementById("dtVencimento").textContent = dados.vencimentoMensalidade || "Não informada";
 
-        // if (dadosSessao.statusMensalidade == "em atraso") {
-        //     document.getElementById("btnPagamento").textContent = 
-        //         `Registrar pagamento de: ${dadosSessao.vencimentoMensalidade}`;
-        // }else {
-        //     document.getElementByClass("dtVencimento")
-        //     document.getElementById("btnPagamento").style.display = "none";
+                    // esse botao tem q trazer a  mensalidade mais antiga que está como "atraso"
+                    // provavelmente vou ter que linkar com o fetch de mensalidade 
+                    //     const botao = document.getElementById("btnPagamento");
+                    //     if (dados.statusMensalidade === "em atraso") {
+                    //         botao.textContent = `Registrar pagamento de: ${dados.vencimentoMensalidade}`;
+                    //         botao.style.display = "inline-block";
+                    //         botao.onclick = () => darBaixa(dados.registroEscoteiro);
+                    //     } else {
+                    //         botao.style.display = "none";
+                    //     }
+                    // })
+                    // .catch(err => {
+                    //     console.error(err);
+                    //     alert("Erro ao carregar dados do escoteiro.");
+                });
+        }
 
-        // }
-
-        // // Meses anteriores
-        // const listaMeses = document.getElementById("listaMesesAnteriores");
-        // if (dados.mensalidadesAnteriores && dados.mensalidadesAnteriores.length > 0) {
-        //     listaMeses.innerHTML = "";
-        //     dados.mensalidadesAnteriores.forEach(m => {
-        //         listaMeses.innerHTML += `
-        //             <div class="moldeMes">
-        //                 <div class="mesAno">
-        //                     <p>Mês/Ano</p>
-        //                     <span>${m.mes}/${m.ano}</span>
-        //                 </div>
-        //                 <div class="statusmes">
-        //                     <p>Status</p>
-        //                     <span>${m.status}</span>
-        //                 </div>
-        //                 <div class="dtPagamento">
-        //                     <p>Data do pagamento</p>
-        //                     <span>${m.dataPagamento || "Sem pagamento"}</span>
-        //                 </div>
-        //             </div>
-        //         `;
-        //     });
-        // } else {
-        //     listaMeses.innerHTML = `
-        //         <div class="moldeNenhum">
-        //             <p>Ainda não há Registros de meses passados...</p>
-        //         </div>
-        //     `;
-        // }
-
-       function carregarDadosEscoteiro (registroEscoteiro){
-         fetch(`/escoteiro/${registroEscoteiro}`)
-            .then(res => {
-                if (!res.ok) throw new Error("Erro ao buscar dados atualizados");
-                return res.json();
-            })
-            .then(dados => {
-                // renderizarEscoteiro(dados);
-                document.getElementById("nome").textContent = dados.nome;
-                document.getElementById("ramo").textContent = dados.secaoRamo;
-                document.getElementById("registro").textContent = dados.registroEscoteiro;
-                document.getElementById("celular").textContent = dados.celular || "Sem celular informado";
-
-                // verifica se tem nomeResponsavel, se sim adiciona
-                if (dados.nomeResponsavel) {
-                    document.getElementById("nomeResponsavel").textContent = dados.celular || "Sem celular informado";
-                } else {
-                    document.getElementById("nomeResponsavel").style.display = "none";
-                }
-                document.getElementById("statusMensalidade").textContent = dados.statusMensalidade || "Sem info";
-                document.getElementById("dtVencimento").textContent = dados.vencimentoMensalidade || "Não informada";
-
-                // esse botao tem q trazer a  mensalidade mais antiga que está como "atraso"
-                // provavelmente vou ter que linkar com o fetch de mensalidade 
-                //     const botao = document.getElementById("btnPagamento");
-                //     if (dados.statusMensalidade === "em atraso") {
-                //         botao.textContent = `Registrar pagamento de: ${dados.vencimentoMensalidade}`;
-                //         botao.style.display = "inline-block";
-                //         botao.onclick = () => darBaixa(dados.registroEscoteiro);
-                //     } else {
-                //         botao.style.display = "none";
-                //     }
-                // })
-                // .catch(err => {
-                //     console.error(err);
-                //     alert("Erro ao carregar dados do escoteiro.");
-            });
-
-       }
-
-        fetch(`/escoteiro/${registroEscoteiro}/mensalidades`)
-            .then(res => {
-                if (!res.ok) throw new Error("Erro ao buscar mensalidades");
-                return res.json();
-            })
-            .then(mensalidades => {
-                const listaMeses = document.getElementById("listaMesesAnteriores");
-                if (mensalidades.length > 0) {
-                    listaMeses.innerHTML = '<p id="TitulomesesAnteriores">Meses Anteriores</p>';
-                    mensalidades.forEach(m => {
-                        listaMeses.innerHTML += `
+        // esse vai puxar as informações de mensalidade, abraçar em uma funcao
+        function carregarMensalidadesEscoteiro{
+            fetch(`/escoteiro/${registroEscoteiro}/mensalidades`)
+                .then(res => {
+                    if (!res.ok) throw new Error("Erro ao buscar mensalidades");
+                    return res.json();
+                })
+                .then(mensalidades => {
+                    const listaMeses = document.getElementById("listaMesesAnteriores");
+                    if (mensalidades.length > 0) {
+                        listaMeses.innerHTML = '<p id="TitulomesesAnteriores">Meses Anteriores</p>';
+                        mensalidades.forEach(m => {
+                            listaMeses.innerHTML += `
                     <div class="moldeMes">
                         <div class="mesAno">
                             <p>Mês/Ano</p>
@@ -247,61 +201,40 @@
                         </div>
                     </div>
                     `;
-                    });
-                } else {
-                    listaMeses.innerHTML = `
+                        });
+                    } else {
+                        listaMeses.innerHTML = `
                 <div class="moldeNenhum">
                     <p>Ainda não há Registros de meses passados...</p>
                 </div>
                 `;
-                }
+                    }
 
-                // 🔁 Lógica para preencher o botão de baixa
-                const botao = document.getElementById("btnPagamento");
-                const mensalidadeEmAtraso = mensalidades.find(m => m.status === "em atraso");
-                if (mensalidadeEmAtraso) {
-                    botao.textContent = `Registrar pagamento de: ${mensalidadeEmAtraso.mes}/${mensalidadeEmAtraso.ano}`;
-                    botao.style.display = "inline-block";
-                    botao.onclick = () => darBaixa(mensalidadeEmAtraso.id); // Certifique-se de que o ID esteja disponível
-                } else {
-                    botao.style.display = "none";
-                }
-            })
-            .catch(err => {
-                console.error(err);
-                alert("Erro ao carregar mensalidades anteriores.");
-            });
-    };
-
-
-    // function renderizarEscoteiro(dados) {
-    //     document.getElementById("nome").textContent = dados.nome;
-    //     document.getElementById("ramo").textContent = dados.secaoRamo;
-    //     document.getElementById("registro").textContent = dados.registroEscoteiro;
-    //     document.getElementById("celular").textContent = dados.celular || "Sem celular informado";
-
-    //     // verifica se tem nomeResponsavel, se sim adiciona
-    //     if (nomeResponsavel) {
-    //         document.getElementById("nomeResponsavel").textContent = dados.celular || "Sem celular informado";
-    //     }else{
-    //         document.getElementById("nomeResponsavel").style.display = "none";
-    //     }
-    //     document.getElementById("statusMensalidade").textContent = dados.statusMensalidade || "Sem info";
-    //     document.getElementById("dtVencimento").textContent = dados.vencimentoMensalidade || "Não informada";
-
-    //     // esse botao tem q trazer a  mensalidade mais antiga que está como "atraso"
-    //     // provavelmente vou ter que linkar com o fetch de mensalidade 
-    //     const botao = document.getElementById("btnPagamento");
-    //     if (dados.statusMensalidade === "em atraso") {
-    //         botao.textContent = `Registrar pagamento de: ${dados.vencimentoMensalidade}`;
-    //         botao.style.display = "inline-block";
-    //         botao.onclick = () => darBaixa(dados.registroEscoteiro);
-    //     } else {
-    //         botao.style.display = "none";
-    //     }
-    // }
+                    // 🔁 Lógica para preencher o botão de baixa
+                    const botao = document.getElementById("btnPagamento");
+                    const mensalidadeEmAtraso = mensalidades.find(m => m.status === "em atraso");
+                    if (mensalidadeEmAtraso) {
+                        botao.textContent = `Registrar pagamento de: ${mensalidadeEmAtraso.mes}/${mensalidadeEmAtraso.ano}`;
+                        botao.style.display = "inline-block";
+                        botao.onclick = () => darBaixa(mensalidadeEmAtraso.id); // Certifique-se de que o ID esteja disponível
+                    } else {
+                        botao.style.display = "none";
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert("Erro ao carregar mensalidades anteriores.");
+                });
+        };
+    }
 
 
+    // function darBaixaMensalidadeEscoteiro {
+
+    // };
+
+
+    // ESSA LOGICA referencia o model que pega a mensalidade mais recente
     // function darBaixa(registroEscoteiro) {
     //     console.log("acionaram o dar baixa")
     //     fetch("/escoteiro/darBaixa", {
