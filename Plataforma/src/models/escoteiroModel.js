@@ -2,6 +2,10 @@ var database = require("../database/config");
 
 async function cadastrar(registroEscoteiro, nome, dataNascimento, secaoEscoteira, nome_responsavel, celular, vencimentoMensalidade, fkUsuario) {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+
+    const mesReferencia = new Date().toISOString().slice(0, 7) + '-01';
+    const diaAtual = new Date().getDate()
+
     var instrucaoSqlEscoteiro = `
         INSERT INTO escoteiro VALUES
         ('${registroEscoteiro}', '${nome}', '${dataNascimento}', '${secaoEscoteira}', '${nome_responsavel || null}', '${celular}', '${vencimentoMensalidade}', '${fkUsuario}' );
@@ -9,9 +13,11 @@ async function cadastrar(registroEscoteiro, nome, dataNascimento, secaoEscoteira
     console.log("Executando a instrução SQL: \n" + instrucaoSqlEscoteiro);
     await database.executar(instrucaoSqlEscoteiro);
 
+    const statusMensalidade = diaAtual > vencimentoMensalidade ? 'em atraso' : 'pendente';
+
     var instrucaoSqlMensalidade = `
-        INSERT INTO mensalidade (statusMensalidade, fkEscoteiro)
-        VALUES ('em atraso', '${registroEscoteiro}');
+        INSERT INTO mensalidade (statusMensalidade, fkEscoteiro, mesReferencia)
+        VALUES ('${statusMensalidade}', '${registroEscoteiro}', '${mesReferencia}');
     `;
     console.log("Executando a instrução SQL para mensalidade: \n" + instrucaoSqlMensalidade);
     return await database.executar(instrucaoSqlMensalidade);
@@ -26,25 +32,35 @@ function renderizarEscoteiro(fkUsuario) {
         return;
     }
 
-// eu pego o id de mensalidade mais recente para que eu saiba o status e data de vencimento
-// talvez eu mude para que traga a informação em atraso  
-// o status deve pegar o mais antigo que esteja em atraso ou pendente ou senao o mais recente
+
+    // faço uma priorização para que mostre o mais antigo se for atraso, ent pendente e então recente pago
     var instrucaoSql = `
       SELECT
-        e.registroEscoteiro,
-        e.nome,
-        e.secaoRamo,
-        DATE_FORMAT(e.vencimentoMensalidade, '%Y-%m-%d') AS vencimentoMensalidade,
-        m.statusMensalidade
+            e.registroEscoteiro,
+            e.nome,
+            e.secaoRamo,
+            DATE_FORMAT(e.vencimentoMensalidade, '%Y-%m-%d') AS vencimentoMensalidade,
+            m.statusMensalidade
         FROM escoteiro e
-        LEFT JOIN mensalidade m ON e.registroEscoteiro = m.fkEscoteiro
-        WHERE m.idMensalidade = (
-            SELECT MAX(idMensalidade) FROM mensalidade WHERE fkEscoteiro = e.registroEscoteiro
-        ) AND fkUsuario = ${fkUsuario}
+        LEFT JOIN mensalidade m ON m.idMensalidade = (
+            SELECT idMensalidade FROM mensalidade
+            WHERE fkEscoteiro = e.registroEscoteiro
+            ORDER BY 
+                CASE 
+                    WHEN statusMensalidade = 'em atraso' THEN 1
+                    WHEN statusMensalidade = 'pendente' THEN 2
+                    WHEN statusMensalidade = 'em dia' THEN 3
+                    ELSE 4
+                END,
+                dataPagamento ASC
+            LIMIT 1
+        )
+        WHERE e.fkUsuario = ${fkUsuario}
         ORDER BY 
-        CASE WHEN m.statusMensalidade = 'em atraso' THEN 0 ELSE 1 END,
-        e.nome;
-    `;
+            CASE WHEN m.statusMensalidade = 'em atraso' THEN 0 ELSE 1 END,
+            e.nome;
+
+            `;
     // ('${registroEscoteiro}', '${nome}', '${secaoEscoteira}', '${vencimentoMensalidade}', '${fkUsuario}' );
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -54,7 +70,7 @@ function renderizarEscoteiro(fkUsuario) {
 function darBaixa(registroEscoteiro) {
     console.log("começando o comando")
     console.log(registroEscoteiro)
-     const instrucaoSql = `
+    const instrucaoSql = `
            UPDATE mensalidade m
             JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
             SET m.statusMensalidade = 'em dia',

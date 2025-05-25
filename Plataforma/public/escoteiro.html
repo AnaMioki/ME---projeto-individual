@@ -174,7 +174,7 @@
         }
 
         // esse vai puxar as informações de mensalidade, abraçar em uma funcao
-        function carregarMensalidadesEscoteiro{
+        function carregarMensalidadesEscoteiro(registroEscoteiro){
             fetch(`/escoteiro/${registroEscoteiro}/mensalidades`)
                 .then(res => {
                     if (!res.ok) throw new Error("Erro ao buscar mensalidades");

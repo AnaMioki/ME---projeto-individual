@@ -46,19 +46,29 @@ async function obterDadosGraficoLinha(req, res) {
     //     const previsto = await dashboardModel.obterValorPrevisto(fkUsuario);
     //     const pago = await dashboardModel.obterValorPago(fkUsuario);
     //     const faltando = await dashboardModel.obterValorInadimplente(fkUsuario);
-    dashboardModel.obterDadosGraficoLinha(fkUsuario)
-        .then(([previsto, pago, faltando]) => {
-            res.status(200).json({ previsto, pago, faltando });
-        })
+    // dashboardModel.obterDadosGraficoLinha(fkUsuario)
+    //     .then(([previsto, pago, faltando]) => {
+
+    try {
+        const [previsto, pago, faltando] = await Promise.all([
+            dashboardModel.obterValorPrevisto(fkUsuario),
+            dashboardModel.obterValorPago(fkUsuario),
+            dashboardModel.obterValorInadimplente(fkUsuario)
+        ]);
+         console.log("✅ Controller: dados obtidos com sucesso");
+         console.log("valor previsto", previsto);
+         console.log("valor pago", pago);
+         console.log("valor inadimplente",  faltando  )
+        res.status(200).json({ previsto, pago, faltando });
         // res.status(200).json({
         //     previsto,
         //     pago,
         //     faltando
         // });
-        .catch(erro => {
+    } catch (erro) {
         console.error("Erro ao obter dados do gráfico de linha:", erro);
         res.status(500).json({ erro: "Erro ao buscar dados do gráfico de linha." });
-    });
+    };
 }
 
 
@@ -66,12 +76,13 @@ async function obterDadosGraficoLinha(req, res) {
 
 function obterDadosGraficoRosca(req, res) {
     const fkUsuario = req.params.fkUsuario;
-    
+
     dashboardModel.obterDadosGraficoRosca(fkUsuario)
-        .then(([emDia, emAtraso]) => {
+        .then(([emDia, pendente, emAtraso]) => {
             res.status(200).json /*({ emDia, emAtraso });*/
                 ({
                     emDia: emDia[0].quantidade,
+                    pendente: pendente[0].quantidade,
                     emAtraso: emAtraso[0].quantidade
                 });
         })

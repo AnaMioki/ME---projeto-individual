@@ -87,7 +87,7 @@
                 <div class="card">
                     <div class="tituloCard">
                         <img src="./assets/iconAtraso.png" alt="" width="20px">
-                        <h3>Mensalidades Atrasadas</h3>
+                        <h3>Total do Valor Atrasado</h3>
                     </div>
                     <div id="atrasoMensalidade" class="numbers">
                         <p id="valorMensalidadeAtrasada"></p>
@@ -134,107 +134,7 @@
     const ctx = document.getElementById('myChart');
     const graficoRosca = document.getElementById('myChartRosca');
 
-    // const previsto = [1000, 1200, 900, 1100, 1300, 1250];
-    // const arrecadado = [800, 1000, 850, 1000, 1150, 1200];
-    // const faltando = previsto.map((v, i) => v - arrecadado[i]);
-
-    // new Chart(ctx, {
-    //     type: 'line',
-    //     data: {
-    //         labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
-    //         datasets: [
-    //             {
-    //                 label: 'Valor Previsto',
-    //                 data: previsto,
-    //                 borderColor: '#3b82f6',
-    //                 backgroundColor: 'rgba(59, 130, 246, 0.1)',
-    //                 fill: true,
-    //                 pointRadius: 5,
-    //                 pointHoverRadius: 7
-    //             },
-    //             {
-    //                 label: 'Valor Pago',
-    //                 data: arrecadado,
-    //                 borderColor: '#10b981',
-    //                 backgroundColor: 'rgba(16, 185, 129, 0.1)',
-    //                 fill: true,
-    //                 tension: 0.4,
-    //                 pointRadius: 5,
-    //                 pointHoverRadius: 7
-    //             },
-    //             {
-    //                 label: 'Inadimplência',
-    //                 data: faltando,
-    //                 borderColor: '#ef4444',
-    //                 backgroundColor: 'rgba(239, 68, 68, 0.1)',
-    //                 fill: true,
-    //                 tension: 0.4,
-    //                 pointRadius: 5,
-    //                 pointHoverRadius: 7
-    //             }
-    //         ]
-    //     },
-    //     options: {
-    //         responsive: true,
-    //         plugins: {
-    //             legend: {
-    //                 position: 'top',
-    //                 labels: {
-    //                     font: {
-    //                         size: 14
-    //                     }
-    //                 }
-    //             },
-    //             tooltip: {
-    //                 callbacks: {
-    //                     label: function (context) {
-    //                         return context.dataset.label + ': R$ ' + context.parsed.y.toFixed(2);
-    //                     }
-    //                 }
-    //             }
-    //         },
-    //         scales: {
-    //             y: {
-    //                 beginAtZero: true,
-    //                 title: {
-    //                     display: true,
-    //                     text: 'Valor em R$'
-    //                 },
-    //                 ticks: {
-    //                     callback: function (value) {
-    //                         return 'R$ ' + value;
-    //                     }
-    //                 }
-    //             },
-    //             x: {
-    //                 title: {
-    //                     display: true,
-    //                     text: 'Meses'
-    //                 }
-    //             }
-    //         }
-    //     }
-    // });
-
-    // const dataRosca = {
-    //     labels: [
-    //         'Em Atraso',
-    //         'Em dia',
-    //     ],
-    //     datasets: [{
-    //         label: 'Mensalidades',
-    //         data: [300, 50],
-    //         backgroundColor: [
-    //             'rgb(255, 99, 132)',
-    //             '#10b981'
-    //         ],
-    //         hoverOffset: 4
-    //     }]
-    // };
-    // new Chart(graficoRosca, {
-    //     type: 'doughnut',
-    //     data: dataRosca,
-    // })
+    
 </script>
 
 
@@ -403,67 +303,6 @@
     }
 
 
-    // function obterDadosGraficoLinha() {
-    //     fetch("/dashboard/financeiro/grafico-linha")
-    //         .then(function (resposta) {
-    //             if (resposta.ok) {
-    //                 resposta.json().then(function (respostaJson) {
-    //                     let meses = [];
-    //                     let previsto = [];
-    //                     let arrecadado = [];
-    //                     let faltando = [];
-
-    //                     for (let i = 0; i < respostaJson.length; i++) {
-    //                         meses.push(respostaJson[i].mes);
-    //                         previsto.push(respostaJson[i].previsto);
-    //                         arrecadado.push(respostaJson[i].arrecadado);
-    //                         faltando.push(respostaJson[i].faltando);
-    //                     }
-
-    //                     const ctx = document.getElementById("graficoLinha").getContext("2d");
-    //                     new Chart(ctx, {
-    //                         type: "line",
-    //                         data: {
-    //                             labels: meses,
-    //                             datasets: [
-    //                                 {
-    //                                     label: "Previsto",
-    //                                     data: previsto,
-    //                                     borderColor: "#999",
-    //                                     backgroundColor: "transparent"
-    //                                 },
-    //                                 {
-    //                                     label: "Arrecadado",
-    //                                     data: arrecadado,
-    //                                     borderColor: "#4caf50",
-    //                                     backgroundColor: "transparent"
-    //                                 },
-    //                                 {
-    //                                     label: "Faltando",
-    //                                     data: faltando,
-    //                                     borderColor: "#f44336",
-    //                                     backgroundColor: "transparent"
-    //                                 }
-    //                             ]
-    //                         },
-    //                         options: {
-    //                             responsive: true,
-    //                             plugins: {
-    //                                 legend: { position: "top" },
-    //                                 title: { display: true, text: "Resumo mensal" }
-    //                             }
-    //                         }
-    //                     });
-    //                 });
-    //             } else {
-    //                 console.error("Erro ao obter dados do gráfico de linha.");
-    //             }
-    //         })
-    //         .catch(function (erro) {
-    //             console.error("Erro na requisição do gráfico de linha:", erro);
-    //         });
-    // }
-
     function obterDadosGraficoRosca() {
         fetch(`/dashboard/financeiro/grafico-rosca/${fkUsuario}`)
             .then(function (resposta) {
@@ -474,14 +313,14 @@
                         // if (myChartRosca) {
                         //     myChartRosca.destroy();
                         // }
-
+                         console.log(respostaJson);
                         graficoRosca = new Chart(graficoRosca, {
                             type: "doughnut",
                             data: {
-                                labels: ["Em dia", "Em atraso"],
+                                labels: ["Em dia", "Pendentes" ,"Em atraso"],
                                 datasets: [{
-                                    data: [respostaJson.emDia, respostaJson.emAtraso],
-                                    backgroundColor: ['#10b981', 'rgb(255, 99, 132)']
+                                    data: [respostaJson.emDia, respostaJson.pendente ,respostaJson.emAtraso],
+                                    backgroundColor: ['#10b981', '#FCB218' ,'rgb(255, 99, 132)']
                                 }]
                             },
                             options: {

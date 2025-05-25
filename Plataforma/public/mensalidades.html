@@ -236,7 +236,7 @@
                 clone.querySelector(".vencimento").textContent = escoteiro.vencimentoMensalidade || "";
 
                 const btnDarBaixa = clone.querySelector(".btn-darBaixa");
-                if (escoteiro.statusMensalidade === "em atraso") {
+                if (escoteiro.statusMensalidade === "em atraso" || escoteiro.statusMensalidade === "pendente" ) {
                     btnDarBaixa.style.display = "inline-block";
                     btnDarBaixa.onclick = () => darBaixa(escoteiro.registroEscoteiro);
                 } else {

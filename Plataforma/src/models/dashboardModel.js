@@ -33,35 +33,32 @@ function obterValorAtrasado(fkUsuario) {
         FROM mensalidade m
         JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
         WHERE m.statusMensalidade = 'em atraso'
-        AND YEAR(m.dataPagamento) = YEAR(CURDATE())
-        AND MONTH(m.dataPagamento) = MONTH(CURDATE())
         AND e.fkUsuario = ${fkUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 };
 
-function obterDadosGraficoLinha(fkUsuario) {
-    console.log("ACESSEI O MENSALIDADE MODEL - função obterDadosGraficoLinha()");
-   return Promise.all([
-        obterValorPrevisto(fkUsuario),
-        obterValorPago(fkUsuario),
-        obterValorInadimplente(fkUsuario)
-    ]);
-};
+// function obterDadosGraficoLinha(fkUsuario) {
+//     console.log("ACESSEI O MENSALIDADE MODEL - função obterDadosGraficoLinha()");
+//    return Promise.all([
+//         obterValorPrevisto(fkUsuario),
+//         obterValorPago(fkUsuario),
+//         obterValorInadimplente(fkUsuario)
+//     ]);
+// };
 
 function  obterValorPrevisto(fkUsuario){
     console.log("ACESSEI O MENSALIDADE MODEL - função obterValorPrevisto()");
     var instrucaoSql = `
          SELECT 
-            DATE_FORMAT(m.dataPagamento, '%Y-%m') AS mesAno,
+            DATE_FORMAT(m.mesReferencia, '%Y-%m') AS mesAno,
             COUNT(DISTINCT m.fkEscoteiro) AS qtdEscoteiros,
             MAX(m.valor) AS valorMensalidade,
             SUM(m.valor) AS totalMensal
         FROM mensalidade m
         JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
-        WHERE m.dataPagamento IS NOT NULL
-        AND e.fkUsuario = ${fkUsuario}
+        WHERE e.fkUsuario = ${fkUsuario}
         GROUP BY mesAno
         ORDER BY mesAno DESC
         LIMIT 6;
@@ -69,15 +66,15 @@ function  obterValorPrevisto(fkUsuario){
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
 function  obterValorPago(fkUsuario){
     var instrucaoSql = `
        SELECT 
-            DATE_FORMAT(m.dataPagamento, '%Y-%m') AS mesAno,
+            DATE_FORMAT(m.mesReferencia, '%Y-%m') AS mesAno,
             SUM(m.valor) AS valorPago
         FROM mensalidade m
         JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
-        WHERE m.statusMensalidade = 'em dia'
-        AND m.dataPagamento IS NOT NULL
+        WHERE m.dataPagamento IS NOT NULL
         AND e.fkUsuario = ${fkUsuario}
         GROUP BY mesAno
         ORDER BY mesAno DESC
@@ -90,12 +87,11 @@ function  obterValorPago(fkUsuario){
 function  obterValorInadimplente(fkUsuario){
     var instrucaoSql = `
        SELECT 
-            DATE_FORMAT(m.dataPagamento, '%Y-%m') AS mesAno,
+            DATE_FORMAT(m.mesReferencia, '%Y-%m') AS mesAno,
             SUM(m.valor) AS valorNaoPago
         FROM mensalidade m
         JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
         WHERE m.statusMensalidade = 'em atraso'
-        AND m.dataPagamento IS NOT NULL
         AND e.fkUsuario = ${fkUsuario}
         GROUP BY mesAno
         ORDER BY mesAno DESC
@@ -110,6 +106,7 @@ function obterDadosGraficoRosca(fkUsuario) {
     
     return Promise.all([
         obterQuantidadeMensalidadesEmDia(fkUsuario),
+        obterQuantidadeMensalidadesPendente(fkUsuario),
         obterQuantidadeMensalidadesEmAtraso(fkUsuario)
     ]);
 };
@@ -121,6 +118,19 @@ function obterQuantidadeMensalidadesEmDia(fkUsuario) {
         FROM mensalidade m
         JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
         WHERE m.statusMensalidade = 'em dia'
+        AND e.fkUsuario = ${fkUsuario};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function obterQuantidadeMensalidadesPendente(fkUsuario){
+     console.log("ACESSEI O MENSALIDADE MODEL - função obterQuantidadeMensalidadesPendente()");
+    var instrucaoSql = `
+        SELECT COUNT(*) AS quantidade 
+        FROM mensalidade m
+        JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
+        WHERE m.statusMensalidade = 'pendente'
         AND e.fkUsuario = ${fkUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -144,11 +154,12 @@ module.exports = {
     obterQuantidadeEscoteiros,
     obterValorArrecadado,
     obterValorAtrasado,
-    obterDadosGraficoLinha,
+    // obterDadosGraficoLinha,
     obterDadosGraficoRosca,
     obterValorPrevisto,
     obterValorPago,
     obterValorInadimplente,
     obterQuantidadeMensalidadesEmDia,
+    obterQuantidadeMensalidadesPendente,
     obterQuantidadeMensalidadesEmAtraso
 }
