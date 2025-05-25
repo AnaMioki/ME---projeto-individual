@@ -2,6 +2,10 @@
     margin-left: 250px;
 } */
 
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+
 .escoteiro {
     margin-left: 80px;
     transition: margin-left 0.3s;
@@ -9,12 +13,13 @@
 }
 
 body {
-    background: url('../assets/backgroundEscoteiro.png') no-repeat center center fixed; 
+    background: url('../assets/backgroundEscoteiro.png') no-repeat center center fixed;
     background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    font-family: Poppins, sans-serif;
 }
 
 
@@ -25,13 +30,26 @@ body {
     width: 800px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 20px;
+    margin-top: -200px;
 }
 
 /* Header */
 .header {
     display: flex;
+    flex-wrap: ;
     align-items: center;
     margin-bottom: 20px;
+}
+
+.info{
+    gap: 0px;
+}
+
+.name{
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    gap: 10px;
 }
 
 .icon {
@@ -43,7 +61,7 @@ body {
     font-size: 30px;
     font-family: Poppins, sans-serif;
     color: #103F2A;
-    margin-top: -20px;
+    /* margin-top: -20px; */
 }
 
 /* Form Fields */
@@ -51,19 +69,73 @@ body {
     margin-bottom: 15px;
 }
 
-label {
+
+#botaoExcluir{
+    margin-top: -80px;
+    padding-left: 320px;
+}
+
+.topo{
+    display: flex;
+    /* justify-content: space-evenly; */
+    margin-top: -80px;
+}
+
+.contentUser{
+    display: flex;
+    gap: 40px;
+}
+.status {
+    margin-top: -10px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    font-size: 14px;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+
+#TitulomesesAnteriores{
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-left: 30px;
+    /* font-size: 15px; */
+}
+
+.moldeMes{
+    display: flex;
+    flex-direction: row;
+    font-size: 13px;
+    padding-left: 30px;
+    gap: 140px;
+    padding: auto;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    /* background-color: #e7c27e; */
+    /* justify-content: space-between; */
+}
+
+.mesAno{
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* label {
     margin-bottom: 5px;
     font-size: 15px;
     color: #103F2A;
-}
+} */
 
-.input {
+/* .input {
     width: 100%;
     padding: 8px;
     border: 1px solid #CCC;
     border-radius: 5px;
     font-size: 14px;
-}
+} */
 
 /* Buttons */
 .buttons {
@@ -81,20 +153,22 @@ label {
     transition: background-color 0.3s;
 }
 
-.btn-cancel {
-    background-color: #F8D7A5;
-    color: #4A5736;
-}
 
-.btn-cancel:hover {
-    background-color: #EAC890;
-}
-
-.btn-submit {
-    background-color: #166c5f;
+.escoteiro button {
+    background-color: #8E44AD;
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
     color: white;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.btn-submit:hover {
-    background-color: #6d8854;
+.escoteiro button:hover {
+    background-color: #651a85;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.288);
+    cursor: pointer;
+}
+
+.moldeNenhum{
+    display: none;
 }

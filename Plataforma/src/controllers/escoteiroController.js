@@ -63,6 +63,8 @@ async function cadastrar(req, res) {
     var nome_responsavel = req.body.responsavel;
     var celular = req.body.celular;
     var vencimentoMensalidade = req.body.vencimentoMensalidade;
+
+    
     var fkUsuario = req.params.fkUsuario;
 
     if (!nome || !registroEscoteiro || !dataNascimento || !celular || !vencimentoMensalidade || !fkUsuario) {

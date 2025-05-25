@@ -28,11 +28,11 @@
                 </li>
                 <li>
                     <img src="./assets/iconEscoteiro.png" alt="" width="30px">
-                    <a href=""><span class="label">Mensalidades</span></a>
+                    <a href="./mensalidades.html"><span class="label">Mensalidades</span></a>
                 </li>
                 <li>
                     <img src="./assets/iconConfig.png" alt="" width="30px">
-                    <a href="./index.html"><span class="label">Configurações</span></a>
+                    <a href="./configuracoes.html"><span class="label">Configurações</span></a>
                 </li>
             </ul>
 
@@ -46,30 +46,65 @@
                 <header class="header">
                     <div class="topo">
                         <a href="./mensalidades.html"> <img src="./assets/iconSeta.png" alt="" width="20px"></a>
-                        <img src="./assets/iconExcluir.png" alt="">
+                       
                     </div>
-                    
+
                     <img src="./assets/iconEscoteiropersona.png" alt="Ícone Escoteiro" width="200px" class="icon">
-                    
-                    <h1 class="title">${escoteiro.nome}</h1>
-                    <img src="./assets/iconEditar.png" alt="">
-                    <div class="contentUser">
-                        <span id="ramo"></span>
-                        <span id="registro"></span>
-                        <span id="celular"></span>
+                    <div class="info">
+                        
                     </div>
+                    <div class="info">
+                        <div class="name">
+                               <h1 class="title">${escoteiro.nome}</h1>
+                    <img src="./assets/iconEditar.png" width="24px">
+                        </div>
+                     
+                    <div class="contentUser">
+                        <span id="ramo">${ramo}</span>
+                        <span id="registro">${22222}</span>
+                        <span id="celular">${11972781117}</span>
+                    </div>
+                    </div>
+                     <img id="botaoExcluir" src="./assets/iconExcluir.png" alt="">
                 </header>
                 <div class="status">
-                    <p></p>
+                    <div class="statusMensalidade">
+                        <p>Status Mensalidade Atual</p>
+                        <span>${10 dias} Em atraso</span>
+                    </div>
                     <div class="dtVencimento">
-                        <p>Data Vencimento</p>
-                        <p>10/05/2025</p>
+                        <p>Data de vencimento</p>
+                        <span>10/05/2025</span>
                     </div>
+                    <!-- <div class="dtPagamento">
+                        <p>Data do pagamento</p>
+                        <span>xx/xx/xxxx</span>
+                    </div> -->
                     <div class="botao">
-                        <button>Dar Baixa</button>
+                        <button>Registrar pagamento em: ${10/04}</button>
                     </div>
-                    <div class="mesesAnteriores">
 
+                </div>
+
+                <hr>
+                <div class="mesesAnteriores">
+                    <p id="TitulomesesAnteriores">Meses Anteriores</p>
+                    <div class="moldeMes">
+                        <div class="mesAno">
+                            <p>Mês/Ano</p>
+                            <span>ssss</span>
+                        </div>
+                        <div class="statusmes">
+                            <p>Status</p>
+                            <span>Em atraso</span>
+                        </div>
+                        <div class="dtPagamento">
+                            <p>Data do pagamento</p>
+                            <span>xx/xx/xxxx</span>
+                        </div>
+                    </div>
+                    <div class="moldeNenhum">
+                        <p>Ainda não há Registros de meses passados...</p>
                     </div>
                 </div>
             </div>
@@ -85,6 +120,6 @@
         barraLateral.classList.toggle("expandido");
     }
 
-    
+
 
 </script>
