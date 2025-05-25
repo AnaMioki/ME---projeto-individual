@@ -1,5 +1,6 @@
 var escoteiroModel = require("../models/escoteiroModel");
 var database = require("../database/config");
+const { format } = require('date-fns');
 
 // function cadastrar(req, res) {
 
@@ -64,7 +65,7 @@ async function cadastrar(req, res) {
     var celular = req.body.celular;
     var vencimentoMensalidade = req.body.vencimentoMensalidade;
 
-    
+
     var fkUsuario = req.params.fkUsuario;
 
     if (!nome || !registroEscoteiro || !dataNascimento || !celular || !vencimentoMensalidade || !fkUsuario) {
@@ -112,7 +113,20 @@ function renderizarEscoteiro(req, res) {
     escoteiroModel.renderizarEscoteiro(fkUsuario)
         .then(function (resultado) {
             if (resultado.length > 0) {
-                res.status(200).json(resultado);
+                const resultadoFormatado = resultado.map(escoteiro => {
+                    return {
+                        ...escoteiro,
+                        // Supondo que o campo seja vencimentoMensalidade e dataNascimento
+                        vencimentoMensalidade: escoteiro.vencimentoMensalidade
+                            ? format(new Date(escoteiro.vencimentoMensalidade), 'dd/MM/yyyy')
+                            : null,
+                        dataNascimento: escoteiro.dataNascimento
+                            ? format(new Date(escoteiro.dataNascimento), 'dd/MM/yyyy')
+                            : null
+                    };
+                });
+                 console.log("Dados depois de formatar:", resultadoFormatado);
+                res.status(200).json(resultadoFormatado);
             } else {
                 console.log(resultado)
                 res.status(200).send("Nenhum escoteiro encontrado. :(")
@@ -149,7 +163,7 @@ function darBaixa(req, res) {
 
 
 async function deletarEscoteiro(req, res) {
-     const registroEscoteiro = req.params.registroEscoteiro;
+    const registroEscoteiro = req.params.registroEscoteiro;
     if (!registroEscoteiro) {
         return res.status(400).json({ erro: 'Registro do escoteiro não fornecido' });
     }
@@ -210,6 +224,6 @@ module.exports = {
     cadastrar,
     renderizarEscoteiro,
     darBaixa,
-    deletarEscoteiro, 
+    deletarEscoteiro,
     buscarEscoteiro
 }

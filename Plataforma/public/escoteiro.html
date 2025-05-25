@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/menuLateral.css">
     <link rel="stylesheet" href="./style/escoteiro.css">
+    <script src="./js/darBaixa.js"></script>
     <title>Scout Ease</title>
 </head>
 
@@ -81,7 +82,7 @@
                         <span>xx/xx/xxxx</span>
                     </div> -->
                     <div class="botao">
-                        <button id="btnPagamento"></button>
+                        <button id="btnPagamento" onclick="darBaixa()"></button>
                     </div>
 
                 </div>
@@ -131,16 +132,20 @@
         }
 
         document.getElementById("nome").textContent = dados.nome;
-        document.getElementById("ramo").textContent = dados.ramoEscoteiro;
+        document.getElementById("ramo").textContent = dados.secaoRamo;
         document.getElementById("registro").textContent = dados.registroEscoteiro;
         // document.getElementById("celular").textContent = dados.celular;
 
         document.getElementById("statusMensalidade").textContent = dados.statusMensalidade || "Sem info";
         document.getElementById("dtVencimento").textContent = dados.vencimentoMensalidade || "Não informada";
 
-        if (dados.dataRegistrarPagamento) {
+        if (dados.statusMensalidade == "em atraso") {
             document.getElementById("btnPagamento").textContent = 
-                `Registrar pagamento em: ${dados.dataRegistrarPagamento}`;
+                `Registrar pagamento de: ${dados.vencimentoMensalidade}`;
+        }else {
+            document.getElementByClass("dtVencimento")
+            document.getElementById("btnPagamento").style.display = "none";
+
         }
 
         // Meses anteriores
