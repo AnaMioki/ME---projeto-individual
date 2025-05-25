@@ -47,26 +47,26 @@
                 <header class="header">
                     <div class="topo">
                         <a href="./mensalidades.html"> <img src="./assets/iconSeta.png" alt="" width="20px"></a>
-                       
+
                     </div>
 
                     <img src="./assets/iconEscoteiropersona.png" alt="Ícone Escoteiro" width="200px" class="icon">
                     <div class="info">
-                        
+
                     </div>
                     <div class="info">
                         <div class="name">
-                               <h1 class="title" id="nome"></h1>
-                    <img src="./assets/iconEditar.png" width="24px">
+                            <h1 class="title" id="nome"></h1>
+                            <img src="./assets/iconEditar.png" width="24px">
                         </div>
-                     
-                    <div class="contentUser">
-                        <span id="ramo"></span>
-                        <span id="registro"></span>
-                        <span id="celular"></span>
+
+                        <div class="contentUser">
+                            <span id="ramo"></span>
+                            <span id="registro"></span>
+                            <span id="celular"></span>
+                        </div>
                     </div>
-                    </div>
-                     <img id="botaoExcluir" src="./assets/iconExcluir.png" alt="">
+                    <img id="botaoExcluir" src="./assets/iconExcluir.png" alt="">
                 </header>
                 <div class="status">
                     <div class="statusMensalidade">
@@ -101,7 +101,7 @@
                         </div>
                         <div class="dtPagamento">
                             <p>Data do pagamento</p>
-                            <span id="dtPagamento"</span>
+                            <span id="dtPagamento" </span>
                         </div>
                     </div>
                     <div class="moldeNenhum">
@@ -122,61 +122,135 @@
     }
 
     window.onload = () => {
-        const dados = JSON.parse(sessionStorage.getItem("DADOS_ESCOTEIRO"));
-        console.log("dados recebidos:", dados)
+        const dadosSessao = JSON.parse(sessionStorage.getItem("DADOS_ESCOTEIRO"));
+        console.log("dados recebidos:", dadosSessao)
 
-        if (!dados) {
+        if (!dadosSessao) {
             alert("Erro ao carregar os dados do escoteiro.");
             window.location.href = "./mensalidades.html";
             return;
         }
 
+
+        // document.getElementById("nome").textContent = dadosSessao.nome;
+        // document.getElementById("ramo").textContent = dadosSessao.secaoRamo;
+        // document.getElementById("registro").textContent = dadosSessao.registroEscoteiro;
+        // // document.getElementById("celular").textContent = dados.celular;
+
+        // document.getElementById("statusMensalidade").textContent = dados.statusMensalidade || "Sem info";
+        // document.getElementById("dtVencimento").textContent = dados.vencimentoMensalidade || "Não informada";
+
+        // if (dadosSessao.statusMensalidade == "em atraso") {
+        //     document.getElementById("btnPagamento").textContent = 
+        //         `Registrar pagamento de: ${dadosSessao.vencimentoMensalidade}`;
+        // }else {
+        //     document.getElementByClass("dtVencimento")
+        //     document.getElementById("btnPagamento").style.display = "none";
+
+        // }
+
+        // // Meses anteriores
+        // const listaMeses = document.getElementById("listaMesesAnteriores");
+        // if (dados.mensalidadesAnteriores && dados.mensalidadesAnteriores.length > 0) {
+        //     listaMeses.innerHTML = "";
+        //     dados.mensalidadesAnteriores.forEach(m => {
+        //         listaMeses.innerHTML += `
+        //             <div class="moldeMes">
+        //                 <div class="mesAno">
+        //                     <p>Mês/Ano</p>
+        //                     <span>${m.mes}/${m.ano}</span>
+        //                 </div>
+        //                 <div class="statusmes">
+        //                     <p>Status</p>
+        //                     <span>${m.status}</span>
+        //                 </div>
+        //                 <div class="dtPagamento">
+        //                     <p>Data do pagamento</p>
+        //                     <span>${m.dataPagamento || "Sem pagamento"}</span>
+        //                 </div>
+        //             </div>
+        //         `;
+        //     });
+        // } else {
+        //     listaMeses.innerHTML = `
+        //         <div class="moldeNenhum">
+        //             <p>Ainda não há Registros de meses passados...</p>
+        //         </div>
+        //     `;
+        // }
+
+        fetch(`/escoteiro/${dadosSessao.registroEscoteiro}`)
+            .then(res => {
+                if (!res.ok) throw new Error("Erro ao buscar dados atualizados");
+                return res.json();
+            })
+            .then(dados => {
+                renderizarEscoteiro(dados);
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Erro ao carregar dados do escoteiro.");
+            });
+
+
+            fetch(`/escoteiro/${registroEscoteiro}/mensalidades`){
+
+            }
+    };
+
+
+    function renderizarEscoteiro(dados) {
         document.getElementById("nome").textContent = dados.nome;
         document.getElementById("ramo").textContent = dados.secaoRamo;
         document.getElementById("registro").textContent = dados.registroEscoteiro;
-        // document.getElementById("celular").textContent = dados.celular;
+        document.getElementById("celular").textContent = dados.celular || "Sem celular informado";
 
         document.getElementById("statusMensalidade").textContent = dados.statusMensalidade || "Sem info";
         document.getElementById("dtVencimento").textContent = dados.vencimentoMensalidade || "Não informada";
 
-        if (dados.statusMensalidade == "em atraso") {
-            document.getElementById("btnPagamento").textContent = 
-                `Registrar pagamento de: ${dados.vencimentoMensalidade}`;
-        }else {
-            document.getElementByClass("dtVencimento")
-            document.getElementById("btnPagamento").style.display = "none";
-
-        }
-
-        // Meses anteriores
-        const listaMeses = document.getElementById("listaMesesAnteriores");
-        if (dados.mensalidadesAnteriores && dados.mensalidadesAnteriores.length > 0) {
-            listaMeses.innerHTML = "";
-            dados.mensalidadesAnteriores.forEach(m => {
-                listaMeses.innerHTML += `
-                    <div class="moldeMes">
-                        <div class="mesAno">
-                            <p>Mês/Ano</p>
-                            <span>${m.mes}/${m.ano}</span>
-                        </div>
-                        <div class="statusmes">
-                            <p>Status</p>
-                            <span>${m.status}</span>
-                        </div>
-                        <div class="dtPagamento">
-                            <p>Data do pagamento</p>
-                            <span>${m.dataPagamento || "Sem pagamento"}</span>
-                        </div>
-                    </div>
-                `;
-            });
+        const botao = document.getElementById("btnPagamento");
+        if (dados.statusMensalidade === "em atraso") {
+            botao.textContent = `Registrar pagamento de: ${dados.vencimentoMensalidade}`;
+            botao.style.display = "inline-block";
+            botao.onclick = () => darBaixa(dados.registroEscoteiro);
         } else {
-            listaMeses.innerHTML = `
-                <div class="moldeNenhum">
-                    <p>Ainda não há Registros de meses passados...</p>
-                </div>
-            `;
+            botao.style.display = "none";
         }
-    };
+    }
+
+
+    function darBaixa(registroEscoteiro) {
+        console.log("acionaram o dar baixa")
+        fetch("/escoteiro/darBaixa", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                registroEscoteiro: registroEscoteiro
+            })
+        })
+            .then(res => {
+                console.log("entrei no fetch")
+                // console.log(body)
+                if (res.ok) {
+                    return res.json().then(data => {
+                        //  console.log("Resposta da API:", data);
+                        alert(`Mensalidade do escoteiro ${registroEscoteiro} atualizada para 'Em dia'.`);
+
+                        window.location.reload();
+                    })
+                } else {
+                    return res.json().then(data => {
+                        throw new Error(data.erro || "Erro ao dar baixa na mensalidade.");
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Erro na requisição de dar baixa: ", error);
+            });
+    }
+
+
 
 </script>

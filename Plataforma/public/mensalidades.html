@@ -293,22 +293,23 @@
             alert(`Mostrar detalhes das mensalidades do escoteiro ${registroEscoteiro}`);
             console.log("abrindo detalhes do escoteiro")
 
-            fetch(`/escoteiro/${registroEscoteiro}`)
-                .then(function (resposta) {
-                    console.log('entrei no fetch mostrarDetalhes')
-                    if (resposta.ok) {
-                        resposta.json().then(function (respostaJson) {
-                            console.log(respostaJson)
+             window.location = "./escoteiro.html";
+            // fetch(`/escoteiro/${registroEscoteiro}`)
+            //     .then(function (resposta) {
+            //         console.log('entrei no fetch mostrarDetalhes')
+            //         if (resposta.ok) {
+            //             resposta.json().then(function (respostaJson) {
+            //                 console.log(respostaJson)
 
-                            window.location = "./escoteiro.html";
-                        });
-                    } else {
-                        console.error("Erro ao obter ver mensalidades.");
-                    }
-                })
-                .catch(function (erro) {
-                    console.error("Erro na requisição de ver mensalidades:", erro);
-                });
+                           
+            //             });
+            //         } else {
+            //             console.error("Erro ao obter ver mensalidades.");
+            //         }
+            //     })
+            //     .catch(function (erro) {
+            //         console.error("Erro na requisição de ver mensalidades:", erro);
+            //     });
         };
 
 
