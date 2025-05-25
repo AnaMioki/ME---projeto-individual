@@ -191,6 +191,7 @@ body {
 
 .inicio button:hover {
     transform: translateY(-2px);
+    cursor: pointer;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.288);
 }
 
@@ -275,6 +276,8 @@ body {
 
   .campoGrafico{
     padding-left: 20px;
+    display: flex;
+    justify-content: space-between;
     /* background-color: #d28d28; */
   }
   .grafico{
@@ -313,11 +316,13 @@ canvas {
 }
 
 .grafico2{
-    height: 210px;
+    height: 300px;
     gap: 30px;
     padding-left: 20px;
 }
-
+.graficoRosca{
+    width: 240px;
+}
 .graficos h3{
     margin-bottom: 20px;
     font-size: 15px;
@@ -328,6 +333,7 @@ canvas {
     /* background-color: #d28d28; */
     padding-left: 30px;
     width: 300px;
+    display: none;
 }
 
 .alerta p{

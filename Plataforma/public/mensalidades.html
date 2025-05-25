@@ -103,8 +103,12 @@
                         </div>
                     </div>
                     <div class="botoes">
-                        <button class="btn-darBaixa" style="display:none" onclick="darBaixa()">Dar Baixa</button>
-                        <button class="btn-verMensalidades">Ver Mensalidades</button>
+                        <button class="btn-darBaixa" style="display:none" onclick="darBaixa()">Registrar
+                            Pagamento</button>
+                        <a href="./escoteiro.html">
+                            <button class="btn-verMensalidades" onclick="mostrarDetalhes(registroEscoteiro)">Ver
+                                Mensalidades</button>
+                        </a>
                         <img src="./assets/iconExcluir.png" alt="" class="excluir-btn" width="20"
                             onclick="deletarEscoteiro()" />
                     </div>
@@ -223,7 +227,7 @@
             escoteiros.forEach(escoteiro => {
                 const clone = molde.cloneNode(true);
                 clone.style.display = "block";
-                clone.removeAttribute("id"); 
+                clone.removeAttribute("id");
 
                 clone.querySelector(".registro").textContent = escoteiro.registroEscoteiro;
                 clone.querySelector(".nome").textContent = escoteiro.nome;
@@ -283,28 +287,30 @@
         }
 
 
-        function mostrarDetalhes(registro) {
-            alert(`Mostrar detalhes das mensalidades do escoteiro ${registro}`);
+        function mostrarDetalhes(registroEscoteiro) {
+            alert(`Mostrar detalhes das mensalidades do escoteiro ${registroEscoteiro}`);
+            console.log("abrindo detalhes do escoteiro")
 
-            fetch (`/escoteiro/${registroEscoteiro}`)
-            .then(function (resposta){
-                console.log('entrei no fetch mostrarDetalhes')
+            fetch(`/escoteiro/${registroEscoteiro}`)
                 .then(function (resposta) {
-                if (resposta.ok) {
-                    resposta.json().then(function (respostaJson) {
-                        console.log(respostaJson)
-                        window.location = "./escoteiro.html";
-                    });
-                } else {
-                    console.error("Erro ao obter valor arrecadado.");
-                }
-            })
-            .catch(function (erro) {
-                console.error("Erro na requisição de valor arrecadado:", erro);
-            });
-        });
+                    console.log('entrei no fetch mostrarDetalhes')
+                    if (resposta.ok) {
+                        resposta.json().then(function (respostaJson) {
+                            console.log(respostaJson)
 
-        }
+                            sessionStorage.setItem("DETALHES_ESCOTEIRO", JSON.stringify(respostaJson));
+                            window.location = "./escoteiro.html";
+                        });
+                    } else {
+                        console.error("Erro ao obter ver mensalidades.");
+                    }
+                })
+                .catch(function (erro) {
+                    console.error("Erro na requisição de ver mensalidades:", erro);
+                });
+        };
+
+
 
 
         async function buscarEscoteiro() {
@@ -331,7 +337,7 @@
 
                 const escoteiros = await response.json();
 
-                
+
                 let html = "<ul>";
                 for (const escoteiro of escoteiros) {
                     html += `<li onclick="mostrarDetalhes('${escoteiro.registroEscoteiro}')">${escoteiro.registroEscoteiro} - ${escoteiro.nome}</li>`;
@@ -399,7 +405,7 @@
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ registroEscoteiro })
+                // body: JSON.stringify({ registroEscoteiro })
             })
                 .then(res => {
                     if (res.ok) {

@@ -41,9 +41,6 @@ body {
     margin-bottom: 20px;
 }
 
-.info{
-    gap: 0px;
-}
 
 .name{
     display: flex;
@@ -97,7 +94,7 @@ body {
 
 
 #TitulomesesAnteriores{
-    display: flex;
+    /* display: flex; */
     margin-top: 20px;
     margin-bottom: 10px;
     padding-left: 30px;
@@ -112,15 +109,11 @@ body {
     gap: 140px;
     padding: auto;
     margin-bottom: 10px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     /* background-color: #e7c27e; */
     /* justify-content: space-between; */
 }
 
-.mesAno{
-    display: flex;
-    flex-direction: column;
-}
 
 
 /* label {

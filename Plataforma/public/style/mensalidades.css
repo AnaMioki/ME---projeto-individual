@@ -238,3 +238,7 @@ input:focus {
 .btn-verMensalidades{
     background-color: #896028;
 }
+
+ a{
+    text-decoration: none;
+}

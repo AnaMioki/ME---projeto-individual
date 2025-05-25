@@ -55,7 +55,7 @@
                     </div>
                     <div class="info">
                         <div class="name">
-                               <h1 class="title">${escoteiro.nome}</h1>
+                               <h1 class="title" id="nome">${escoteiro.nome}</h1>
                     <img src="./assets/iconEditar.png" width="24px">
                         </div>
                      
@@ -120,6 +120,60 @@
         barraLateral.classList.toggle("expandido");
     }
 
+    window.onload = () => {
+        const dados = JSON.parse(sessionStorage.getItem("DETALHES_ESCOTEIRO"));
 
+        if (!dados) {
+            alert("Erro ao carregar os dados do escoteiro.");
+            window.location.href = "./mensalidades.html";
+            return;
+        }
+
+        // Preencher dados básicos
+        document.getElementById("nome").textContent = dados.nome;
+        document.getElementById("ramo").textContent = dados.ramo;
+        document.getElementById("registro").textContent = dados.registro;
+        document.getElementById("celular").textContent = dados.celular;
+
+        // Status atual
+        document.getElementById("statusAtual").textContent = dados.statusAtual || "Sem info";
+        document.getElementById("dataVencimento").textContent = dados.dataVencimento || "Não informada";
+
+        // Botão de pagamento
+        if (dados.dataRegistrarPagamento) {
+            document.getElementById("btnPagamento").textContent =
+                `Registrar pagamento em: ${dados.dataRegistrarPagamento}`;
+        }
+
+        // Meses anteriores
+        const listaMeses = document.getElementById("listaMesesAnteriores");
+        if (dados.mensalidadesAnteriores && dados.mensalidadesAnteriores.length > 0) {
+            listaMeses.innerHTML = "";
+            dados.mensalidadesAnteriores.forEach(m => {
+                listaMeses.innerHTML += `
+                    <div class="moldeMes">
+                        <div class="mesAno">
+                            <p>Mês/Ano</p>
+                            <span>${m.mes}/${m.ano}</span>
+                        </div>
+                        <div class="statusmes">
+                            <p>Status</p>
+                            <span>${m.status}</span>
+                        </div>
+                        <div class="dtPagamento">
+                            <p>Data do pagamento</p>
+                            <span>${m.dataPagamento || "Sem pagamento"}</span>
+                        </div>
+                    </div>
+                `;
+            });
+        } else {
+            listaMeses.innerHTML = `
+                <div class="moldeNenhum">
+                    <p>Ainda não há Registros de meses passados...</p>
+                </div>
+            `;
+        }
+    };
 
 </script>
