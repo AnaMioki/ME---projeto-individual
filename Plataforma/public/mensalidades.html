@@ -245,7 +245,8 @@
 
                 clone.querySelector(".btn-verMensalidades").onclick = () =>{
                     mostrarDetalhes(escoteiro.registroEscoteiro);
-                    sessionStorage.setItem("DADOS_ESCOTEIRO", JSON.stringify(escoteiro));
+                    sessionStorage.setItem("REGISTRO_ESCOTEIRO", escoteiro.registroEscoteiro);
+                    // sessionStorage.setItem("DADOS_ESCOTEIRO", JSON.stringify(escoteiro));
 
                 };
                 

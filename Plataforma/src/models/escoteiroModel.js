@@ -25,7 +25,10 @@ function renderizarEscoteiro(fkUsuario) {
         console.error('fkusuario não foi fornecido!');
         return;
     }
+// eu pego o id de mensalidade mais recente para que eu saiba o status e data de vencimento
+// adicionei os campos de nomeResponsavel e celular
 
+//tirei
     var instrucaoSql = `
       SELECT
         e.registroEscoteiro,
