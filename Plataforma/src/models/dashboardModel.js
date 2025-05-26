@@ -14,7 +14,8 @@ function obterQuantidadeEscoteiros(fkUsuario) {
 function obterValorArrecadado(fkUsuario) {
     console.log("ACESSEI O MENSALIDADE MODEL - função obterValorArrecadado()");
     var instrucaoSql = `
-        SELECT IFNULL(SUM(m.valor), 0) AS valorArrecadado 
+        SELECT 
+            IFNULL(SUM(m.valor), 0) AS valorArrecadado 
         FROM mensalidade m
         JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
         WHERE m.statusMensalidade = 'em dia'
@@ -48,7 +49,7 @@ function obterValorAtrasado(fkUsuario) {
 //     ]);
 // };
 
-function  obterValorPrevisto(fkUsuario){
+function obterValorPrevisto(fkUsuario) {
     console.log("ACESSEI O MENSALIDADE MODEL - função obterValorPrevisto()");
     var instrucaoSql = `
          SELECT 
@@ -67,7 +68,7 @@ function  obterValorPrevisto(fkUsuario){
     return database.executar(instrucaoSql);
 }
 
-function  obterValorPago(fkUsuario){
+function obterValorPago(fkUsuario) {
     var instrucaoSql = `
        SELECT 
             DATE_FORMAT(m.mesReferencia, '%Y-%m') AS mesAno,
@@ -84,7 +85,7 @@ function  obterValorPago(fkUsuario){
     return database.executar(instrucaoSql);
 }
 
-function  obterValorInadimplente(fkUsuario){
+function obterValorInadimplente(fkUsuario) {
     var instrucaoSql = `
        SELECT 
             DATE_FORMAT(m.mesReferencia, '%Y-%m') AS mesAno,
@@ -103,7 +104,7 @@ function  obterValorInadimplente(fkUsuario){
 
 function obterDadosGraficoRosca(fkUsuario) {
     console.log("ACESSEI O MENSALIDADE MODEL - função obterDadosGraficoRosca()");
-    
+
     return Promise.all([
         obterQuantidadeMensalidadesEmDia(fkUsuario),
         obterQuantidadeMensalidadesPendente(fkUsuario),
@@ -118,19 +119,23 @@ function obterQuantidadeMensalidadesEmDia(fkUsuario) {
         FROM mensalidade m
         JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
         WHERE m.statusMensalidade = 'em dia'
+        AND YEAR(m.dataPagamento) = YEAR(CURDATE())
+        AND MONTH(m.dataPagamento) = MONTH(CURDATE())
         AND e.fkUsuario = ${fkUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function obterQuantidadeMensalidadesPendente(fkUsuario){
-     console.log("ACESSEI O MENSALIDADE MODEL - função obterQuantidadeMensalidadesPendente()");
+function obterQuantidadeMensalidadesPendente(fkUsuario) {
+    console.log("ACESSEI O MENSALIDADE MODEL - função obterQuantidadeMensalidadesPendente()");
     var instrucaoSql = `
         SELECT COUNT(*) AS quantidade 
         FROM mensalidade m
         JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
         WHERE m.statusMensalidade = 'pendente'
+        AND YEAR(m.dataPagamento) = YEAR(CURDATE())
+        AND MONTH(m.dataPagamento) = MONTH(CURDATE())
         AND e.fkUsuario = ${fkUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -144,6 +149,8 @@ function obterQuantidadeMensalidadesEmAtraso(fkUsuario) {
         FROM mensalidade m
         JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
         WHERE m.statusMensalidade = 'em atraso'
+        AND YEAR(m.dataPagamento) = YEAR(CURDATE())
+        AND MONTH(m.dataPagamento) = MONTH(CURDATE())
         AND e.fkUsuario = ${fkUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);

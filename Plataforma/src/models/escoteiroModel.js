@@ -84,9 +84,11 @@ function darBaixa(registroEscoteiro) {
 }
 
 function deletarEscoteiro(registroEscoteiro) {
-    const instrucaoSql = `
+    const instrucaoSqlEscoteiro = `
         DELETE FROM escoteiro 
         WHERE registroEscoteiro = '${registroEscoteiro}';
+
+        DELETE FROM mensalidade WHERE fkEscoteiro = ${registroEscoteiro};
     `;
     return database.executar(instrucaoSql);
 }
