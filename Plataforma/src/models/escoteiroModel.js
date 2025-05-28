@@ -4,7 +4,8 @@ async function cadastrar(registroEscoteiro, nome, dataNascimento, secaoEscoteira
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
 
     const mesReferencia = new Date().toISOString().slice(0, 7) + '-01';
-    const diaAtual = new Date().getDate()
+    const diaAtual = new Date()
+    const vencimento = new Date(vencimentoMensalidade);
 
     var instrucaoSqlEscoteiro = `
         INSERT INTO escoteiro VALUES
@@ -13,8 +14,11 @@ async function cadastrar(registroEscoteiro, nome, dataNascimento, secaoEscoteira
     console.log("Executando a instrução SQL: \n" + instrucaoSqlEscoteiro);
     await database.executar(instrucaoSqlEscoteiro);
 
-    const statusMensalidade = diaAtual > vencimentoMensalidade ? 'em atraso' : 'pendente';
+    const statusMensalidade = diaAtual > vencimento ? 'em atraso' : 'pendente';
+    console.log(diaAtual);
 
+    // console.log("Hoje:", diaAtual.toISOString().slice(0, 10), " | Vencimento:", vencimento.toISOString().slice(0, 10));
+    console.log("Status definido:", statusMensalidade);
     var instrucaoSqlMensalidade = `
         INSERT INTO mensalidade (statusMensalidade, fkEscoteiro, mesReferencia)
         VALUES ('${statusMensalidade}', '${registroEscoteiro}', '${mesReferencia}');
@@ -57,8 +61,8 @@ function renderizarEscoteiro(fkUsuario) {
         )
         WHERE e.fkUsuario = ${fkUsuario}
         ORDER BY 
-            CASE WHEN m.statusMensalidade = 'em atraso' THEN 0 ELSE 1 END,
-            e.nome;
+            CASE WHEN m.statusMensalidade = 'em atraso' THEN 0 ELSE 1 END;
+            -- e.nome;
 
             `;
     // ('${registroEscoteiro}', '${nome}', '${secaoEscoteira}', '${vencimentoMensalidade}', '${fkUsuario}' );

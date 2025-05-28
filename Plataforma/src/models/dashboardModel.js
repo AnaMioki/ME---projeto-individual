@@ -19,8 +19,8 @@ function obterValorArrecadado(fkUsuario) {
         FROM mensalidade m
         JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
         WHERE m.statusMensalidade = 'em dia'
-        AND YEAR(m.dataPagamento) = YEAR(CURDATE())
-        AND MONTH(m.dataPagamento) = MONTH(CURDATE())
+        AND YEAR(m.mesReferencia) = YEAR(CURDATE())
+        AND MONTH(m.mesReferencia) = MONTH(CURDATE())
         AND e.fkUsuario = ${fkUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -33,7 +33,7 @@ function obterValorAtrasado(fkUsuario) {
         SELECT IFNULL(SUM(m.valor), 0) AS valorAtrasado 
         FROM mensalidade m
         JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
-        WHERE m.statusMensalidade = 'em atraso'
+        WHERE m.statusMensalidade = 'em atraso' OR m.statusMensalidade = 'pendente'
         AND e.fkUsuario = ${fkUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -89,10 +89,10 @@ function obterValorInadimplente(fkUsuario) {
     var instrucaoSql = `
        SELECT 
             DATE_FORMAT(m.mesReferencia, '%Y-%m') AS mesAno,
-            SUM(m.valor) AS valorNaoPago
+             IFNULL(SUM(m.valor), 0) AS valorNaoPago
         FROM mensalidade m
         JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
-        WHERE m.statusMensalidade = 'em atraso'
+        WHERE m.statusMensalidade = 'em atraso' 
         AND e.fkUsuario = ${fkUsuario}
         GROUP BY mesAno
         ORDER BY mesAno DESC
