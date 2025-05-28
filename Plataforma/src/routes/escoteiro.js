@@ -7,6 +7,10 @@ router.post("/cadastrar/:fkUsuario", function (req, res) {
     escoteiroController.cadastrar(req, res);
 });
 
+router.post("/mensalidades/atualizar", function (req, res) {
+    escoteiroController.atualizar(req, res);
+});
+
 router.get("/mensalidades/:fkUsuario", function (req, res) {
     escoteiroController.renderizarEscoteiro(req, res);
 });
@@ -35,8 +39,8 @@ router.put("/:registroEscoteiro/mensalidades", function (req, res) {
     escoteiroController.carregarMensalidadesEscoteiro(req, res);
 });
 
-router.get("/buscar", function (req, res) {
-    escoteiroController.buscarEscoteiro(req, res);
-});
+// router.get("/buscar", function (req, res) {
+//     escoteiroController.buscarEscoteiro(req, res);
+// });
  
 module.exports = router;

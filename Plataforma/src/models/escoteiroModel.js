@@ -83,30 +83,37 @@ function darBaixa(registroEscoteiro) {
     return database.executar(instrucaoSql);
 }
 
-function deletarEscoteiro(registroEscoteiro) {
-    const instrucaoSqlEscoteiro = `
-        DELETE FROM escoteiro 
-        WHERE registroEscoteiro = '${registroEscoteiro}';
+async function deletarEscoteiro(registroEscoteiro) {
+    console.log("entrei no model")
 
-        DELETE FROM mensalidade WHERE fkEscoteiro = ${registroEscoteiro};
+    const deletarMensalidades = `
+        DELETE FROM mensalidade WHERE fkEscoteiro = '${registroEscoteiro}';
     `;
-    return database.executar(instrucaoSql);
+    await database.executar(deletarMensalidades);
+    const deletarEscoteiro = `
+        DELETE FROM escoteiro WHERE registroEscoteiro = '${registroEscoteiro}';
+    `;
+    return await database.executar(deletarEscoteiro);
+
+    // return database.executar(deletarMensalidades)
+    //     .then(() => database.executar(deletarEscoteiro));
+    // return database.executar(instrucaoSql);
 }
 
-async function buscarEscoteiro(termo) {
-    const instrucaoSql = `
-        SELECT registroEscoteiro, nome
-        FROM escoteiro
-        WHERE registroEscoteiro LIKE '%${termo}%' OR nome LIKE '%${termo}%'
-        ORDER BY nome;
-    `;
-    return await database.executar(instrucaoSql);
-}
+// async function buscarEscoteiro(termo) {
+//     const instrucaoSql = `
+//         SELECT registroEscoteiro, nome
+//         FROM escoteiro
+//         WHERE registroEscoteiro LIKE '%${termo}%' OR nome LIKE '%${termo}%'
+//         ORDER BY nome;
+//     `;
+//     return await database.executar(instrucaoSql);
+// }
 
 module.exports = {
     cadastrar,
     renderizarEscoteiro,
     darBaixa,
     deletarEscoteiro,
-    buscarEscoteiro
+    // buscarEscoteiro
 }

@@ -169,6 +169,7 @@ async function deletarEscoteiro(req, res) {
     }
 
     try {
+        console.log("entrei no controller")
         await escoteiroModel.deletarEscoteiro(registroEscoteiro);
         res.json({ mensagem: "Escoteiro deletado com sucesso" });
     } catch (error) {

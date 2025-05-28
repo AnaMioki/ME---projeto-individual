@@ -119,8 +119,8 @@ function obterQuantidadeMensalidadesEmDia(fkUsuario) {
         FROM mensalidade m
         JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
         WHERE m.statusMensalidade = 'em dia'
-        AND YEAR(m.dataPagamento) = YEAR(CURDATE())
-        AND MONTH(m.dataPagamento) = MONTH(CURDATE())
+        AND YEAR(m.mesReferencia) = YEAR(CURDATE())
+        AND MONTH(m.mesReferencia) = MONTH(CURDATE())
         AND e.fkUsuario = ${fkUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -134,8 +134,8 @@ function obterQuantidadeMensalidadesPendente(fkUsuario) {
         FROM mensalidade m
         JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
         WHERE m.statusMensalidade = 'pendente'
-        AND YEAR(m.dataPagamento) = YEAR(CURDATE())
-        AND MONTH(m.dataPagamento) = MONTH(CURDATE())
+        AND YEAR(m.mesReferencia) = YEAR(CURDATE())
+        AND MONTH(m.mesReferencia) = MONTH(CURDATE())
         AND e.fkUsuario = ${fkUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -149,8 +149,8 @@ function obterQuantidadeMensalidadesEmAtraso(fkUsuario) {
         FROM mensalidade m
         JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
         WHERE m.statusMensalidade = 'em atraso'
-        AND YEAR(m.dataPagamento) = YEAR(CURDATE())
-        AND MONTH(m.dataPagamento) = MONTH(CURDATE())
+        AND YEAR(m.mesReferencia) = YEAR(CURDATE())
+        AND MONTH(m.mesReferencia) = MONTH(CURDATE())
         AND e.fkUsuario = ${fkUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);

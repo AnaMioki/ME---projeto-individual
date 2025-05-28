@@ -55,7 +55,7 @@ async function obterDadosGraficoLinha(req, res) {
             dashboardModel.obterValorPago(fkUsuario),
             dashboardModel.obterValorInadimplente(fkUsuario)
         ]);
-         console.log("✅ Controller: dados obtidos com sucesso");
+         console.log(" Controller: dados obtidos com sucesso");
          console.log("valor previsto", previsto);
          console.log("valor pago", pago);
          console.log("valor inadimplente",  faltando  )
