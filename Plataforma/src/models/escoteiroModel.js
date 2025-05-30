@@ -87,6 +87,36 @@ function darBaixa(registroEscoteiro) {
     return database.executar(instrucaoSql);
 }
 
+async function carregarDadosEscoteiro(registroEscoteiro) {
+    console.log("entrei em carregar Dados Escoteiro do escoteiro")
+    const instrucaoSql = `
+           SELECT * from
+            JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
+            SET m.statusMensalidade = 'em dia',
+                m.dataPagamento = CURRENT_DATE()
+            WHERE m.fkEscoteiro = '${registroEscoteiro}'
+            AND MONTH(e.vencimentoMensalidade) = MONTH(CURRENT_DATE())
+            AND YEAR(e.vencimentoMensalidade) = YEAR(CURRENT_DATE());
+        `;
+    console.log("Executando SQL:", instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+// adicionar o comando
+async function carregarMensalidadesEscoteiro(registroEscoteiro) {
+    console.log("entrei em carregarMensalidades do escoteiro")
+    const instrucaoSql = `
+           SELECT * from
+            JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
+            SET m.statusMensalidade = 'em dia',
+                m.dataPagamento = CURRENT_DATE()
+            WHERE m.fkEscoteiro = '${registroEscoteiro}'
+            AND MONTH(e.vencimentoMensalidade) = MONTH(CURRENT_DATE())
+            AND YEAR(e.vencimentoMensalidade) = YEAR(CURRENT_DATE());
+        `;
+    console.log("Executando SQL:", instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 async function deletarEscoteiro(registroEscoteiro) {
     console.log("entrei no model")
 

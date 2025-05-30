@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style/mensalidades.css" />
     <link rel="stylesheet" href="./style/menuLateral.css" />
     <title>Scout Ease</title>
@@ -156,7 +156,7 @@
             // renderizarEscoteiros(escoteirosTeste);
             const nomeUsuario = sessionStorage.getItem("NOME_USUARIO"); //FUNCIONA?
             document.querySelector('.boasVindas p').textContent = `Boas-vindas, ${nomeUsuario}`;
-
+            // atualizarData();
 
             if (!fkUsuario) {
                 alert("Usuário não logado.");
@@ -217,6 +217,23 @@
                 });
         }
 
+        // colocar função pra atualizar a variavel da data pra todo dia
+        // se a variavel de mes for maior que o mesReferencia das mensalidades
+
+        // ele vai dar um insert de uma nova mensalidade para esse mês
+
+        // se o dia atual for maior que o mês de referencia trocar para status "em atraso"
+
+        // function atualizarData(){
+        //     var dataAtual = getDate();
+
+        //     // adicionar mais mensalidades 
+        //     fetch(`escoteiro/mensalidades/atualizar/${fkUsuario}`)
+
+        //     .then(res =>{
+        //         console.log("entrei no fetch atualizarData")
+        //     })
+        // };
 
         function renderizarEscoteiros(escoteiros) {
             const lista = document.getElementById("listaEscoteiros");

@@ -33,7 +33,7 @@ function obterValorAtrasado(fkUsuario) {
         SELECT IFNULL(SUM(m.valor), 0) AS valorAtrasado 
         FROM mensalidade m
         JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
-        WHERE m.statusMensalidade = 'em atraso' OR m.statusMensalidade = 'pendente'
+        WHERE m.statusMensalidade = 'em atraso' -- OR m.statusMensalidade = 'pendente'
         AND e.fkUsuario = ${fkUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
