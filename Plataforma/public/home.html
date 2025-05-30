@@ -11,6 +11,7 @@
 </head>
 <!-- ajustar grafico de rosca, tirar notificação, diminuit tamanho dos inputs
  deixar mais intutit=vo no cadastro mrs, botar uma fucking seta pra voltar -->
+
 <body>
     <section class="pagina">
         <div class="sidebar" id="sidebar">
@@ -28,20 +29,26 @@
                     <img src="./assets/iconHome.png" alt="" width="30px">
                     <a href="./home.html"><span class="label">Inicio | Dashboards</span></a>
                 </li>
-                <li>
-                    <img src="./assets/iconEscoteiro.png" alt="" width="30px">
-                    <a href="./mensalidades.html"><span class="label">Mensalidades</span></a>
-                </li>
-                <li>
+                <a href="./mensalidades.html">
+                    <div>
+                        <li>
+                        <img src="./assets/iconEscoteiro.png" alt="" width="30px">
+                        <a href="./mensalidades.html"><span class="label">Mensalidades</span></a>
+                    </li>
+                    </div>
+                </a>
+                <!-- <li>
                     <img src="./assets/iconConfig.png" alt="" width="30px">
                     <a href="./configuracoes.html"><span class="label">Configurações</span></a>
-                </li>
+                </li> -->
             </ul>
+            <a href="./index.html">
+                <div class="botao-sair">
+                    <img src="./assets/iconSair.png" alt="" width="30px">
+                    <a href="./index.html"><span class="label">Sair</span></a>
+                </div>
+            </a>
 
-            <div class="botao-sair">
-                <img src="./assets/iconSair.png" alt="" width="30px">
-                <a href="./index.html"><span class="label">Sair</span></a>
-            </div>
         </div>
 
         <!-- pagina de fato -->
@@ -54,8 +61,8 @@
                 <h1>Dashboards</h1>
                 <div class="botoesGestao">
                     <a href="./adicionarEscoteiro.html">
-                        <button class="botaoEscoteiro"><img src="./assets/iconAdd.png" alt="./adicionarEscoteiro.html" width="20px"
-                                height="20px">Adicionar Escoteiro</button>
+                        <button class="botaoEscoteiro"><img src="./assets/iconAdd.png" alt="./adicionarEscoteiro.html"
+                                width="20px" height="20px">Adicionar Escoteiro</button>
                     </a>
                     <a href="./mensalidades.html">
                         <button class="botaoMensalidade"><img src="./assets/iconDindin.png" alt="" width="20px">Lançar
@@ -115,10 +122,10 @@
                         </div>
                     </div>
 
-                    <div class="alerta">
+                    <!-- <div class="alerta">
                         <h3>Notificações:</h3>
                         <p id="alerta"></p>
-                    </div>
+                    </div> -->
 
                 </div>
 
@@ -134,7 +141,7 @@
     const ctx = document.getElementById('myChart');
     const graficoRosca = document.getElementById('myChartRosca');
 
-    
+
 </script>
 
 
@@ -167,7 +174,7 @@
 
     }
 
-   
+
 
     function obterQuantidadeEscoteiros() {
         console.log('entrei na funcao de qntd escot')
@@ -313,14 +320,14 @@
                         // if (myChartRosca) {
                         //     myChartRosca.destroy();
                         // }
-                         console.log(respostaJson);
+                        console.log(respostaJson);
                         graficoRosca = new Chart(graficoRosca, {
                             type: "doughnut",
                             data: {
-                                labels: ["Em dia", "Pendentes" ,"Em atraso"],
+                                labels: ["Em dia", "Pendentes", "Em atraso"],
                                 datasets: [{
-                                    data: [respostaJson.emDia, respostaJson.pendente ,respostaJson.emAtraso],
-                                    backgroundColor: ['#10b981', '#FCB218' ,'rgb(255, 99, 132)']
+                                    data: [respostaJson.emDia, respostaJson.pendente, respostaJson.emAtraso],
+                                    backgroundColor: ['#10b981', '#FCB218', 'rgb(255, 99, 132)']
                                 }]
                             },
                             options: {

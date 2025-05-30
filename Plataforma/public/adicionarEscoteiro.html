@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=9.0">
     <link rel="stylesheet" href="./style/menuLateral.css">
     <link rel="stylesheet" href="./style/adicionarEscoteiro.css">
+    <link rel="shortcut icon" href="./assets/logo.png" type="image/x-icon" width="200px">
     <title>Scout Ease</title>
 </head>
 
@@ -23,18 +24,27 @@
             </button>
 
             <ul class="menu-opcoes">
-                <li>
-                    <img src="./assets/iconHome.png" alt="" width="30px">
-                    <a href="./home.html"><span class="label">Inicio | Dashboards</span></a>
-                </li>
-                <li>
+                <a href="./home.html">
+                    <div>
+                        <li>
+                            <img src="./assets/iconHome.png" alt="" width="30px">
+                            <a href="./home.html"><span class="label">Inicio | Dashboards</span></a>
+                        </li>
+                    </div>
+                </a>
+                <a href="./mensalidades.html">
+                    <div>
+                        <li>
                     <img src="./assets/iconEscoteiro.png" alt="" width="30px">
                     <a href="./mensalidades.html"><span class="label">Mensalidades</span></a>
                 </li>
-                <li>
+                    </div>
+                </a>
+                
+                <!-- <li>
                     <img src="./assets/iconConfig.png" alt="" width="30px">
                     <a href="./configuracoes.html"><span class="label">Configurações</span></a>
-                </li>
+                </li> -->
             </ul>
 
             <div class="botao-sair">
@@ -76,7 +86,7 @@
                             placeholder="Digite somente os números">
                     </div>
                     <div class="field">
-                        <label for="mensalidade">Vencimento da Mensalidade *coloque o mês e ano atuais</label>
+                        <label for="mensalidade">Vencimento da Mensalidade *coloque o ano atual</label>
                         <input type="date" id="mensalidade" name="mensalidade" class="input" required>
                     </div>
                     <div class="buttons">

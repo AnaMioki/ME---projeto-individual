@@ -3,6 +3,7 @@
 
 *{
     font-family: Poppins, sans-serif;
+    width: 100%vh;
 }
 
 body {
@@ -162,25 +163,26 @@ body {
 .boasVindas {
     display: flex;
     justify-content: end;
-    font-size: 15px;
+    font-size: 12px;
     margin-top: -10px; 
 }
 
 .inicio {
     display: flex;
     justify-content: space-between;
+    margin-top: -5px; 
 }
 
 .inicio h1 {
     font-size: 30px;
     padding-left: 30px;
     color: #033D2F;
-    margin-top: -8px; 
+    margin-top: -18px; 
 }
 
 .inicio button {
     padding: 6px;
-    font-size: 15px;
+    font-size: 12px;
     font-family: Poppins, sans-serif;
     border-radius: 5px;
     border: none;
@@ -258,7 +260,7 @@ body {
     margin-top: -20px;
     display: flex;
     justify-content: center; /* Centraliza horizontalmente */
-    align-items: end; /* Centraliza verticalmente */
+    align-items: end; 
     height: 100%; 
   }
 

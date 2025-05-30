@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style/mensalidades.css" />
     <link rel="stylesheet" href="./style/menuLateral.css" />
+    <link rel="shortcut icon" href="./assets/logo.png" type="image/x-icon" width="200px">
     <title>Scout Ease</title>
 </head>
 
@@ -22,24 +23,39 @@
             </button>
 
             <ul class="menu-opcoes">
-                <li>
-                    <img src="./assets/iconHome.png" alt="" width="30" />
-                    <a href="./home.html"><span class="label">Inicio | Dashboards</span></a>
-                </li>
-                <li>
+                <a href="./home.html">
+                    <div>
+                        <li>
+                            <img src="./assets/iconHome.png" alt="" width="30" />
+                            <a href="./home.html"><span class="label">Inicio | Dashboards</span></a>
+                        </li>
+                    </div>
+                </a>
+                 <a href="./mensalidades.html">
+                    <div>
+                        <li>
+                        <img src="./assets/iconEscoteiro.png" alt="" width="30px">
+                        <a href="./mensalidades.html"><span class="label">Mensalidades</span></a>
+                    </li>
+                    </div>
+                </a>
+
+                <!-- <li>
                     <img src="./assets/iconEscoteiro.png" alt="" width="30" />
                     <a href="./mensalidades.html"><span class="label">Mensalidades</span></a>
-                </li>
-                <li>
+                </li> -->
+                <!-- <li>
                     <img src="./assets/iconConfig.png" alt="" width="30" />
                     <a href="./configuracoes.html"><span class="label">Configurações</span></a>
-                </li>
+                </li> -->
             </ul>
+            <a href="./index.html">
+                <div class="botao-sair">
+                    <img src="./assets/iconSair.png" alt="" width="30" />
+                    <a href="./index.html"><span class="label">Sair</span></a>
+                </div>
+            </a>
 
-            <div class="botao-sair">
-                <img src="./assets/iconSair.png" alt="" width="30" />
-                <a href="./index.html"><span class="label">Sair</span></a>
-            </div>
         </div>
     </section>
 
@@ -58,12 +74,12 @@
                     </button>
                 </a>
 
-                <button class="botaoMensalidade">
+                <!-- <button class="botaoMensalidade">
                     <img src="./assets/iconDindin.png" alt="" width="20" />Registrar pagamentos
-                </button>
+                </button> -->
             </div>
 
-            <div class="pesquisa">
+            <div id="pesquisaComponente" class="pesquisa">
                 <label>Buscar Escoteiro</label>
                 <div class="inputBusca">
                     <input type="text" id="input_escoteiro" placeholder="Digite por nome ou registro" />
@@ -71,7 +87,7 @@
                 </div>
             </div>
 
-            <div class="filtroDiv">
+            <div id="filtroComponente" class="filtroDiv">
                 <span>Filtrar</span>
                 <img src="./assets/iconFiltrar.png" alt="" width="20" id="filtrar-btn" class="filtrar-btn" />
                 <select id="filtro" class="filtro" style="display: none;">
@@ -106,7 +122,7 @@
                         <button class="btn-darBaixa" style="display:none" onclick="darBaixa()">Registrar
                             Pagamento</button>
                         <a href="./escoteiro.html">
-                            <button class="btn-verMensalidades" onclick="mostrarDetalhes(registroEscoteiro)">Ver
+                            <button id="mensalidade"class="btn-verMensalidades" onclick="mostrarDetalhes(registroEscoteiro)">Ver
                                 Mensalidades</button>
                         </a>
                         <img src="./assets/iconExcluir.png" alt="" class="excluir-btn" width="20"
@@ -191,6 +207,10 @@
                     } else {
                         document.getElementById("mensagem").style.display = "none";
                         document.getElementById("listaEscoteiros").style.display = "block";
+                        document.getElementById("mensalidade").style.display = "none";
+                        document.getElementById("filtroComponente").style.display = "none";
+                        document.getElementById("pesquisaComponente").style.display = "none";
+
                         renderizarEscoteiros(dados);
                     }
                 })
@@ -253,20 +273,20 @@
                 clone.querySelector(".vencimento").textContent = escoteiro.vencimentoMensalidade || "";
 
                 const btnDarBaixa = clone.querySelector(".btn-darBaixa");
-                if (escoteiro.statusMensalidade === "em atraso" || escoteiro.statusMensalidade === "pendente" ) {
+                if (escoteiro.statusMensalidade === "em atraso" || escoteiro.statusMensalidade === "pendente") {
                     btnDarBaixa.style.display = "inline-block";
                     btnDarBaixa.onclick = () => darBaixa(escoteiro.registroEscoteiro);
                 } else {
                     btnDarBaixa.style.display = "none";
                 }
 
-                clone.querySelector(".btn-verMensalidades").onclick = () =>{
+                clone.querySelector(".btn-verMensalidades").onclick = () => {
                     mostrarDetalhes(escoteiro.registroEscoteiro);
                     sessionStorage.setItem("REGISTRO_ESCOTEIRO", escoteiro.registroEscoteiro);
                     // sessionStorage.setItem("DADOS_ESCOTEIRO", JSON.stringify(escoteiro));
 
                 };
-                
+
                 clone.querySelector(".excluir-btn").onclick = () =>
                     deletarEscoteiro(escoteiro.registroEscoteiro);
 
@@ -311,7 +331,7 @@
             alert(`Mostrar detalhes das mensalidades do escoteiro ${registroEscoteiro}`);
             console.log("abrindo detalhes do escoteiro")
 
-             window.location = "./escoteiro.html";
+            window.location = "./escoteiro.html";
             // fetch(`/escoteiro/${registroEscoteiro}`)
             //     .then(function (resposta) {
             //         console.log('entrei no fetch mostrarDetalhes')
@@ -319,7 +339,7 @@
             //             resposta.json().then(function (respostaJson) {
             //                 console.log(respostaJson)
 
-                           
+
             //             });
             //         } else {
             //             console.error("Erro ao obter ver mensalidades.");

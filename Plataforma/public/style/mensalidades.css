@@ -22,15 +22,18 @@ h1 {
     font-size: 30px;
     padding-left: 30px;
     color: #033D2F;
-    margin-top: -8px;
+    margin-top: -30px;
 }
 
+.btn-verMensalidades{
+    display:none
+}
 .EscoteirosMensalidades button {
     padding: 6px;
     font-size: 13px;
     font-family: Poppins, sans-serif;
     border-radius: 5px;
-    margin-top: 10px;
+    margin-top: 0px;
     border: none;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
     color: white;
