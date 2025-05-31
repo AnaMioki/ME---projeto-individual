@@ -71,10 +71,17 @@
                         <input type="text" id="registro" name="registro" class="input" required
                             placeholder="Digite somente os números">
                     </div>
-                    <div class="field">
+                    <div class="datas">
+                        <div class="field">
                         <label for="nascimento">Data de Nascimento</label>
                         <input type="date" id="nascimento" name="nascimento" class="input" required>
                     </div>
+                     <div class="field">
+                        <label for="mensalidade">Vencimento da Mensalidade *coloque o ano atual</label>
+                        <input type="date" id="mensalidade" name="mensalidade" class="input" required>
+                    </div>
+                    </div>
+                    
                     <div class="field">
                         <label for="responsavel">Responsável *caso for menor de idade</label>
                         <input type="text" id="responsavel" name="responsavel" class="input"
@@ -85,10 +92,7 @@
                         <input type="tel" id="celular" name="celular" class="input" required
                             placeholder="Digite somente os números">
                     </div>
-                    <div class="field">
-                        <label for="mensalidade">Vencimento da Mensalidade *coloque o ano atual</label>
-                        <input type="date" id="mensalidade" name="mensalidade" class="input" required>
-                    </div>
+                   
                     <div class="buttons">
                         <a href="./mensalidades.html"><button type="button" class="btn btn-cancel">Cancelar</button></a>
                         <button type="button" class="btn btn-submit" onclick="cadastrarEscoteiro()">Enviar</button>

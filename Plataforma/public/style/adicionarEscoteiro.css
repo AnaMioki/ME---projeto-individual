@@ -25,7 +25,7 @@ body {
 .card {
     background-color: #ECCF97;
     border-radius: 10px;
-    width: 800px;
+    width: 750px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 20px;
 }
@@ -61,13 +61,26 @@ label {
 }
 
 .input {
-    width: 100%;
+     width: 100%; 
+    /* width: 400px; */
     padding: 8px;
     border: 1px solid #CCC;
     border-radius: 5px;
     font-size: 14px;
+      display: flex;
+    flexx-direction: column;
 }
 
+.datas{
+    display: flex;
+    gap: 30px;
+}
+
+.datas .input{
+    display: flex;
+    flexx-direction: column;
+    width: 200px;
+}
 /* Buttons */
 .buttons {
     display: flex;

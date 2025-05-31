@@ -3,13 +3,15 @@
 
 *{
     font-family: Poppins, sans-serif;
-    width: 100%vh;
+    /* width: 100%vh;  */
 }
 
 body {
     margin: 0;
     font-family: Poppins, sans-serif;
-    background-color: #F1DBAE;
+    background-color:rgb(255, 231, 184); 
+    /* background-color: #F1DBAE;  */
+    /* background-color: #fffafa; */
     padding: 0;
 }
 
@@ -226,7 +228,8 @@ body {
     padding: 0px 0px 0 20px;
 }
 .card{
-    background-color: #FFFBEA;
+    /* background-color: #FFFBEA; */
+    background-color: white;
     border-radius: 20px;
     padding: 20px;
     width: 300px;
@@ -284,26 +287,32 @@ body {
   }
   .grafico{
     background-color: white;
-    width: 500px;
+    width: 550px;
+    padding-left: 40px;
     border-radius: 10px;
   }
   
-  .graficos{
+  /* .graficos{
     display: flex;
-  }
+  } */
   .graficoRosca{
-    width: 210px;
+    width: 300px;
     background-color: white;
     border-radius: 10px;
   }
 
   .graficos {
+   padding-left: 60px;
+    width: auto;
+    gap: 50px;
     display: flex;
-    justify-content: start;
-    gap: 20px; 
+    justify-content: start; 
     flex-wrap: wrap;
 }
 
+.grafico1{
+    width: 600px;
+}
 .grafico,
 .graficoRosca {
     background-color: white;
@@ -318,15 +327,15 @@ canvas {
 }
 
 .grafico2{
-    height: 300px;
+    width: 400px;
     gap: 30px;
-    padding-left: 20px;
+    padding-left: -70px; 
 }
 .graficoRosca{
-    width: 240px;
+    width: 270px;
 }
 .graficos h3{
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 15px;
     color: #221006
 }
