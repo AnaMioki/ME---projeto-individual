@@ -69,7 +69,7 @@ async function cadastrar(req, res) {
     var fkUsuario = req.params.fkUsuario;
 
     if (!nome || !registroEscoteiro || !dataNascimento || !celular || !vencimentoMensalidade || !fkUsuario) {
-        return res.status(400).send("Preencha todos os campos obrigatórios!");
+        return res.status(400).send({erro: "Preencha todos os campos obrigatórios!"});
     }
 
     try {
@@ -107,7 +107,7 @@ function renderizarEscoteiro(req, res) {
     console.log("fkUsuario recebido:", fkUsuario)
 
     if (!fkUsuario) {
-        return res.status(400).send("Parâmetro fkUsuario ausente!");
+        return res.status(400).send({erro:"Parâmetro fkUsuario ausente!"});
     }
 
     escoteiroModel.renderizarEscoteiro(fkUsuario)
@@ -129,7 +129,7 @@ function renderizarEscoteiro(req, res) {
                 res.status(200).json(resultadoFormatado);
             } else {
                 console.log(resultado)
-                res.status(200).send("Nenhum escoteiro encontrado. :(")
+                res.status(200).send({mensagem: "Nenhum escoteiro encontrado. :("})
             }
         })
 

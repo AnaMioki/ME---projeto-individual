@@ -80,9 +80,9 @@ async function darBaixa(registroEscoteiro) {
             SELECT idMensalidade
             FROM mensalidade
             WHERE fkEscoteiro = '${registroEscoteiro}'
-              AND statusMensalidade = 'em atraso'
+              AND (statusMensalidade = 'pendente' OR statusMensalidade = 'em atraso')
             ORDER BY mesReferencia ASC
-            LIMIT 1
+            LIMIT 1 
         ) AS maisAntiga ON m.idMensalidade = maisAntiga.idMensalidade
         SET m.statusMensalidade = 'em dia',
             m.dataPagamento = CURRENT_DATE();`;

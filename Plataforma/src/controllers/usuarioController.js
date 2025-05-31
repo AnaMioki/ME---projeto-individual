@@ -36,9 +36,9 @@ function entrar(req, res) {
                         //         }
                         //     })
                     } else if (resultadoEntrar.length == 0) {
-                        res.status(403).send("Email e/ou senha inválido(s)");
+                        res.status(403).send({erro: "Email e/ou senha inválido(s)"});
                     } else {
-                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                        res.status(403).send({erro:"Mais de um usuário com o mesmo login e senha!"});
                     }
                 })
 
