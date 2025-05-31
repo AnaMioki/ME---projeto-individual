@@ -6,7 +6,6 @@
 comandos para mysql server
 histórico do meu banco de dados
 */
-
 CREATE DATABASE ScoutEase;
 
 USE ScoutEase;
@@ -37,6 +36,7 @@ REFERENCES usuario(idUsuario)
 ON DELETE CASCADE
 );
 
+
 CREATE TABLE mensalidade
 (idMensalidade INT PRIMARY KEY AUTO_INCREMENT,
 valor DECIMAL(10,2),
@@ -63,6 +63,19 @@ DROP INDEX unico_mes_por_escoteiro;  -- caso exista essa restrição antiga
 
 ALTER TABLE mensalidade
 ADD UNIQUE KEY unico_mes_por_escoteiro (fkEscoteiro, mesReferencia);
+
+SELECT
+  CONSTRAINT_NAME,
+  TABLE_NAME,
+  COLUMN_NAME,
+  REFERENCED_TABLE_NAME,
+  REFERENCED_COLUMN_NAME
+FROM
+  information_schema.KEY_COLUMN_USAGE
+WHERE
+  TABLE_SCHEMA = 'ScoutEase' -- nome do seu banco
+  AND TABLE_NAME = 'mensalidade'
+  AND COLUMN_NAME = 'fkEscoteiro';
 
 
 
@@ -172,7 +185,7 @@ SELECT idMensalidade, mesReferencia FROM mensalidade ORDER BY idMensalidade DESC
 UPDATE mensalidade
 SET mesReferencia = DATE_FORMAT(CURDATE(), '%Y-%m-01');
 
--- adicao de meses passados
+-- simulando meses passados
 INSERT INTO mensalidade (statusMensalidade, fkEscoteiro, mesReferencia, valor)
 VALUES
 ('em atraso', '78965436', '2025-03-01', 25.00),
@@ -219,11 +232,11 @@ select * from mensalidade where fkEscoteiro = "23232323";
 select * from escoteiro where registroEscoteiro = "23232323";
 select * from escoteiro where registroEscoteiro = "12643527";
 select * from mensalidade where fkEscoteiro = "12643527";
-
+select * from escoteiro;
 
 
 select * from mensalidade where fkEscoteiro = "26547890";
-delete from escoteiro where registroEscoteiro = "26547890";
+
 
 INSERT INTO escoteiro (
     registroEscoteiro, nome, dataNasc, secaoRamo, nomeResponsavel,
@@ -233,12 +246,85 @@ INSERT INTO escoteiro (
     '11912345678', '2024-12-10', 1
 );
 
+INSERT INTO escoteiro (
+    registroEscoteiro, nome, dataNasc, secaoRamo, nomeResponsavel,
+    celular, vencimentoMensalidade, fkUsuario
+) VALUES (
+    '26547891', 'Escoteiro Teste2', '2010-05-15', 'sênior', 'Responsável Teste',
+    '11912345679', '2024-12-10', 1
+);
 INSERT INTO mensalidade (valor, dataPagamento, statusMensalidade, fkEscoteiro, mesReferencia)
 VALUES 
-(25.00, NULL, 'em atraso', '26547890', '2024-12-01'),
-(25.00, NULL, 'em atraso', '26547890', '2025-01-01'),
-(25.00, NULL, 'em atraso', '26547890', '2025-02-01'),
-(25.00, NULL, 'em atraso', '26547890', '2025-03-01'),
-(25.00, NULL, 'em atraso', '26547890', '2025-04-01'),
-(50.00, NULL, 'em atraso', '26547890', '2025-05-01');
+(25.00, NULL, 'em atraso', '26547891', '2024-12-01'),
+(25.00, NULL, 'em atraso', '26547891', '2025-01-01'),
+(25.00, NULL, 'em atraso', '26547891', '2025-02-01'),
+(25.00, NULL, 'em atraso', '26547891', '2025-03-01'),
+(25.00, NULL, 'em atraso', '26547891', '2025-04-01'),
+(50.00, NULL, 'em atraso', '26547891', '2025-05-01');
 
+        UPDATE mensalidade m
+        JOIN (
+            SELECT idMensalidade
+            FROM mensalidade
+            WHERE fkEscoteiro = '26547891'
+              AND statusMensalidade = 'em atraso'
+            ORDER BY mesReferencia ASC
+            LIMIT 1
+        ) AS maisAntiga ON m.idMensalidade = maisAntiga.idMensalidade
+        SET m.statusMensalidade = 'em dia',
+            m.dataPagamento = CURRENT_DATE();
+            
+
+/*UPDATE escoteiro e
+JOIN (
+    SELECT fkEscoteiro, mesReferencia
+    FROM mensalidade
+    WHERE statusMensalidade = 'em atraso'
+      AND fkEscoteiro = '26547891'
+    ORDER BY mesReferencia ASC
+    LIMIT 1
+) AS m ON e.registroEscoteiro = m.fkEscoteiro
+SET e.vencimentoMensalidade = STR_TO_DATE(
+    CONCAT(DATE_FORMAT(m.mesReferencia, '%Y-%m-'), DATE_FORMAT(e.vencimentoMensalidade, '%d')),
+    '%Y-%m-%d'
+);*/
+
+
+-- como eu preciso atualizar para a próxima data de vencimento e não para o mês que foi pago, vou adicionar 1
+ UPDATE escoteiro e
+        JOIN (
+            SELECT DATE_ADD(mesReferencia, INTERVAL 1 MONTH) AS proximoMes -- mesReferencia
+            FROM mensalidade
+            WHERE fkEscoteiro =  '26547891'
+              AND statusMensalidade = 'em dia'
+            ORDER BY mesReferencia DESC
+            LIMIT 1
+        ) AS m
+        ON e.registroEscoteiro =  '89343212'
+        SET e.vencimentoMensalidade = STR_TO_DATE(
+            CONCAT(DATE_FORMAT(m.proximoMes, '%Y-%m-'), DATE_FORMAT(e.vencimentoMensalidade, '%d')),
+            '%Y-%m-%d'
+        );
+
+select * from mensalidade where fkEscoteiro = "12378623";
+update mensalidade set valor = 25 where idMensalidade = 95;
+select * from escoteiro where registroEscoteiro = "26547890";
+
+select * from mensalidade where mesReferencia = '2025-04-01';
+
+select * from mensalidade where statusMensalidade = "em atraso";
+
+ SELECT 
+            DATE_FORMAT(m.mesReferencia, '%Y-%m') AS mesAno,
+             IFNULL(SUM(m.valor), 0) AS valorNaoPago
+        FROM mensalidade m
+        JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
+        WHERE m.statusMensalidade = 'em atraso' 
+        AND e.fkUsuario = 1
+        GROUP BY mesAno
+        ORDER BY mesAno DESC
+        LIMIT 6;
+
+-- nao tá retornando nada
+SELECT * FROM mensalidade
+WHERE mesReferencia = '2024-12-01' AND statusMensalidade = 'em atraso';

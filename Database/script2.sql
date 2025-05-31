@@ -6,9 +6,6 @@ select * from usuario;
 select * from escoteiro;
 select * from mensalidade;
 
-delete from escoteiro where id= "1234567";
-
-
 CREATE TABLE usuario
 (idUsuario INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(45) NOT NULL,
@@ -49,12 +46,42 @@ MODIFY valor DECIMAL(10,2) DEFAULT 25.0;
 UPDATE mensalidade
 SET valor = 25.0;
 
+ALTER TABLE mensalidade
+ADD COLUMN mesReferencia VARCHAR(10);
+
+ALTER TABLE mensalidade
+DROP INDEX unico_mes_por_escoteiro;  -- caso exista essa restrição antiga
+
+ALTER TABLE mensalidade
+ADD UNIQUE KEY unico_mes_por_escoteiro (fkEscoteiro, mesReferencia);
+
+SELECT
+  CONSTRAINT_NAME,
+  TABLE_NAME,
+  COLUMN_NAME,
+  REFERENCED_TABLE_NAME,
+  REFERENCED_COLUMN_NAME
+FROM
+  information_schema.KEY_COLUMN_USAGE
+WHERE
+  TABLE_SCHEMA = 'ScoutEase' -- nome do seu banco
+  AND TABLE_NAME = 'mensalidade'
+  AND COLUMN_NAME = 'fkEscoteiro';
+
+
+
+UPDATE mensalidade
+SET mesReferencia = CONCAT(mesReferencia, '-01')
+WHERE LENGTH(mesReferencia) = 7;
+
+ALTER TABLE mensalidade
+MODIFY COLUMN mesReferencia DATE;
 
 ALTER TABLE mensalidade DROP CHECK chkStatus;
 
-ALTER TABLE mensalidade
-ADD CONSTRAINT chkStatus
-CHECK (statusMensalidade IN ('em dia', 'em atraso'));
+ALTER TABLE mensalidade 
+ADD CONSTRAINT chkStatus 
+CHECK (statusMensalidade IN ('em dia', 'em atraso', 'pendente'));
 
 SELECT * FROM mensalidade;
 
@@ -105,4 +132,117 @@ SELECT
         ORDER BY 
         CASE WHEN m.statusMensalidade = 'em atraso' THEN 0 ELSE 1 END,
         e.nome;
+
+
+SELECT
+    e.registroEscoteiro,
+    e.nome,
+    e.secaoRamo,
+    DATE_FORMAT(e.vencimentoMensalidade, '%Y-%m-%d') AS vencimentoMensalidade,
+    m.statusMensalidade
+FROM escoteiro e
+LEFT JOIN mensalidade m ON m.idMensalidade = (
+    SELECT idMensalidade FROM mensalidade
+    WHERE fkEscoteiro = e.registroEscoteiro
+    ORDER BY 
+        CASE 
+            WHEN statusMensalidade = 'em atraso' THEN 1
+            WHEN statusMensalidade = 'pendente' THEN 2
+            WHEN statusMensalidade = 'em dia' THEN 3
+            ELSE 4
+        END,
+        dataPagamento ASC
+    LIMIT 1
+)
+WHERE e.fkUsuario = 1
+ORDER BY 
+    CASE WHEN m.statusMensalidade = 'em atraso' THEN 0 ELSE 1 END,
+    e.nome;
+
+SELECT 
+            DATE_FORMAT(m.mesReferencia, '%Y-%m') AS mesAno,
+            COUNT(DISTINCT m.fkEscoteiro) AS qtdEscoteiros,
+            MAX(m.valor) AS valorMensalidade,
+            SUM(m.valor) AS totalMensal
+        FROM mensalidade m
+        JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
+        WHERE e.fkUsuario = 1
+        GROUP BY mesAno
+        ORDER BY mesAno DESC
+        LIMIT 6;
+        
+SELECT idMensalidade, mesReferencia FROM mensalidade ORDER BY idMensalidade DESC;
+
+UPDATE mensalidade
+SET mesReferencia = DATE_FORMAT(CURDATE(), '%Y-%m-01');
+
+-- simulando meses passados
+INSERT INTO mensalidade (statusMensalidade, fkEscoteiro, mesReferencia, valor)
+VALUES
+('em atraso', '78965436', '2025-03-01', 25.00),
+('em atraso', '89343212', '2025-03-01', 25.00),
+('pendente', '24583412', '2025-03-01', 25.00),
+
+('em atraso', '78965436', '2025-04-01', 25.00),
+('em atraso', '89343212', '2025-04-01', 25.00),
+('pendente', '24583412', '2025-04-01', 25.00);
+
+INSERT INTO mensalidade (statusMensalidade, fkEscoteiro, mesReferencia, valor)
+VALUES
+('em dia', '78965436', '2024-12-01', 25.00),
+('em dia', '89343212', '2024-12-01', 25.00),
+('em dia', '24583412', '2024-12-01', 25.00);
+
+select * from escoteiro;
+select * from mensalidade; 
+
+DELETE FROM mensalidade 
+WHERE fkEscoteiro NOT IN (SELECT registroEscoteiro FROM escoteiro);
+-- SET sql_safe_updates = 0;
+
+ SELECT 
+            IFNULL(SUM(m.valor), 0) AS valorArrecadado 
+        FROM mensalidade m
+        JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
+        WHERE m.statusMensalidade = 'em dia'
+        AND YEAR(m.dataPagamento) = YEAR(CURDATE())
+        AND MONTH(m.dataPagamento) = MONTH(CURDATE())
+        AND e.fkUsuario = 1;
+        
+
+ SELECT COUNT(*) AS quantidade 
+        FROM mensalidade m
+        JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
+        WHERE m.statusMensalidade = 'em dia'
+        AND YEAR(m.mesReferencia) = YEAR(CURDATE())
+        AND MONTH(m.mesReferencia) = MONTH(CURDATE())
+        AND e.fkUsuario = 1;
+
+select * from mensalidade where fkEscoteiro = "12365485";
+select * from mensalidade where fkEscoteiro = "23232323";
+select * from escoteiro where registroEscoteiro = "23232323";
+select * from escoteiro where registroEscoteiro = "12643527";
+select * from mensalidade where fkEscoteiro = "12643527";
+
+
+
+select * from mensalidade where fkEscoteiro = "26547890";
+delete from escoteiro where registroEscoteiro = "26547890";
+
+INSERT INTO escoteiro (
+    registroEscoteiro, nome, dataNasc, secaoRamo, nomeResponsavel,
+    celular, vencimentoMensalidade, fkUsuario
+) VALUES (
+    '26547890', 'Escoteiro Teste', '2010-05-15', 'sênior', 'Responsável Teste',
+    '11912345678', '2024-12-10', 1
+);
+
+INSERT INTO mensalidade (valor, dataPagamento, statusMensalidade, fkEscoteiro, mesReferencia)
+VALUES 
+(25.00, NULL, 'em atraso', '26547890', '2024-12-01'),
+(25.00, NULL, 'em atraso', '26547890', '2025-01-01'),
+(25.00, NULL, 'em atraso', '26547890', '2025-02-01'),
+(25.00, NULL, 'em atraso', '26547890', '2025-03-01'),
+(25.00, NULL, 'em atraso', '26547890', '2025-04-01'),
+(50.00, NULL, 'em atraso', '26547890', '2025-05-01');
 
