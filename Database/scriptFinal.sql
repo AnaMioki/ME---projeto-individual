@@ -136,5 +136,3 @@ select * from escoteiro where registroEscoteiro = "26547890";
 
 select * from mensalidade where mesReferencia = '2025-04-01';
 
-select * from mensalidade where statusMensalidade = "em atraso";
-
