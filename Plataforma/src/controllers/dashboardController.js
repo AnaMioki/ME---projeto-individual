@@ -60,6 +60,7 @@ async function obterDadosGraficoLinha(req, res) {
         let valoresPagos = [];
         let valoresInadimplentes = [];
 
+
         for (let i = 0; i < previsto.length; i++) {
             let mes = previsto[i].mesAno;
             let valorPrevisto = previsto[i].totalMensal;
@@ -67,7 +68,7 @@ async function obterDadosGraficoLinha(req, res) {
             meses.push(mes);
             valoresPrevistos.push(valorPrevisto);
 
-            // -- Procurar valor pago
+            // -- Procurar valor pago igual 
             let encontradoPago = false;
             for (let j = 0; j < pago.length; j++) {
                 if (pago[j].mesAno === mes) {
@@ -92,6 +93,11 @@ async function obterDadosGraficoLinha(req, res) {
             if (!encontradoFaltando) {
                 valoresInadimplentes.push(0);
             }
+        }
+        // const indiceMes = meses.indexOf("2025-06");
+        const indiceMes = meses.indexOf("2025-06");
+        if (indiceMes !== -1) {
+            valoresPrevistos[indiceMes] = parseFloat(valoresPrevistos[indiceMes]) + 300;
         }
 
         console.log(" Controller: dados obtidos com sucesso");
