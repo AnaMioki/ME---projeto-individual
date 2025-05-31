@@ -269,8 +269,8 @@
                 clone.querySelector(".registro").textContent = escoteiro.registroEscoteiro;
                 clone.querySelector(".nome").textContent = escoteiro.nome;
                 clone.querySelector(".secao").textContent = escoteiro.secaoRamo || "Não informado";
-                clone.querySelector(".status").textContent = escoteiro.statusMensalidade || "em atraso";
-                clone.querySelector(".vencimento").textContent = escoteiro.vencimentoMensalidade || "";
+                clone.querySelector(".status").textContent = `Status: ${escoteiro.statusMensalidade }`|| "em atraso";
+                clone.querySelector(".vencimento").textContent = `Vencimento: ${escoteiro.vencimentoMensalidade}` || "";
 
                 const btnDarBaixa = clone.querySelector(".btn-darBaixa");
                 if (escoteiro.statusMensalidade === "em atraso" || escoteiro.statusMensalidade === "pendente") {

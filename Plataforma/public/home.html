@@ -32,9 +32,9 @@
                 <a href="./mensalidades.html">
                     <div>
                         <li>
-                        <img src="./assets/iconEscoteiro.png" alt="" width="30px">
-                        <a href="./mensalidades.html"><span class="label">Mensalidades</span></a>
-                    </li>
+                            <img src="./assets/iconEscoteiro.png" alt="" width="30px">
+                            <a href="./mensalidades.html"><span class="label">Mensalidades</span></a>
+                        </li>
                     </div>
                 </a>
                 <!-- <li>
@@ -236,10 +236,14 @@
         fetch(`/dashboard/financeiro/grafico-linha/${fkUsuario}`)
             .then(res => res.json())
             .then(data => {
-                const labels = data.previsto.map(item => item.mesAno).reverse();
-                const previsto = data.previsto.map(item => item.totalMensal).reverse();
-                const pago = data.pago.map(item => item.valorPago).reverse();
-                const faltando = data.faltando.map(item => item.valorNaoPago).reverse();
+                // const labels = data.previsto.map(item => item.mesAno).reverse();
+                // const previsto = data.previsto.map(item => item.totalMensal).reverse();
+                // const pago = data.pago.map(item => item.valorPago).reverse();
+                // const faltando = data.faltando.map(item => item.valorNaoPago).reverse();
+                const labels = data.meses.map(m => m).reverse();
+                const previsto = data.valoresPrevistos.map(v => v).reverse();
+                const pago = data.valoresPagos.map(v => v).reverse();
+                const faltando = data.valoresInadimplentes.map(v => v).reverse();
 
                 const ctx = document.getElementById("myChart").getContext("2d");
 

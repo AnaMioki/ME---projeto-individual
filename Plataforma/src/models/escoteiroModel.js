@@ -71,20 +71,42 @@ function renderizarEscoteiro(fkUsuario) {
 
 }
 // preciso alterar para que eu dê baixa na mensalidade mais antiga (pagina de mensalidade)
-function darBaixa(registroEscoteiro) {
+async function darBaixa(registroEscoteiro) {
     console.log("começando o comando")
     console.log(registroEscoteiro)
     const instrucaoSql = `
-           UPDATE mensalidade m
-            JOIN escoteiro e ON m.fkEscoteiro = e.registroEscoteiro
-            SET m.statusMensalidade = 'em dia',
-                m.dataPagamento = CURRENT_DATE()
-            WHERE m.fkEscoteiro = '${registroEscoteiro}'
-            AND MONTH(e.vencimentoMensalidade) = MONTH(CURRENT_DATE())
-            AND YEAR(e.vencimentoMensalidade) = YEAR(CURRENT_DATE());
-        `;
+            UPDATE mensalidade m
+        JOIN (
+            SELECT idMensalidade
+            FROM mensalidade
+            WHERE fkEscoteiro = '${registroEscoteiro}'
+              AND statusMensalidade = 'em atraso'
+            ORDER BY mesReferencia ASC
+            LIMIT 1
+        ) AS maisAntiga ON m.idMensalidade = maisAntiga.idMensalidade
+        SET m.statusMensalidade = 'em dia',
+            m.dataPagamento = CURRENT_DATE();`;
     console.log("Executando SQL:", instrucaoSql);
-    return database.executar(instrucaoSql);
+    await database.executar(instrucaoSql);
+
+    const instrucaoSqlvencimentoMensalidade = `
+    UPDATE escoteiro e
+        JOIN (
+            SELECT DATE_ADD(mesReferencia, INTERVAL 1 MONTH) AS proximoMes -- mesReferencia
+            FROM mensalidade
+            WHERE fkEscoteiro =  '${registroEscoteiro}'
+              AND statusMensalidade = 'em dia'
+            ORDER BY mesReferencia DESC
+            LIMIT 1
+        ) AS m
+        ON e.registroEscoteiro =  ${registroEscoteiro}
+        SET e.vencimentoMensalidade = STR_TO_DATE(
+            CONCAT(DATE_FORMAT(m.proximoMes, '%Y-%m-'), DATE_FORMAT(e.vencimentoMensalidade, '%d')),
+            '%Y-%m-%d'
+        );
+    `;
+    console.log("Executando SQL:", instrucaoSqlvencimentoMensalidade);
+    return await database.executar(instrucaoSqlvencimentoMensalidade);
 }
 
 async function carregarDadosEscoteiro(registroEscoteiro) {

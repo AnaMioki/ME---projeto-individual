@@ -55,11 +55,56 @@ async function obterDadosGraficoLinha(req, res) {
             dashboardModel.obterValorPago(fkUsuario),
             dashboardModel.obterValorInadimplente(fkUsuario)
         ]);
-         console.log(" Controller: dados obtidos com sucesso");
-         console.log("valor previsto", previsto);
-         console.log("valor pago", pago);
-         console.log("valor inadimplente",  faltando  )
-        res.status(200).json({ previsto, pago, faltando });
+        let meses = [];
+        let valoresPrevistos = [];
+        let valoresPagos = [];
+        let valoresInadimplentes = [];
+
+        for (let i = 0; i < previsto.length; i++) {
+            let mes = previsto[i].mesAno;
+            let valorPrevisto = previsto[i].totalMensal;
+
+            meses.push(mes);
+            valoresPrevistos.push(valorPrevisto);
+
+            // -- Procurar valor pago
+            let encontradoPago = false;
+            for (let j = 0; j < pago.length; j++) {
+                if (pago[j].mesAno === mes) {
+                    valoresPagos.push(pago[j].valorPago);
+                    encontradoPago = true;
+                    break;
+                }
+            }
+            if (!encontradoPago) {
+                valoresPagos.push(0);
+            }
+
+
+            let encontradoFaltando = false;
+            for (let k = 0; k < faltando.length; k++) {
+                if (faltando[k].mesAno === mes) {
+                    valoresInadimplentes.push(faltando[k].valorNaoPago);
+                    encontradoFaltando = true;
+                    break;
+                }
+            }
+            if (!encontradoFaltando) {
+                valoresInadimplentes.push(0);
+            }
+        }
+
+        console.log(" Controller: dados obtidos com sucesso");
+        console.log("valor previsto", previsto);
+        console.log("valor pago", pago);
+        console.log("valor inadimplente", faltando)
+        // res.status(200).json({ previsto, pago, faltando });
+        res.status(200).json({
+            meses,
+            valoresPrevistos,
+            valoresPagos,
+            valoresInadimplentes
+        });
         // res.status(200).json({
         //     previsto,
         //     pago,
